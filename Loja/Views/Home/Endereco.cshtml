@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Loja.Models.EnderecoEntrega>
+
+@using (Html.BeginForm())
+{
+    foreach (var item in Model)
+    {
+        <div class="cartaoE">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <p class="button2">@Html.ActionLink("Adicionar Novo", "EnderecoEntrega", "EnderecoEntrega", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-shopping-cart" })</p>                       
+                        <p class="button2">Deletar</p>
+                     </div>
+                    <div class="card-footer">
+                        CEP:    @item.CEP
+                        Estado: @item.Estado
+                        Cidade: @item.Cidade
+                        Bairro: @item.Bairro
+                        Logradouro: @item.Logradouro
+                        Numero: @item.Numero
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
