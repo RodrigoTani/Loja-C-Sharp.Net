@@ -9,7 +9,7 @@ namespace Dominio
     public class EntidadeDominio
     {
         public int Id { get; set; }
-        public DateTime DataCadastro { get; set; }
-        public string StrBusca { get; set; }
+        public System.DateTime DataCadastro { get; set; }
+        //public string StrBusca { get; set; }
     }
 }

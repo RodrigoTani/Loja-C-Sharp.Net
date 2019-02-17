@@ -9,13 +9,16 @@ namespace Loja.Models
         
         [Required]
         public String Nome { get; set; }
-        public enum TipoPessoa { Física, Jurídica }
+        public TipoPessoa tipoPessoa { get; set; }
         public String CNPJ { get; set; }
         //[Required]
         public String RazaoSocial { get; set; }
+        public bool Ativo { get; set; } = true;
 
-        public EnderecoEntrega Endereco { get; set; }
+        //Auxiliares
 
+        public virtual EnderecoEntrega EnderecoEntrega { get; set; }
+        public enum TipoPessoa { Física, Jurídica }
 
     }
 }

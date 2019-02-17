@@ -1,6 +1,7 @@
 ﻿using Dominio;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Loja.Models
 {
@@ -14,18 +15,18 @@ namespace Loja.Models
         [Display(Name = "Link Imagem do Jogo")]
         public String ImagemUrl { get; set; }
 
-        public enum Plataforma { PS4, XONE, PSVITA, SWITCH, PC }
+        public Plataforma plataforma{ get; set; }
 
-        public enum Idioma { Português, Inglês, Espanhol, Japonês, Francês }
+        public Idioma idioma { get; set; }
 
-        public enum Legenda { Português, Inglês, Espanhol, Japonês, Francês }
+        public Legenda legenda { get; set; }
 
         [Display(Name = "Dimensão do Jogo")]
         public String DimensaodoProduto { get; set; }
 
-        public enum Gênero { Ação, Aventura, Estratégia, RPG, Esporte, Corrida, Tiro }
+        public Genero genero { get; set; }
 
-        public enum ClassificacaoIndicativa { L, _10, _12, _14, _16, _18 }
+        public ClassificacaoIndicativa classificacaoIndicativa { get; set; }
 
         [Display(Name = "Desenvolvedor do Jogo")]
         public String Desenvolvedor { get; set; }
@@ -36,7 +37,8 @@ namespace Loja.Models
         [Display(Name = "Conteúdo da Emabalagem")]
         public String ConteudoEmbalagem { get; set; }
 
-        public Fornecedor Fornecedor { get; set; }
+        [ForeignKey("fornecedor")]
+        public int Fornecedor { get; set; }
 
         [Display(Name = "Garantia do Fornecedor")]
         public String GarantiaFornecedor { get; set; }
@@ -47,18 +49,23 @@ namespace Loja.Models
         [Display(Name = "Descrição2 do jogo")]
         public String Descricao2 { get; set; }
 
-        public decimal ValorFinal;
+        public decimal ValorFinal { get; set; }
 
-        public EstoqueProdutos ep;
+        public bool Ativo { get; set; } = true;
 
-        public decimal CalculaValorFinal(EstoqueProdutos ep){ 
-            return ep.PorcentagemPrecificacao * ep.Custo;
-        }
-        
-        public AdicionarJogo() {
+        // Auxiliares
 
-            ValorFinal = CalculaValorFinal(ep);
+        public virtual Fornecedor fornecedor { get; set; }
 
-        }
+        public enum Plataforma { PS4, XONE, PSVITA, SWITCH, PC }
+
+        public enum Idioma { Português, Inglês, Espanhol, Japonês, Francês }
+
+        public enum Legenda { Português, Inglês, Espanhol, Japonês, Francês }
+
+        public enum Genero { Ação, Aventura, Estratégia, RPG, Esporte, Corrida, Tiro }
+
+        public enum ClassificacaoIndicativa { L, _10, _12, _14, _16, _18 }
+
     }
 }
