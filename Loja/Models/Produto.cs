@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Loja.Models
 {
-    public class AdicionarJogo : EntidadeDominio
+    public class Produto : EntidadeDominio
     {
 
         [Required]
@@ -37,7 +37,7 @@ namespace Loja.Models
         [Display(Name = "Conteúdo da Emabalagem")]
         public String ConteudoEmbalagem { get; set; }
 
-        [ForeignKey("fornecedor")]
+        [ForeignKey("forn")]
         public int Fornecedor { get; set; }
 
         [Display(Name = "Garantia do Fornecedor")]
@@ -55,13 +55,13 @@ namespace Loja.Models
 
         // Auxiliares
 
-        public virtual Fornecedor fornecedor { get; set; }
+        public virtual Fornecedor forn { get; set; }
 
         public enum Plataforma { PS4, XONE, PSVITA, SWITCH, PC }
 
-        public enum Idioma { Português, Inglês, Espanhol, Japonês, Francês }
+        public enum Idioma { Português, Inglês, Espanhol, Japonês, Francês, Alemão }
 
-        public enum Legenda { Português, Inglês, Espanhol, Japonês, Francês }
+        public enum Legenda { Português, Inglês, Espanhol, Japonês, Francês, Alemão }
 
         public enum Genero { Ação, Aventura, Estratégia, RPG, Esporte, Corrida, Tiro }
 

@@ -8,7 +8,7 @@ namespace Loja.Models
     public class EstoqueProdutos : EntidadeDominio
     {
         [ForeignKey("AdicionarJogo")]
-        public int Jogo { get; set; }
+        public int Produto { get; set; }
          
         [Required]
         [Display(Name = "Porcentagem de precificação do Jogo")]
@@ -31,6 +31,6 @@ namespace Loja.Models
         //Auxiliares
 
         public virtual Fornecedor fornecedor { get; set; }
-        public virtual AdicionarJogo AdicionarJogo { get; set; }
+        public virtual Produto AdicionarJogo { get; set; }
     }
 }

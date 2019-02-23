@@ -8,11 +8,11 @@ namespace Loja.Models
     {
         
         [Required]
-        public String Nome { get; set; }
+        public String RazaoSocial { get; set; }
         public TipoPessoa tipoPessoa { get; set; }
         public String CNPJ { get; set; }
         //[Required]
-        public String RazaoSocial { get; set; }
+        public String NomeVendedor  { get; set; }
         public bool Ativo { get; set; } = true;
 
         //Auxiliares

@@ -174,7 +174,14 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\AdicionarJogo.cs" />
+    <Compile Include="Models\Carrinho\CarrinhoDeCompras.cs" />
+    <Compile Include="Models\Carrinho\CarrinhodeComprasRemoverViewModel.cs" />
+    <Compile Include="Models\Carrinho\CarrinhodeComprasViewModel.cs" />
+    <Compile Include="Models\Carrinho\ClasseModeladora.cs" />
+    <Compile Include="Models\Carrinho\DetalhesPedido.cs" />
+    <Compile Include="Models\Carrinho\Pedido.cs" />
+    <Compile Include="Models\Produto.cs" />
+    <Compile Include="Models\Carrinho\Carrinho.cs" />
     <Compile Include="Models\EnderecoEntrega.cs" />
     <Compile Include="Models\EstoqueProdutos.cs" />
     <Compile Include="Models\Fornecedor.cs" />

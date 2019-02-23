@@ -28,5 +28,6 @@ namespace Loja.Models
         {
             return new ApplicationDbContext();
         }
+
     }
 }
