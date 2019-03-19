@@ -3,19 +3,19 @@
     padding-bottom: 20px;
 }
 
-/* Set padding to keep content from hitting the edges 
+/* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
+   will truncate terms that are too long to fit in the left column */
 
 .dl-horizontal dt {
     white-space: normal;
 }
- Set width on the form input elements since they're 100% wide by default 
+ /*Set width on the form input elements since they're 100% wide by default*/ 
 input,
 select,
 textarea {
@@ -39,4 +39,127 @@ footer{
     padding-top:50px;
     padding-left:50px;
     margin:0px;
+}
+.listE{
+    width:50%;
+    float:left;
+}
+.listD{
+    width:50%;
+    float:left;
+}
+.listB{
+    width:100%;
+    float:left;
+}
+.listImg{
+    height:350px;
+    width:300px;
+    background-size:cover;
+}
+
+.card-body {
+background-color:#1b1717;
+width:200px;
+text-align:center;
+
+}
+.card{
+background-color:#1b1717;
+width:230px;
+padding:15px;
+box-shadow: 0 4px 8px 0 red, 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.col-lg-4 {
+margin:20px;
+
+width:280px;
+height:300px;
+}
+/*---------------------------------------*/
+.Details{
+    margin:0;
+    padding:0;
+}
+.view{
+    float:left;
+    width:100%;
+    height:600px;
+    margin:0;
+    padding:0;
+}
+.titulo{
+    height:80px;
+    text-align:center;
+}
+.Imagem{
+    width:50%;
+    height:100%;
+    float: left;
+    padding-left:10%;
+}
+.Imagem img{
+    height:auto;
+    width:100%;
+}
+.ViewD{
+    float:left;
+    width:50%;
+    text-align:center;
+    height:100%;
+    margin:0;
+    padding:50px;
+    padding-right:10%;
+}
+.Descricao{
+    float:left;
+    height:100%;
+    width:100%;
+    padding:50px 10% 0 10%;
+    font-size:14pt;
+    background-color:black;
+    margin-top:50px;
+}
+.Especificacao{
+    float:left;
+    width:100%;
+    padding-top:50px;
+    padding-left:10%;
+}
+.adm{
+    float:left;
+    height:100px;
+    width:100%;
+    padding-left:10%;
+}
+.navegacao{
+        padding-left:10%;
+}
+/*---------------------------------------*/
+
+@media (min-width: 767px) {
+    .cart {
+        visibility: hidden;
+        float: right;
+    }
+    .cart1{
+        float: right;
+        margin-left:330px;
+        margin-top:0px;
+        padding-top:0px;
+
+    }
+   
+}
+@media (max-width: 767px) {
+    .cart {
+        float: right;
+        margin: 5px;
+        margin-top: 15px;
+        margin-right: 10px;
+    }
+    .cart1 {
+        visibility: hidden;
+        float: right;
+    }
 }

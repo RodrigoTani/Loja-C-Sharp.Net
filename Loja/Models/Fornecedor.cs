@@ -13,11 +13,15 @@ namespace Loja.Models
         public String CNPJ { get; set; }
         //[Required]
         public String NomeVendedor  { get; set; }
+        public String CPF { get; set; }
+        public String Observacao { get; set; }
+        public String Email { get; set; }
+        public EnderecoEntrega EnderecoEntrega { get; set; }
         public bool Ativo { get; set; } = true;
 
         //Auxiliares
 
-        public virtual EnderecoEntrega EnderecoEntrega { get; set; }
+       
         public enum TipoPessoa { Física, Jurídica }
 
     }

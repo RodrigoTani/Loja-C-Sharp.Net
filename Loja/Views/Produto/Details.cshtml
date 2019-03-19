@@ -1,0 +1,119 @@
+﻿@model Loja.Models.Produto
+@{
+    ViewBag.Title = "Details";
+}
+<div>
+    <hr />
+    <div class="Details">
+        <div class="view">
+            <div class="titulo">
+                <h1> @Html.DisplayFor(model => model.Titulo)</h1>
+            </div>
+            <div class="Imagem">
+                <img src="@Html.DisplayFor(model => model.ImagemUrl)" />
+            </div>
+            <div class="ViewD">
+                <h3>
+                    @Html.DisplayFor(model => model.Titulo) -
+                    @Html.DisplayFor(model => model.plataforma) -
+                    @Html.DisplayFor(model => model.genero) -
+                    @Html.DisplayFor(model => model.idioma)
+                </h3>
+                <h1 style="color:red;">R$: @Html.DisplayFor(model => model.ValorFinal)</h1>
+                <h1>@Html.DisplayFor(model => model.classificacaoIndicativa)</h1>
+                <h3 class="button2">@Html.ActionLink("Adicionar", "AddToCart", "CarrinhoDeCompras", new { id = Model.Id  }, htmlAttributes: new { @class = "glyphicon glyphicon-shopping-cart" })</h3>
+            </div>
+        </div>
+        <div class="Descricao">
+            <h1 style="color:red;">Descrição</h1>
+            <img src="@Html.DisplayFor(model => model.Descricao1)" />
+            <br />
+            @Html.DisplayFor(model => model.Descricao2)
+        </div>
+        <div class="Especificacao">
+            <h4 style="color:red;">Especificação</h4>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.idioma)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.idioma)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.legenda)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.legenda)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.DimensaodoProduto)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.DimensaodoProduto)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.genero)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.genero)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Desenvolvedor)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Desenvolvedor)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.EspacoHd)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.EspacoHd)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.ConteudoEmbalagem)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ConteudoEmbalagem)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.GarantiaFornecedor)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.GarantiaFornecedor)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.classificacaoIndicativa)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.classificacaoIndicativa)
+                </dd>
+            </dl>
+        </div>
+        <div class="adm">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.ImagemUrl)
+                <dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ImagemUrl)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Ativo)
+                <dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Ativo)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.DataCadastro)
+                <dt>
+                <dd>
+                    @Html.DisplayFor(model => model.DataCadastro)
+                </dd>
+            </dl>
+        </div>
+    </div>
+</div>
+<div class="navegacao"> 
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Voltar para listagem", "Index")
+</div>

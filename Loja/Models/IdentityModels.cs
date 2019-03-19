@@ -29,5 +29,19 @@ namespace Loja.Models
             return new ApplicationDbContext();
         }
 
+        public System.Data.Entity.DbSet<Loja.Models.EnderecoEntrega> EnderecoEntregas { get; set; }
+
+
+        public System.Data.Entity.DbSet<Loja.Models.Fornecedor> Fornecedors { get; set; }
+
+        public System.Data.Entity.DbSet<Loja.Models.Produto> Produtoes { get; set; }
+
+        public System.Data.Entity.DbSet<Loja.Models.EstoqueProdutos> EstoqueProdutos { get; set; }
+
+        public System.Data.Entity.DbSet<Loja.Models.Carrinho.Carrinho> Carrinhoes { get; set; }
+
+        public System.Data.Entity.DbSet<Loja.Models.Carrinho.Pedido> Pedidoes { get; set; }
+
+        public System.Data.Entity.DbSet<Loja.Models.Carrinho.DetalhesPedido> DetalhesPedidoes { get; set; }
     }
 }

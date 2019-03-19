@@ -9,13 +9,15 @@ namespace Loja.Models
     {
         [ForeignKey("AdicionarJogo")]
         public int Produto { get; set; }
-         
+
+        [ForeignKey("fornecedor1")]
+        public int Fornecedores { get; set; }
+
         [Required]
         [Display(Name = "Porcentagem de precificação do Jogo")]
         public Decimal PorcentagemPrecificacao { get; set; }
 
-        [ForeignKey("fornecedor")]
-        public int Fornecedor { get; set; }
+        
 
         [Required(ErrorMessage = "O custo de compra do Jogo é necessário")]
         [Display(Name = "Custo do Jogo")]
@@ -30,7 +32,7 @@ namespace Loja.Models
 
         //Auxiliares
 
-        public virtual Fornecedor fornecedor { get; set; }
+        public virtual Fornecedor fornecedor1 { get; set; }
         public virtual Produto AdicionarJogo { get; set; }
     }
 }

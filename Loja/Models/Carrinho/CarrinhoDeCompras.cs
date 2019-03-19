@@ -2,11 +2,12 @@
 using Loja.Models.Carrinho;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace EComerceMVC.Models
+namespace Loja.Models
 {
     public class CarrinhoDeCompras
     {
@@ -29,35 +30,35 @@ namespace EComerceMVC.Models
         public void AddToCart(Produto produto)
         {
             // Get the matching cart and album instances
-            var cartItem = storeDB.Carrrinhos.SingleOrDefault(
+            var cartItem = storeDB.Carrinhoes.SingleOrDefault(
                 c => c.CarrinhoId == ShoppingCartId
-                && c.JogoId == produto.Id);
+                && c.ProdutoId == produto.Id);
 
             if (cartItem == null)
             {
-                // Create a new cart item if no cart item exists
-                cartItem = new Carrinho
+                // Cria um novo carrinho caso não exista um
+                cartItem = new Carrinho.Carrinho
                 {
-                    JogoId = produto.Id,
+                    ProdutoId = produto.Id,
                     CarrinhoId = ShoppingCartId,
                     Quantidade = 1,
                     DataCriacao = DateTime.Now
                 };
-                storeDB.Carrrinhos.Add(cartItem);
+                storeDB.Carrinhoes.Add(cartItem);
             }
             else
             {
-                // If the item does exist in the cart, 
-                // then add one to the quantity
+                // Se o item já existe no carrinho, 
+                // então adiciona mais um na quantidade
                 cartItem.Quantidade++;
             }
-            // Save changes
+            // Salvar mudanças
             storeDB.SaveChanges();
-        }
+        } 
         public int RemoveFromCart(int id)
         {
             // Get the cart
-            var cartItem = storeDB.Carrrinhos.Single(
+            var cartItem = storeDB.Carrinhoes.Single(
                 cart => cart.CarrinhoId == ShoppingCartId
                  && cart.RecordId == id);
 
@@ -65,36 +66,36 @@ namespace EComerceMVC.Models
 
             if (cartItem != null)
             {
-                storeDB.Carrrinhos.Remove(cartItem);
-                // Save changes
+                storeDB.Carrinhoes.Remove(cartItem);
+                // Salvar mudanças
                 storeDB.SaveChanges();
             }
             return itemCount;
         }
         public void EmptyCart()
         {
-            var cartItems = storeDB.Carrrinhos.Where(
+            var cartItems = storeDB.Carrinhoes.Where(
                 cart => cart.CarrinhoId == ShoppingCartId);
 
             foreach (var cartItem in cartItems)
             {
-                storeDB.Carrrinhos.Remove(cartItem);
+                storeDB.Carrinhoes.Remove(cartItem);
             }
             // Save changes
             storeDB.SaveChanges();
-        }
-        public List<Carrinho> GetCartItems()
+        } 
+        public List<Carrinho.Carrinho> GetCartItems()
         {
-            return storeDB.Carrrinhos.Where(
+            return storeDB.Carrinhoes.Where(
                 cart => cart.CarrinhoId == ShoppingCartId).ToList();
         }
         public int GetCount()
         {
-            // Get the count of each item in the cart and sum them up
-            int? count = (from cartItems in storeDB.Carrrinhos
+            // Conta os items do carrinho e soma todos
+            int? count = (from cartItems in storeDB.Carrinhoes
                           where cartItems.CarrinhoId == ShoppingCartId
                           select (int?)cartItems.Quantidade).Sum();
-            // Return 0 if all entries are null
+            // Retorna 0 se tds entradas forem null
             return count ?? 0;
         }
         public decimal GetTotal()
@@ -102,10 +103,10 @@ namespace EComerceMVC.Models
             // Multiply album price by count of that album to get 
             // the current price for each of those albums in the cart
             // sum all album price totals to get the cart total
-            decimal? total = (from cartItems in storeDB.Carrrinhos
+            decimal? total = (from cartItems in storeDB.Carrinhoes
                               where cartItems.CarrinhoId == ShoppingCartId
                               select (int?)cartItems.Quantidade *
-                              cartItems.Jogo.ValorFinal).Sum();
+                              cartItems.Produto.ValorFinal).Sum();
 
             return total ?? decimal.Zero;
         }
@@ -161,11 +162,11 @@ namespace EComerceMVC.Models
             }
             return context.Session[CartSessionKey].ToString();
         }
-
+         
         public int UpdateCartCount(int id, int cartCount)
         {
             // Get the cart 
-            var cartItem = storeDB.Carrrinhos.Single(
+            var cartItem = storeDB.Carrinhoes.Single(
                 cart => cart.CarrinhoId == ShoppingCartId
                 && cart.RecordId == id);
 
@@ -180,7 +181,7 @@ namespace EComerceMVC.Models
                 }
                 else
                 {
-                    storeDB.Carrrinhos.Remove(cartItem);
+                    storeDB.Carrinhoes.Remove(cartItem);
                 }
                 // Save changes 
                 storeDB.SaveChanges();
@@ -192,10 +193,10 @@ namespace EComerceMVC.Models
         // be associated with their username
         public void MigrateCart(string userName)
         {
-            var shoppingCart = storeDB.Carrrinhos.Where(
+            var shoppingCart = storeDB.Carrinhoes.Where(
                 c => c.CarrinhoId == ShoppingCartId);
 
-            foreach (Carrinho item in shoppingCart)
+            foreach (Carrinho.Carrinho item in shoppingCart)
             {
                 item.CarrinhoId = userName;
             }

@@ -6,6 +6,9 @@
     <title>@ViewBag.Title - Tani's Store</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/jquery.validate.min.js")
+    @Scripts.Render("~/Scripts/jquery.validate.unobtrusive.min.js")
 
 </head>
 <body>
@@ -24,8 +27,22 @@
                     <li>@Html.ActionLink("Início", "Index", "Home")</li>
                     <li>@Html.ActionLink("Sobre", "About", "Home")</li>
                     <li>@Html.ActionLink("Trocas e Devolução", "Contact", "Home")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administrador<span class="caret"></span></a>
+
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("Fornecedores", "Index", "Fornecedor")</li>
+                            <li>@Html.ActionLink("Produto", "Index", "Produto")</li>
+                            <li>@Html.ActionLink("Estoque de Produtos", "Index", "EstoqueProdutos")</li>
+                            <li>@Html.ActionLink("Endereco", "Index", "EnderecoEntrega")</li>
+                            <li>@Html.ActionLink("CheckOut", "Index", "CheckOut")</li>
+                            <li>@Html.ActionLink("Estoque de Produtos", "Index", "EstoqueProdutos")</li>
+                            <li>@Html.ActionLink("Pedido", "Index", "Pedido")</li>
+                        </ul>
+                    </li>
+                    <li class="cart1">@{Html.RenderAction("CartSummary", "CarrinhodeCompras");}</li>
+                    @Html.Partial("_LoginPartial")
                 </ul>
-                @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>

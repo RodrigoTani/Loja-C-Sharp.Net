@@ -1,0 +1,98 @@
+﻿@model Loja.Models.Fornecedor
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Fornecedor</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.RazaoSocial)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.RazaoSocial)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.tipoPessoa)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.tipoPessoa)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.CNPJ)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.CNPJ)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.NomeVendedor)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.NomeVendedor)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.CPF)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.CPF)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Observacao)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Observacao)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Ativo)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Ativo)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.DataCadastro)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.DataCadastro)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

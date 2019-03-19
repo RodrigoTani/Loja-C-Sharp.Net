@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Loja.Models.Carrinho.Pedido>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="create">
+    <br>
+    <h2>Listagem de Pedidos</h2>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PedidoId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FormaPagamento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataPedido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Usuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Total)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>
+                    @Html.DisplayFor(model => item.PedidoId)
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FormaPagamento)
+                </td>
+
+                <th>
+                    @Html.DisplayFor(model => item.DataPedido)
+                </th>
+                <th>
+                    @Html.DisplayFor(model => item.Usuario)
+                </th>
+                <th>
+                    R$ @Html.DisplayFor(model => item.Total)
+                </th>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", null, new { id = item.PedidoId }, new { @class = "btn btn-primary" }) |
+                    @Html.ActionLink("Details", "Details", null, new { id = item.PedidoId }, new { @class = "btn btn-default" }) |
+                    @Html.ActionLink("Deletar", "Delete", null, new { id = item.PedidoId }, new { @class = "btn btn-danger" })|
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

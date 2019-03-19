@@ -1,0 +1,163 @@
+﻿@model Loja.Models.Produto
+
+
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>Produto</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.forn.RazaoSocial)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.forn.RazaoSocial)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Titulo)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Titulo)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ImagemUrl)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ImagemUrl)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.plataforma)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.plataforma)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.idioma)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.idioma)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.legenda)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.legenda)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.DimensaodoProduto)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.DimensaodoProduto)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.genero)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.genero)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.classificacaoIndicativa)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.classificacaoIndicativa)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Desenvolvedor)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Desenvolvedor)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.EspacoHd)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.EspacoHd)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ConteudoEmbalagem)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ConteudoEmbalagem)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.GarantiaFornecedor)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.GarantiaFornecedor)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Descricao1)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Descricao1)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Descricao2)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Descricao2)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ValorFinal)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ValorFinal)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Ativo)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Ativo)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.DataCadastro)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.DataCadastro)
+            </dd>
+    
+        </dl>
+    
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+    
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>

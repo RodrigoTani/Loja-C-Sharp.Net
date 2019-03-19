@@ -1,0 +1,80 @@
+﻿@model Loja.Models.Carrinho.CarrinhodeComprasViewModel
+<div class="create">
+    <br />
+    <h2>Confirmação</h2>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <h3>
+            <em>Confirmação do pedido</em>
+        </h3>
+        <div>
+            @for (int i = 0; i < Model.CartItems.Count; i++)
+            { <p>
+                @Html.ValidationMessageFor(model => model.CartItems[i].Quantidade)
+            </p>
+            }
+        </div>
+        <div id="update-message">
+        </div>
+        <table>
+            <tr>
+                <th>Nome do Produto</th>
+                <th>Preço (cada)</th>
+                <th>Quantidade</th>
+                <th></th>
+                <th></th>
+                <th>Em estoque</th>
+            </tr>
+
+            @foreach (var item in Model.CartItems)
+            {
+
+                <tr id="row-@item.RecordId">
+
+                    <td>
+                        @Html.ActionLink(item.Produto.Titulo,"Details", "Produto", new { id = item.ProdutoId }, null)
+                    </td>
+                    <td>
+                        @item.Produto.ValorFinal
+                    </td>
+                    <td align="right">
+                        @*id="item-count-@item.RecordId">
+                            @item.Count*@
+                        <div class="col-md-2">
+                            @item.Quantidade
+                        </div>
+                    </td>
+                    <td></td>
+                    <td></td>
+
+                </tr>
+            }
+            <tr>
+                <td>
+                    Total (R$)
+                </td>
+                <td></td>
+
+                <td id="cart-total">
+                    @Model.CartTotal
+                </td>
+            </tr>
+        </table>
+        <h4>Forma de pagamento: </h4> @Html.TextBox("FormaPagamento", "Dinheiro");
+        <input type="submit" value="Confirmar Compra" class="btn btn-success" />
+    }
+    <div>
+        @Html.ActionLink("Voltar", "Index", "CarrinhoDeCompra")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+
+
+
+
+</div>

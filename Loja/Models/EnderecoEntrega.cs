@@ -5,6 +5,7 @@ namespace Loja.Models
 {
     public class EnderecoEntrega : EntidadeDominio
     {
+        public string Usuario { get; set; }
         //[Required]
         public string CEP { get; set; }
         //[Required(ErrorMessage = "Campo Obrigatório")]
@@ -17,6 +18,8 @@ namespace Loja.Models
         public string Logradouro { get; set; }
         //[Required]
         public string Numero { get; set; }
+
+        public string Observacao { get; set; }
 
     }
 }

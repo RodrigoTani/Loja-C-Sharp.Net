@@ -1,0 +1,70 @@
+﻿@model Loja.Models.EstoqueProdutos
+
+    <div>
+        <h4>EstoqueProdutos</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.AdicionarJogo.Titulo)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.AdicionarJogo.Titulo)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.fornecedor1.RazaoSocial)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.fornecedor1.RazaoSocial)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.PorcentagemPrecificacao)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.PorcentagemPrecificacao)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Custo)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Custo)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Quantidade)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Quantidade)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Ativo)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Ativo)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.DataCadastro)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.DataCadastro)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

@@ -1,0 +1,124 @@
+﻿@model Loja.Models.Carrinho.ClasseModeladora
+@{
+    Layout = null;
+}
+<div class="create">
+    <br />
+
+    <h1> &nbsp &nbsp Detalhes do Pedido</h1>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/jquery.validate.min.js")
+    @Scripts.Render("~/Scripts/jquery.validate.unobtrusive.min.js")
+
+
+    <div class="container">
+        <div class="">
+            <hr />
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <div class="h4">Pedido ID: @Html.DisplayFor(model => model.Pedido.PedidoId)</div>
+                </div>
+
+            </div>
+            <div class="row">
+                @{ if (!String.IsNullOrEmpty(Model.LocalEntrega.Estado))
+            {
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="h4">Estado: @Html.DisplayFor(model => model.LocalEntrega.Estado)</div>
+                        </div>
+                    }
+                }
+            </div>
+            <div class="row">
+                @{ if (!String.IsNullOrEmpty(Model.LocalEntrega.Cidade))
+            {
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="h4">Cidade: @Html.DisplayFor(model => model.LocalEntrega.Cidade)</div>
+                        </div>
+                    }
+                }
+                @{ if (!String.IsNullOrEmpty(Model.LocalEntrega.Endereco))
+            {
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="h4">Endereço: @Html.DisplayFor(model => model.LocalEntrega.Endereco)</div>
+                        </div>
+                    }
+                }
+            </div>
+            <div class="row">
+                @{ if (!String.IsNullOrEmpty(Model.LocalEntrega.Bairro))
+            {
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="h4">Bairro: @Html.DisplayFor(model => model.LocalEntrega.Bairro)</div>
+                        </div>
+                    }
+                }
+
+            </div>
+            <div class="row">
+                @{ if (!String.IsNullOrEmpty(Model.LocalEntrega.Numero))
+            {
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="h4">Número: @Html.DisplayFor(model => model.LocalEntrega.Numero)</div>
+                        </div>
+                    }
+                }
+
+            </div>
+        </div>
+        <br />
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">Dados dos produtos</div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Nome do Produto</th>
+                        <th>Preço Unit</th>
+                        <th>Quantidade</th>
+                        <th>Preço Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model.Produto)
+            {
+                        <tr>
+
+                            <td>@Html.DisplayFor(model => item.ProdutoId)</td>
+
+                            <td>@Html.DisplayFor(model => item.Nome)</td>
+                            <td>@Html.DisplayFor(model => model.DetalhesPedidos.Where(x => x.ProdutoId == item.ProdutoId).FirstOrDefault().PrecoUnitario)</td>
+                            <td>@Html.DisplayFor(model => model.DetalhesPedidos.Where(x => x.ProdutoId == item.ProdutoId).FirstOrDefault().Quantidade)</td>
+                            <td>
+                                @(Model.DetalhesPedidos.Where(x => x.ProdutoId == item.ProdutoId).FirstOrDefault().Quantidade *
+                        Model.DetalhesPedidos.Where(x => x.ProdutoId == item.ProdutoId).FirstOrDefault().PrecoUnitario)
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+                <tfoot class="bottom-right">
+                    <tr>
+                        <td class="" colspan="5">
+                            <div class="text-right h5">
+                                <strong>Total: @Html.DisplayFor(model => model.Pedido.Total) R$ </strong>
+                            </div>
+                            <div class="text-left h5">@Html.DisplayFor(model => model.Pedido.FormaPagamento) </div>
+                        </td>
+                    </tr>
+                </tfoot>
+
+            </table>
+        </div>
+    </div>
+    @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-primary" })
+</div>

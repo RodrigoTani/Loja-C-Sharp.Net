@@ -49,6 +49,14 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -168,11 +176,29 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CarrinhoController.cs" />
+    <Compile Include="Controllers\CarrinhodeComprasController.cs" />
+    <Compile Include="Controllers\CheckoutController.cs" />
+    <Compile Include="Controllers\DetalhesPedidoController.cs" />
+    <Compile Include="Controllers\EnderecoEntregaController.cs" />
+    <Compile Include="Controllers\EstoqueProdutosController.cs" />
+    <Compile Include="Controllers\FornecedorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PedidoController.cs" />
+    <Compile Include="Controllers\ProdutoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903190354198_new2.cs" />
+    <Compile Include="Migrations\201903190354198_new2.Designer.cs">
+      <DependentUpon>201903190354198_new2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903190355410_new3.cs" />
+    <Compile Include="Migrations\201903190355410_new3.Designer.cs">
+      <DependentUpon>201903190355410_new3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Carrinho\CarrinhoDeCompras.cs" />
     <Compile Include="Models\Carrinho\CarrinhodeComprasRemoverViewModel.cs" />
@@ -193,6 +219,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -246,9 +273,45 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Endereco.cshtml" />
+    <Content Include="Views\EnderecoEntrega\Create.cshtml" />
+    <Content Include="Views\EnderecoEntrega\Delete.cshtml" />
+    <Content Include="Views\EnderecoEntrega\Details.cshtml" />
+    <Content Include="Views\EnderecoEntrega\Edit.cshtml" />
+    <Content Include="Views\EnderecoEntrega\Index.cshtml" />
+    <Content Include="Views\Fornecedor\Create.cshtml" />
+    <Content Include="Views\Fornecedor\Delete.cshtml" />
+    <Content Include="Views\Fornecedor\Details.cshtml" />
+    <Content Include="Views\Fornecedor\Edit.cshtml" />
+    <Content Include="Views\Fornecedor\Index.cshtml" />
+    <Content Include="Views\Produto\Create.cshtml" />
+    <Content Include="Views\Produto\Delete.cshtml" />
+    <Content Include="Views\Produto\Details.cshtml" />
+    <Content Include="Views\Produto\Edit.cshtml" />
+    <Content Include="Views\Produto\Index.cshtml" />
+    <Content Include="Views\Pedido\Create.cshtml" />
+    <Content Include="Views\Pedido\Delete.cshtml" />
+    <Content Include="Views\Pedido\Details.cshtml" />
+    <Content Include="Views\Pedido\Edit.cshtml" />
+    <Content Include="Views\Pedido\Index.cshtml" />
+    <Content Include="Views\DetalhesPedido\Create.cshtml" />
+    <Content Include="Views\DetalhesPedido\Delete.cshtml" />
+    <Content Include="Views\DetalhesPedido\Details.cshtml" />
+    <Content Include="Views\DetalhesPedido\Edit.cshtml" />
+    <Content Include="Views\DetalhesPedido\Index.cshtml" />
+    <Content Include="Views\Produto\ProdutoP.cshtml" />
+    <Content Include="Views\CarrinhodeCompras\CartSummary.cshtml" />
+    <Content Include="Views\CarrinhodeCompras\Index.cshtml" />
+    <Content Include="Views\Checkout\ClienteFormadePagamento.cshtml" />
+    <Content Include="Views\Checkout\Complete.cshtml" />
+    <Content Include="Views\EstoqueProdutos\Create.cshtml" />
+    <Content Include="Views\EstoqueProdutos\Delete.cshtml" />
+    <Content Include="Views\EstoqueProdutos\Details.cshtml" />
+    <Content Include="Views\EstoqueProdutos\Edit.cshtml" />
+    <Content Include="Views\EstoqueProdutos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Carrinho\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -263,6 +326,14 @@
       <Project>{7A927D94-66F0-4F6B-ABAB-4B05677521BF}</Project>
       <Name>Dominio</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201903190354198_new2.resx">
+      <DependentUpon>201903190354198_new2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903190355410_new3.resx">
+      <DependentUpon>201903190355410_new3.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
