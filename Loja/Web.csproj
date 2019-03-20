@@ -198,6 +198,10 @@
     <Compile Include="Migrations\201903190355410_new3.Designer.cs">
       <DependentUpon>201903190355410_new3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903192245359_novo.cs" />
+    <Compile Include="Migrations\201903192245359_novo.Designer.cs">
+      <DependentUpon>201903192245359_novo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Carrinho\CarrinhoDeCompras.cs" />
@@ -333,6 +337,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903190355410_new3.resx">
       <DependentUpon>201903190355410_new3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903192245359_novo.resx">
+      <DependentUpon>201903192245359_novo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

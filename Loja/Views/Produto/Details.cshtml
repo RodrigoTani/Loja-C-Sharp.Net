@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Details";
 }
-<div>
+<div class="container">
     <hr />
     <div class="Details">
         <div class="view">
@@ -21,7 +21,7 @@
                 </h3>
                 <h1 style="color:red;">R$: @Html.DisplayFor(model => model.ValorFinal)</h1>
                 <h1>@Html.DisplayFor(model => model.classificacaoIndicativa)</h1>
-                <h3 class="button2">@Html.ActionLink("Adicionar", "AddToCart", "CarrinhoDeCompras", new { id = Model.Id  }, htmlAttributes: new { @class = "glyphicon glyphicon-shopping-cart" })</h3>
+                <h3 class="button2">@Html.ActionLink("Adicionar", "AddToCart", "CarrinhoDeCompras", new { id = Model.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-shopping-cart" })</h3>
             </div>
         </div>
         <div class="Descricao">
@@ -113,6 +113,7 @@
         </div>
     </div>
 </div>
+
 <div class="navegacao"> 
     @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Voltar para listagem", "Index")

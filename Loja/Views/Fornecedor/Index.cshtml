@@ -3,60 +3,44 @@
 @{
     ViewBag.Title = "Listagem Fornecedores";
 }
-<h2>Listagem Fornecedores</h2>
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-@using (Html.BeginForm("Index", "Fornecedor", FormMethod.Get))
-{
+<div class="container">
+    <h2>Listagem Fornecedores</h2>
     <p>
-        Procura por RazaoSocial : @Html.TextBox("SearchString")
-        <input type="submit" value="Busca" />
+        @Html.ActionLink("Criar Novo", "Create")
     </p>
-}
-<table class="table">
-    <tr>
-        <th>@Html.ActionLink("RazaoSocial", "Index", new { sortOrder = ViewBag.NomeParam })</th>
-        <th>Razao Social</th>
-        <th>@Html.ActionLink("Data Cadastro", "Index", new { sortOrder = ViewBag.DateParam })</th>
-        <th></th>
-
-        @foreach (var item in Model)
-        {
+    @using (Html.BeginForm("Index", "Fornecedor", FormMethod.Get))
+    {
+        <p>
+            Procura por RazaoSocial : @Html.TextBox("SearchString")
+            <input type="submit" value="Busca" />
+        </p>
+    }
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.RazaoSocial)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.tipoPessoa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CNPJ)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NomeVendedor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CPF)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Observacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ativo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataCadastro)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
-        }
+            <th>@Html.ActionLink("RazaoSocial", "Index", new { sortOrder = ViewBag.NomeParam })</th>
+            <th>Tipo Pessoa</th>
+            <th>CNPJ</th>
+            <th>@Html.ActionLink("Data Cadastro", "Index", new { sortOrder = ViewBag.DateParam })</th>
+            <th></th>
 
-    </table>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.RazaoSocial)</td>
+                <td>@Html.DisplayFor(modelItem => item.tipoPessoa)</td>
+                <td>@Html.DisplayFor(modelItem => item.CNPJ)</td>
+                <td>@Html.DisplayFor(modelItem => item.NomeVendedor)</td>
+                <td>@Html.DisplayFor(modelItem => item.CPF)</td>
+                <td>@Html.DisplayFor(modelItem => item.Observacao)</td>
+                <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                <td>@Html.DisplayFor(modelItem => item.Ativo)</td>
+                <td>@Html.DisplayFor(modelItem => item.DataCadastro)</td>
+                <td>@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+            }
+
+        </table>
+    </div>

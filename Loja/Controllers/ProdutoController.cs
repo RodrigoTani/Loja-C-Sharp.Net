@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Loja.Models;
+using PagedList;
 
 namespace Loja.Controllers
 {
@@ -33,12 +34,58 @@ namespace Loja.Controllers
             return PartialView();
         }
 
-
+        /*
         // GET: Produto
         public ActionResult Index()
         {
             var produtoes = db.Produtoes.Include(p => p.forn);
             return View(produtoes.ToList());
+        }*/
+
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+        {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NomeParam = String.IsNullOrEmpty(sortOrder) ? "Titulo" : "";
+            ViewBag.DateParm = sortOrder == "Date" ? "Date_desc" : "Date";
+
+            if (searchString != null){
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var produtos = from s in db.Produtoes
+                               select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                produtos = produtos.Where(s => s.Titulo.ToUpper().Contains(searchString.ToUpper())
+                                       || s.Titulo.ToUpper().Contains(searchString.ToUpper()));
+            }
+            switch (sortOrder)
+            {
+                case "Titulo":
+                    produtos = produtos.OrderByDescending(s => s.Titulo);
+                    break;
+                case "Data":
+                    produtos = produtos.OrderBy(s => s.DataCadastro);
+                    break;
+                case "Data_desc":
+                    produtos = produtos.OrderByDescending(s => s.DataCadastro);
+                    break;
+                default:
+                    produtos = produtos.OrderBy(s => s.Id);
+                    break;
+            }
+
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(produtos.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Produto/Details/5

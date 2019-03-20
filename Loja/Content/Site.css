@@ -20,8 +20,11 @@ input,
 select,
 textarea {
     max-width: 280px;
-}*/
+}
 
+.lista{
+    height:800px;
+}
 .topA{
     height: 200px;
     background-color: #e2e0e0;
@@ -39,6 +42,7 @@ footer{
     padding-top:50px;
     padding-left:50px;
     margin:0px;
+    clear:both;
 }
 .listE{
     width:50%;

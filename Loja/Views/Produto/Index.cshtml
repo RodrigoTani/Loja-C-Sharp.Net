@@ -1,66 +1,46 @@
 ﻿@model IEnumerable<Loja.Models.Produto>
-
+<div class="container">
+    <br />
+    <h3>Listagem de Produtos</h3>
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
+    @using (Html.BeginForm("Index", "Produto", FormMethod.Get))
+    {
+        <p>
+            Procura por Titulo : @Html.TextBox("SearchString")
+            <input type="submit" value="Busca" />
+        </p>
+    }
     <table class="table">
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.forn.RazaoSocial)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Titulo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.plataforma)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.genero)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ValorFinal)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ativo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataCadastro)
-            </th>
+            <th>@Html.DisplayNameFor(model => model.forn.RazaoSocial)</th>
+            <th>@Html.ActionLink("Titulo", "Index", new { sortOrder = ViewBag.NomeParam })</th>
+            <th>@Html.DisplayNameFor(model => model.plataforma)</th>
+            <th>@Html.DisplayNameFor(model => model.genero)</th>
+            <th>@Html.DisplayNameFor(model => model.ValorFinal)</th>
+            <th>@Html.DisplayNameFor(model => model.Ativo)</th>
+            <th>@Html.ActionLink("Data Cadastro", "Index", new { sortOrder = ViewBag.DateParam })</th>
             <th></th>
         </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.forn.RazaoSocial)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Titulo)
-            </td>
-           
-            <td>
-                @Html.DisplayFor(modelItem => item.plataforma)
-            </td>
-         
-            <td>
-                @Html.DisplayFor(modelItem => item.genero)
-            </td>
-            
-            <td>
-                @Html.DisplayFor(modelItem => item.ValorFinal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ativo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataCadastro)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.forn.RazaoSocial)</td>
+                <td>@Html.DisplayFor(modelItem => item.Titulo)</td>
+                <td>@Html.DisplayFor(modelItem => item.plataforma)</td>
+                <td>@Html.DisplayFor(modelItem => item.genero)</td>
+                <td>@Html.DisplayFor(modelItem => item.ValorFinal)</td>
+                <td>@Html.DisplayFor(modelItem => item.Ativo)</td>
+                <td>@Html.DisplayFor(modelItem => item.DataCadastro)</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
         </tr>
-    }
-    
+        }
+
     </table>
+</div>

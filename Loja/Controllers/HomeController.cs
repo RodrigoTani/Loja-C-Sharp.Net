@@ -26,5 +26,10 @@ namespace Loja.Controllers
 
             return View();
         }
+
+        public ActionResult Endereco()
+        {
+            return View();
+        }
     }
 }

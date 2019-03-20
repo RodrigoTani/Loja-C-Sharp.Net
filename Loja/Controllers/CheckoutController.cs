@@ -25,12 +25,12 @@ namespace Loja.Controllers
 
             return View(viewModel);
         }
-        public ActionResult ClienteEFormaPagamento(string pagamento)
+        public ActionResult ClienteFormadePagamento(string pagamento)
         {
             var cart = CarrinhoDeCompras.GetCart(this.HttpContext);
             if (storeDB.EnderecoEntregas.Where(x => x.Usuario == User.Identity.Name).FirstOrDefault() == null)
             {
-                return RedirectToAction("CadastrarEndereço");
+                return RedirectToAction("Create","EnderecoEntrega");
             }
             // Set up our ViewModel
             var viewModel = new CarrinhodeComprasViewModel
@@ -55,14 +55,14 @@ namespace Loja.Controllers
                 localEntrega.Usuario = User.Identity.Name;
                 storeDB.EnderecoEntregas.Add(localEntrega);
                 storeDB.SaveChanges();
-                return RedirectToAction("ClienteEFormaPagamento");
+                return RedirectToAction("ClienteFormadePagamento");
             }
 
             return View(localEntrega); 
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ClienteEFormaPagamento(FormCollection values)
+        public ActionResult ClienteFormadePagamento(FormCollection values)
         {
             ViewBag.Clientes = storeDB.Users; 
             var order = new Pedido();
@@ -86,14 +86,14 @@ namespace Loja.Controllers
             }
             catch
             {
-                //Invalid - redisplay with errors
+                //Invalido - Devolve tela com erros
                 return View(order);
             }
 
         }
         public ActionResult Complete(int id)
         {
-            // Validate customer owns this order
+            // Valida o pedido para o Usuário
             bool isValid = storeDB.Pedidoes.Any(
                 o => o.PedidoId == id);
 
