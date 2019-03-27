@@ -60,10 +60,14 @@ namespace Loja.Models
         [Required]
         [Display(Name = "Descrição2 do jogo")]
         public String Descricao2 { get; set; }
+
         [Required]
         public decimal ValorFinal { get; set; }
         [Required]
         public bool Ativo { get; set; } = true;
+
+        //public String MotivoAtivacao { get; set; }
+        //public String MotivoInativacao { get; set; }
 
         // Auxiliares
 
@@ -78,6 +82,9 @@ namespace Loja.Models
         public enum Genero { Ação, Aventura, Estratégia, RPG, Esporte, Corrida, Tiro }
 
         public enum ClassificacaoIndicativa { L, _10, _12, _14, _16, _18 }
+
+        //Regra de negocio
+
 
     }
 }

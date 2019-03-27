@@ -4,7 +4,6 @@
 }
 <div class="create">
     <br />
-
     <h1> &nbsp &nbsp Detalhes do Pedido</h1>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
@@ -28,45 +27,43 @@
 
             </div>
             <div class="row">
-                @{ if (!String.IsNullOrEmpty(Model.LocalEntrega.Estado))
-            {
+                @{ if (!String.IsNullOrEmpty(Model.EnderecoEntrega.Estado)){
                         <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="h4">Estado: @Html.DisplayFor(model => model.LocalEntrega.Estado)</div>
+                            <div class="h4">Estado: @Html.DisplayFor(model => model.EnderecoEntrega.Estado)</div>
                         </div>
                     }
                 }
             </div>
             <div class="row">
-                @{ if (!String.IsNullOrEmpty(Model.LocalEntrega.Cidade))
-            {
+                @{ if (!String.IsNullOrEmpty(Model.EnderecoEntrega.Cidade)){
                         <div class="col-md-6 col-sm-6 col-xs-6">
-                            <div class="h4">Cidade: @Html.DisplayFor(model => model.LocalEntrega.Cidade)</div>
+                            <div class="h4">Cidade: @Html.DisplayFor(model => model.EnderecoEntrega.Cidade)</div>
                         </div>
                     }
                 }
-                @{ if (!String.IsNullOrEmpty(Model.LocalEntrega.Endereco))
+                @{ if (!String.IsNullOrEmpty(Model.EnderecoEntrega.Logradouro))
             {
                         <div class="col-md-6 col-sm-6 col-xs-6">
-                            <div class="h4">Endereço: @Html.DisplayFor(model => model.LocalEntrega.Endereco)</div>
+                            <div class="h4">Endereço: @Html.DisplayFor(model => model.EnderecoEntrega.Logradouro)</div>
                         </div>
                     }
                 }
             </div>
             <div class="row">
-                @{ if (!String.IsNullOrEmpty(Model.LocalEntrega.Bairro))
+                @{ if (!String.IsNullOrEmpty(Model.EnderecoEntrega.Bairro))
             {
                         <div class="col-md-6 col-sm-6 col-xs-6">
-                            <div class="h4">Bairro: @Html.DisplayFor(model => model.LocalEntrega.Bairro)</div>
+                            <div class="h4">Bairro: @Html.DisplayFor(model => model.EnderecoEntrega.Bairro)</div>
                         </div>
                     }
                 }
 
             </div>
             <div class="row">
-                @{ if (!String.IsNullOrEmpty(Model.LocalEntrega.Numero))
+                @{ if (!String.IsNullOrEmpty(Model.EnderecoEntrega.Numero))
             {
                         <div class="col-md-6 col-sm-6 col-xs-6">
-                            <div class="h4">Número: @Html.DisplayFor(model => model.LocalEntrega.Numero)</div>
+                            <div class="h4">Número: @Html.DisplayFor(model => model.EnderecoEntrega.Numero)</div>
                         </div>
                     }
                 }
@@ -93,14 +90,14 @@
             {
                         <tr>
 
-                            <td>@Html.DisplayFor(model => item.ProdutoId)</td>
+                            <td>@Html.DisplayFor(model => item.Id)</td>
 
-                            <td>@Html.DisplayFor(model => item.Nome)</td>
-                            <td>@Html.DisplayFor(model => model.DetalhesPedidos.Where(x => x.ProdutoId == item.ProdutoId).FirstOrDefault().PrecoUnitario)</td>
-                            <td>@Html.DisplayFor(model => model.DetalhesPedidos.Where(x => x.ProdutoId == item.ProdutoId).FirstOrDefault().Quantidade)</td>
+                            <td>@Html.DisplayFor(model => item.Titulo)</td>
+                            <td>@Html.DisplayFor(model => model.DetalhesPedidos.Where(x => x.ProdutoId == item.Id).FirstOrDefault().PrecoUnitario)</td>
+                            <td>@Html.DisplayFor(model => model.DetalhesPedidos.Where(x => x.ProdutoId == item.Id).FirstOrDefault().Quantidade)</td>
                             <td>
-                                @(Model.DetalhesPedidos.Where(x => x.ProdutoId == item.ProdutoId).FirstOrDefault().Quantidade *
-                        Model.DetalhesPedidos.Where(x => x.ProdutoId == item.ProdutoId).FirstOrDefault().PrecoUnitario)
+                                @(Model.DetalhesPedidos.Where(x => x.ProdutoId == item.Id).FirstOrDefault().Quantidade *
+                        Model.DetalhesPedidos.Where(x => x.ProdutoId == item.Id).FirstOrDefault().PrecoUnitario)
                             </td>
 
                         </tr>

@@ -34,15 +34,15 @@ namespace Loja.Models.Carrinho
         }
         public void BuscarEndereco()
         {
-            // EnderecoEntrega = DB.EnderecoEntregas.Where(x => x. == Pedido.Usuario).FirstOrDefault();
+            //EnderecoEntrega = DB.EnderecoEntregas.Where(x => x. == Pedido.Usuario).FirstOrDefault();
         }
         public void BuscarDetalhesPedidos()
         {
-            //DetalhesPedidos = DB.DetalhesPedidoes.Where(x => x.PedidoId == PedidoId).ToList();
+            DetalhesPedidos = DB.DetalhesPedidoes.Where(x => x.PedidoId == PedidoId).ToList();
         }
         public void BuscarPedido()
         {
-            //Pedido = DB.Pedidoes.Where(x => x.PedidoId == PedidoId).FirstOrDefault();
+            Pedido = DB.Pedidoes.Where(x => x.PedidoId == PedidoId).FirstOrDefault();
         }
     }
 }

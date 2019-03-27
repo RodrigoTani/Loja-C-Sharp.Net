@@ -179,12 +179,14 @@
     <Compile Include="Controllers\CarrinhoController.cs" />
     <Compile Include="Controllers\CarrinhodeComprasController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
+    <Compile Include="Controllers\checkoutViewModelController.cs" />
     <Compile Include="Controllers\DetalhesPedidoController.cs" />
     <Compile Include="Controllers\EnderecoEntregaController.cs" />
     <Compile Include="Controllers\EstoqueProdutosController.cs" />
     <Compile Include="Controllers\FornecedorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MotivoController.cs" />
     <Compile Include="Controllers\PedidoController.cs" />
     <Compile Include="Controllers\ProdutoController.cs" />
     <Compile Include="Global.asax.cs">
@@ -202,14 +204,20 @@
     <Compile Include="Migrations\201903192245359_novo.Designer.cs">
       <DependentUpon>201903192245359_novo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903251325151_novo3.cs" />
+    <Compile Include="Migrations\201903251325151_novo3.Designer.cs">
+      <DependentUpon>201903251325151_novo3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Carrinho\CarrinhoDeCompras.cs" />
     <Compile Include="Models\Carrinho\CarrinhodeComprasRemoverViewModel.cs" />
     <Compile Include="Models\Carrinho\CarrinhodeComprasViewModel.cs" />
+    <Compile Include="Models\Carrinho\CheckoutViewModel.cs" />
     <Compile Include="Models\Carrinho\ClasseModeladora.cs" />
     <Compile Include="Models\Carrinho\DetalhesPedido.cs" />
     <Compile Include="Models\Carrinho\Pedido.cs" />
+    <Compile Include="Models\Motivo.cs" />
     <Compile Include="Models\Produto.cs" />
     <Compile Include="Models\Carrinho\Carrinho.cs" />
     <Compile Include="Models\EnderecoEntrega.cs" />
@@ -312,10 +320,18 @@
     <Content Include="Views\EstoqueProdutos\Details.cshtml" />
     <Content Include="Views\EstoqueProdutos\Edit.cshtml" />
     <Content Include="Views\EstoqueProdutos\Index.cshtml" />
+    <Content Include="Views\Motivo\Create.cshtml" />
+    <Content Include="Views\Motivo\Delete.cshtml" />
+    <Content Include="Views\Motivo\Details.cshtml" />
+    <Content Include="Views\Motivo\Edit.cshtml" />
+    <Content Include="Views\Motivo\Index.cshtml" />
+    <Content Include="Views\Checkout\EnderecoEntrega.cshtml" />
+    <Content Include="Views\Produto\Motivo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Carrinho\" />
+    <Folder Include="Views\checkoutViewModel\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -340,6 +356,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903192245359_novo.resx">
       <DependentUpon>201903192245359_novo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903251325151_novo3.resx">
+      <DependentUpon>201903251325151_novo3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

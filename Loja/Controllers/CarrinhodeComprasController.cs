@@ -11,6 +11,7 @@ namespace Loja.Controllers
         ApplicationDbContext storeDB = new ApplicationDbContext();
         //
         // GET: /ShoppingCart/
+        
 
         public ActionResult Index()
         {

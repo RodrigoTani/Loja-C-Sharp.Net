@@ -119,6 +119,8 @@ namespace Loja.Controllers
         {
             if (ModelState.IsValid)
             {
+                produto.Ativo = true;
+                produto.DataCadastro = DateTime.Now;
                 db.Produtoes.Add(produto);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -187,6 +189,33 @@ namespace Loja.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult Inativar(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Produto produto = db.Produtoes.Find(id);
+            if (produto == null)
+            {
+                return HttpNotFound();
+            }
+            return View(produto);
+        }
+
+        // POST: Produto/Inativar/5
+        [HttpPost, ActionName("Inativar")]
+        [ValidateAntiForgeryToken]
+        public ActionResult InativeConfirmed(int id)
+        {
+            Produto produto = db.Produtoes.Find(id);
+            RedirectToAction("Motivo");
+            produto.Ativo = false;
+            db.Entry(produto).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -194,6 +223,33 @@ namespace Loja.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        //---------------------------------------
+        // GET: Motivo/Create
+        public ActionResult Motivo()
+        {
+            ViewBag.ProdutoId = new SelectList(db.Produtoes, "Id", "Titulo");
+            return View();
+        }
+
+        // POST: Motivo/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Motivo([Bind(Include = "id,DataMotivo,ProdutoId,Usuario,MotivoAtivacao,MotivoInativacao")] Motivo motivo)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Motivoes.Add(motivo);
+                Produto produto = db.Produtoes.Find(motivo.ProdutoId);
+                produto.Ativo = false;
+                db.SaveChanges();
+                return RedirectToAction("Index", "Produto");
+            }
+
+            ViewBag.ProdutoId = new SelectList(db.Produtoes, "Id", "Titulo", motivo.ProdutoId);
+            return View(motivo);
         }
     }
 }

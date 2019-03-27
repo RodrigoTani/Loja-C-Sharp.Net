@@ -21,7 +21,7 @@ namespace Loja.Controllers
                 CartItems = cart.GetCartItems(),
                 CartTotal = cart.GetTotal()
             };
-            // Return the view
+            // Retorna a view
 
             return View(viewModel);
         }
@@ -30,7 +30,7 @@ namespace Loja.Controllers
             var cart = CarrinhoDeCompras.GetCart(this.HttpContext);
             if (storeDB.EnderecoEntregas.Where(x => x.Usuario == User.Identity.Name).FirstOrDefault() == null)
             {
-                return RedirectToAction("Create","EnderecoEntrega");
+                return RedirectToAction("EnderecoEntrega");
             }
             // Set up our ViewModel
             var viewModel = new CarrinhodeComprasViewModel
@@ -38,20 +38,21 @@ namespace Loja.Controllers
                 CartItems = cart.GetCartItems(),
                 CartTotal = cart.GetTotal()
             };
-            // Return the view
+            // Retorna a view
             viewModel.FormaPagamento = pagamento;
             return View(viewModel);
         }
-        public ActionResult CadastrarEndereço()
+        public ActionResult EnderecoEntrega()
         {
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CadastrarEndereço([Bind(Include = "Telefone,Celular,CEP,Estado,Bairro,Cidade,Endereco,Numero")] EnderecoEntrega localEntrega)
+        public ActionResult EnderecoEntrega([Bind(Include = "CEP,Estado,Cidade,Bairro,Logradouro,Numero,Observacao,DataCadastro")] EnderecoEntrega localEntrega)
         {
             if (ModelState.IsValid)
             {
+                localEntrega.DataCadastro = DateTime.Now;
                 localEntrega.Usuario = User.Identity.Name;
                 storeDB.EnderecoEntregas.Add(localEntrega);
                 storeDB.SaveChanges();
@@ -74,10 +75,10 @@ namespace Loja.Controllers
                 order.Usuario = User.Identity.Name;
                 order.DataPedido = DateTime.Now;
                 order.Total = CarrinhoDeCompras.GetCart(this.HttpContext).GetTotal();
-                //Save Order
+                //Salva o Pedido
                 storeDB.Pedidoes.Add(order);
                 storeDB.SaveChanges();
-                //Process the order
+                //Processa o pedido
                 var cart = CarrinhoDeCompras.GetCart(this.HttpContext);
                 cart.CreateOrder(order);
 

@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Loja.Models.Motivo>
+
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.prodid.Titulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataMotivo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Usuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MotivoAtivacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MotivoInativacao)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.prodid.Titulo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataMotivo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Usuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MotivoAtivacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MotivoInativacao)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+                @Html.ActionLink("Details", "Details", new { id=item.id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.id })
+            </td>
+        </tr>
+    }
+    
+    </table>
