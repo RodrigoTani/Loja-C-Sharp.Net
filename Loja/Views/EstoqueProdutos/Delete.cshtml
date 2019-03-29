@@ -1,7 +1,8 @@
 ﻿@model Loja.Models.EstoqueProdutos
 
-
-    <h3>Are you sure you want to delete this?</h3>
+<div class="container">
+    <br />
+    <h3>Você Realmente Deseja Excluir?</h3>
     <div>
         <h4>EstoqueProdutos</h4>
         <hr />
@@ -9,67 +10,69 @@
             <dt>
                 @Html.DisplayNameFor(model => model.AdicionarJogo.Titulo)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.AdicionarJogo.Titulo)
             </dd>
-    
+
             <dt>
                 @Html.DisplayNameFor(model => model.fornecedor1.RazaoSocial)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.fornecedor1.RazaoSocial)
             </dd>
-    
+
             <dt>
                 @Html.DisplayNameFor(model => model.PorcentagemPrecificacao)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.PorcentagemPrecificacao)
             </dd>
-    
+
             <dt>
                 @Html.DisplayNameFor(model => model.Custo)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.Custo)
             </dd>
-    
+
             <dt>
                 @Html.DisplayNameFor(model => model.Quantidade)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.Quantidade)
             </dd>
-    
+
             <dt>
                 @Html.DisplayNameFor(model => model.Ativo)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.Ativo)
             </dd>
-    
+
             <dt>
                 @Html.DisplayNameFor(model => model.DataCadastro)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.DataCadastro)
             </dd>
-    
+
         </dl>
-    
-        @using (Html.BeginForm()) {
+
+        @using (Html.BeginForm())
+        {
             @Html.AntiForgeryToken()
-    
+
             <div class="form-actions no-color">
                 <input type="submit" value="Delete" class="btn btn-default" /> |
-                @Html.ActionLink("Back to List", "Index")
+                @Html.ActionLink("Voltar para Listagem", "Index", null, new { @class = "btn btn-default" })
             </div>
         }
     </div>
+</div>

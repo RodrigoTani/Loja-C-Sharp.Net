@@ -2,12 +2,12 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
-    
-    
+    <div class="container">
+
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-        
+
         <div class="form-horizontal">
             <h4>Pedido</h4>
             <hr />
@@ -19,7 +19,7 @@
                     @Html.ValidationMessageFor(model => model.FormaPagamento, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Save" class="btn btn-default" />
@@ -27,7 +27,8 @@
             </div>
         </div>
     }
-    
+
     <div>
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Voltar para Listagem", "Index",null, new { @class = "btn btn-default"})
     </div>
+</div>

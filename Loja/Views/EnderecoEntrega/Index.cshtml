@@ -58,11 +58,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.DataCadastro)
             </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-            </td>
+            <td>@Html.ActionLink("Editar", "Edit", null, new { id = item.Id }, new { @class = "btn btn-primary" })</td>
+            <td>@Html.ActionLink("Detalhes", "Details", null, new { id = item.Id }, new { @class = "btn btn-default" })</td>
+            <td>@Html.ActionLink("Deletar", "Delete", null, new { id = item.Id }, new { @class = "btn btn-danger" })</td>
         </tr>
     }
     

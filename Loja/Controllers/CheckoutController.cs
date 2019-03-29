@@ -78,12 +78,14 @@ namespace Loja.Controllers
                 //Salva o Pedido
                 storeDB.Pedidoes.Add(order);
                 storeDB.SaveChanges();
+                /*
+                EstoqueProdutos e;
+                e.Quantidade = e.Quantidade - 1;*/
                 //Processa o pedido
                 var cart = CarrinhoDeCompras.GetCart(this.HttpContext);
                 cart.CreateOrder(order);
 
-                return RedirectToAction("Complete",
-                        new { id = order.PedidoId });
+                return RedirectToAction("Complete",new { id = order.PedidoId });
             }
             catch
             {

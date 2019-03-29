@@ -3,7 +3,7 @@
     <br />
     <h3>Listagem de Produtos</h3>
     <p>
-        @Html.ActionLink("Create New", "Create")
+        @Html.ActionLink("Adicionar Novo", "Create",null,new { @class= "btn btn-primary" })
     </p>
     @using (Html.BeginForm("Index", "Produto", FormMethod.Get))
     {
@@ -16,8 +16,8 @@
         <tr>
             <th>@Html.DisplayNameFor(model => model.forn.RazaoSocial)</th>
             <th>@Html.ActionLink("Titulo", "Index", new { sortOrder = ViewBag.NomeParam })</th>
-            <th>@Html.DisplayNameFor(model => model.plataforma)</th>
-            <th>@Html.DisplayNameFor(model => model.genero)</th>
+            <th>Plataforma</th>
+            <th>Gênero</th>
             <th>@Html.DisplayNameFor(model => model.ValorFinal)</th>
             <th>@Html.DisplayNameFor(model => model.Ativo)</th>
             <th>@Html.ActionLink("Data Cadastro", "Index", new { sortOrder = ViewBag.DateParam })</th>
@@ -35,11 +35,11 @@
                 <td>@Html.DisplayFor(modelItem => item.Ativo)</td>
                 <td>@Html.DisplayFor(modelItem => item.DataCadastro)</td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })|
-                    @Html.ActionLink("Inativar", "Inativar", new { id = item.Id })
-                    @Html.ActionLink("Ativar", "Ativar", new { id = item.Id })
+                    @Html.ActionLink("Editar", "Edit",null, new { id = item.Id },new { @class="btn btn-primary"})
+                    @Html.ActionLink("Detalhes", "Details",null, new { id = item.Id },new { @class="btn btn-default"})
+                    @Html.ActionLink("Deletar", "Delete",null, new { id = item.Id },new { @class = "btn btn-danger" })
+                    @Html.ActionLink("Inativar", "Inativar",null, new { id = item.Id },new { @class = "btn btn-warning"})
+                    @Html.ActionLink("Ativar", "Ativar",null, new { id = item.Id },new { @class = "btn btn-success"})
             </td>
         </tr>
         }

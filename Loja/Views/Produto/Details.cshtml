@@ -115,6 +115,6 @@
 </div>
 
 <div class="navegacao"> 
-    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Voltar para listagem", "Index")
+    @Html.ActionLink("Editar", "Edit",null, new { id = Model.Id },new { @class="btn btn-primary"}) |
+    @Html.ActionLink("Voltar para listagem", "Index",null,new { @class = "btn btn-default"})
 </div>

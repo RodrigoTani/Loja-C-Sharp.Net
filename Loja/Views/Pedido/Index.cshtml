@@ -27,8 +27,8 @@
                     <th>@Html.DisplayFor(model => item.Usuario)</th>
                     <th>R$ @Html.DisplayFor(model => item.Total)</th>
 
-                    <td>@Html.ActionLink("Edit", "Edit", null, new { id = item.PedidoId }, new { @class = "btn btn-primary" }) |
-                        @Html.ActionLink("Details", "Details", null, new { id = item.PedidoId }, new { @class = "btn btn-default" }) |
+                    <td>@Html.ActionLink("Editar", "Edit", null, new { id = item.PedidoId }, new { @class = "btn btn-primary" }) |
+                        @Html.ActionLink("Detalhes", "Details", null, new { id = item.PedidoId }, new { @class = "btn btn-default" }) |
                         @Html.ActionLink("Deletar", "Delete", null, new { id = item.PedidoId }, new { @class = "btn btn-danger" })|
                     </td>
                 </tr>

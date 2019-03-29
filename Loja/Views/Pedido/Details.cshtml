@@ -1,7 +1,5 @@
 ﻿@model Loja.Models.Carrinho.ClasseModeladora
-@{
-    Layout = null;
-}
+
 <div class="create">
     <br />
     <h1> &nbsp &nbsp Detalhes do Pedido</h1>
@@ -27,7 +25,7 @@
 
             </div>
             <div class="row">
-                @{ if (!String.IsNullOrEmpty(Model.EnderecoEntrega.Estado)){
+                @{if(!String.IsNullOrEmpty(Model.EnderecoEntrega.Estado)){
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="h4">Estado: @Html.DisplayFor(model => model.EnderecoEntrega.Estado)</div>
                         </div>
@@ -95,11 +93,7 @@
                             <td>@Html.DisplayFor(model => item.Titulo)</td>
                             <td>@Html.DisplayFor(model => model.DetalhesPedidos.Where(x => x.ProdutoId == item.Id).FirstOrDefault().PrecoUnitario)</td>
                             <td>@Html.DisplayFor(model => model.DetalhesPedidos.Where(x => x.ProdutoId == item.Id).FirstOrDefault().Quantidade)</td>
-                            <td>
-                                @(Model.DetalhesPedidos.Where(x => x.ProdutoId == item.Id).FirstOrDefault().Quantidade *
-                        Model.DetalhesPedidos.Where(x => x.ProdutoId == item.Id).FirstOrDefault().PrecoUnitario)
-                            </td>
-
+                            <td>@(Model.DetalhesPedidos.Where(x => x.ProdutoId == item.Id).FirstOrDefault().Quantidade * Model.DetalhesPedidos.Where(x => x.ProdutoId == item.Id).FirstOrDefault().PrecoUnitario)</td>
                         </tr>
                     }
                 </tbody>
