@@ -326,7 +326,8 @@
     <Content Include="Views\Motivo\Edit.cshtml" />
     <Content Include="Views\Motivo\Index.cshtml" />
     <Content Include="Views\Checkout\EnderecoEntrega.cshtml" />
-    <Content Include="Views\Produto\Motivo.cshtml" />
+    <Content Include="Views\Produto\Inativar.cshtml" />
+    <Content Include="Views\Produto\Ativar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

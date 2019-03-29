@@ -62,6 +62,62 @@ namespace Loja.Controllers
             ViewBag.ProdutoId = new SelectList(db.Produtoes, "Id", "Titulo", motivo.ProdutoId);
             return View(motivo);
         }
+        //----------------------------------
+        // GET: Motivo/Create
+        public ActionResult Inativar()
+        {
+            ViewBag.ProdutoId = new SelectList(db.Produtoes, "Id", "Titulo");
+            return View();
+        }
+
+        // POST: Motivo/Create
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Inativar([Bind(Include = "id,DataMotivo,ProdutoId,Usuario,MotivoAtivacao,MotivoInativacao")] Motivo motivo)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Motivoes.Add(motivo);
+                Produto produto = db.Produtoes.Find(motivo.ProdutoId);
+                produto.DataCadastro = DateTime.Now;
+                produto.Ativo = false;
+                db.SaveChanges();
+                return RedirectToAction("Inativar", "Produto");
+            }
+
+            ViewBag.ProdutoId = new SelectList(db.Produtoes, "Id", "Titulo", motivo.ProdutoId);
+            return View(motivo);
+        }
+        //----------------------------------
+        // GET: Motivo/Create
+        public ActionResult Ativar()
+        {
+            ViewBag.ProdutoId = new SelectList(db.Produtoes, "Id", "Titulo");
+            return View();
+        }
+
+        // POST: Motivo/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Ativar([Bind(Include = "id,DataMotivo,ProdutoId,Usuario,MotivoAtivacao,MotivoInativacao")] Motivo motivo)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Motivoes.Add(motivo);
+                Produto produto = db.Produtoes.Find(motivo.ProdutoId);
+                produto.DataCadastro = DateTime.Now;
+                produto.Ativo = true;
+                db.SaveChanges();
+                return RedirectToAction("Inativar", "Produto");
+            }
+
+            ViewBag.ProdutoId = new SelectList(db.Produtoes, "Id", "Titulo", motivo.ProdutoId);
+            return View(motivo);
+        }
+
+
+
 
         // GET: Motivo/Edit/5
         public ActionResult Edit(int? id)

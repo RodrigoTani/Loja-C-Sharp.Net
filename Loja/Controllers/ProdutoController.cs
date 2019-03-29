@@ -188,7 +188,7 @@ namespace Loja.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
+        /*
         public ActionResult Inativar(int? id)
         {
             if (id == null)
@@ -202,7 +202,7 @@ namespace Loja.Controllers
             }
             return View(produto);
         }
-
+        
         // POST: Produto/Inativar/5
         [HttpPost, ActionName("Inativar")]
         [ValidateAntiForgeryToken]
@@ -216,14 +216,7 @@ namespace Loja.Controllers
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        
         //---------------------------------------
         // GET: Motivo/Create
         public ActionResult Motivo()
@@ -250,6 +243,67 @@ namespace Loja.Controllers
 
             ViewBag.ProdutoId = new SelectList(db.Produtoes, "Id", "Titulo", motivo.ProdutoId);
             return View(motivo);
+        }*/
+
+        //----------------------------------
+        // GET: Motivo/Create
+        public ActionResult Inativar()
+        {
+            ViewBag.ProdutoId = new SelectList(db.Produtoes, "Id", "Titulo");
+            return View();
+        }
+        // POST: Motivo/Create
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Inativar([Bind(Include = "id,DataMotivo,ProdutoId,Usuario,MotivoAtivacao,MotivoInativacao")] Motivo motivo)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Motivoes.Add(motivo);
+                Produto produto = db.Produtoes.Find(motivo.ProdutoId);
+                motivo.DataMotivo = DateTime.Now;
+                produto.Ativo = false;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.ProdutoId = new SelectList(db.Produtoes, "Id", "Titulo", motivo.ProdutoId);
+            return View(motivo);
+        }
+        //----------------------------------
+        // GET: Motivo/Create
+        public ActionResult Ativar()
+        {
+            ViewBag.ProdutoId = new SelectList(db.Produtoes, "Id", "Titulo");
+            return View();
+        }
+
+        // POST: Motivo/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Ativar([Bind(Include = "id,DataMotivo,ProdutoId,Usuario,MotivoAtivacao,MotivoInativacao")] Motivo motivo)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Motivoes.Add(motivo);
+                Produto produto = db.Produtoes.Find(motivo.ProdutoId);
+                motivo.DataMotivo = DateTime.Now;
+                produto.Ativo = true;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.ProdutoId = new SelectList(db.Produtoes, "Id", "Titulo", motivo.ProdutoId);
+            return View(motivo);
+        }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

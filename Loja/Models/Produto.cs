@@ -84,7 +84,7 @@ namespace Loja.Models
         public enum ClassificacaoIndicativa { L, _10, _12, _14, _16, _18 }
 
         //Regra de negocio
-
+       
 
     }
 }
