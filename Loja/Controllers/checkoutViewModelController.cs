@@ -26,10 +26,8 @@ namespace Loja.Controllers
                 CartTotal = cart.GetTotal()
             };
             // Retorna a view
-            var endereco = new EnderecoEntrega();
 
-
-            return View(endereco);
+            return View(viewModel);
         }
         public ActionResult ClienteFormadePagamento(string pagamento)
         {

@@ -10,5 +10,7 @@ namespace Loja.Models.Carrinho
         public List<Carrinho> CartItems { get; set; }
         public decimal CartTotal { get; set; }
         public string FormaPagamento { get; set; }
+
+        public IEnumerable<EnderecoEntrega> Endereco { get; set; }
     }
 }

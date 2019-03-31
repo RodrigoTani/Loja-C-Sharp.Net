@@ -102,6 +102,7 @@ namespace Loja.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    fornecedor.Ativo = true;
                     fornecedor.DataCadastro = DateTime.Now;
                     db.Fornecedors.Add(fornecedor);
                     db.SaveChanges();

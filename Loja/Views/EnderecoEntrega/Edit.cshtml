@@ -1,20 +1,16 @@
 ﻿@model Loja.Models.EnderecoEntrega
 
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryval")
-    
-    
+<div class="container">
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-        
+
         <div class="form-horizontal">
             <h4>EnderecoEntrega</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.Id)
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.CEP, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -22,7 +18,7 @@
                     @Html.ValidationMessageFor(model => model.CEP, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.Estado, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -30,7 +26,7 @@
                     @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.Cidade, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -38,7 +34,7 @@
                     @Html.ValidationMessageFor(model => model.Cidade, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.Bairro, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -46,7 +42,7 @@
                     @Html.ValidationMessageFor(model => model.Bairro, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.Logradouro, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -54,7 +50,7 @@
                     @Html.ValidationMessageFor(model => model.Logradouro, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.Numero, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -62,7 +58,7 @@
                     @Html.ValidationMessageFor(model => model.Numero, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.Observacao, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -70,7 +66,7 @@
                     @Html.ValidationMessageFor(model => model.Observacao, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.DataCadastro, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -78,7 +74,7 @@
                     @Html.ValidationMessageFor(model => model.DataCadastro, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Save" class="btn btn-default" />
@@ -86,7 +82,8 @@
             </div>
         </div>
     }
-    
+
     <div>
-        @Html.ActionLink("Voltar para listagem", "Index",null, new { @class = "btn btn-default" })
+        @Html.ActionLink("Voltar para listagem", "Index", null, new { @class = "btn btn-default" })
+    </div>
     </div>

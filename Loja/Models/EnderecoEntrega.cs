@@ -1,5 +1,8 @@
 ﻿using Dominio;
+using System;
 using System.ComponentModel.DataAnnotations;
+using System.Net;
+using System.Web.Mvc;
 
 namespace Loja.Models
 {
@@ -20,6 +23,7 @@ namespace Loja.Models
         public string Numero { get; set; }
 
         public string Observacao { get; set; }
+
 
     }
 }

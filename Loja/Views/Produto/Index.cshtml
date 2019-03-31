@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Loja.Models.Produto>
+﻿@model IEnumerable <Loja.Models.Produto>
+
 <div class="container">
     <br />
     <h3>Listagem de Produtos</h3>
@@ -46,3 +47,6 @@
 
     </table>
 </div>
+       @* Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount)
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+       *@

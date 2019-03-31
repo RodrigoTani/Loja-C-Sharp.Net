@@ -8,10 +8,11 @@ namespace Core.Negocio
     {
         public string Processar(EntidadeDominio entidade)
         {
+            /*
             if (entidade != null)
                 entidade.DataCadastro = DateTime.Now;
             else
-                return "Erro ao encontrar entidade!";
+                return "Erro ao encontrar entidade!";*/
             return null;
         }
     }

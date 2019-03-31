@@ -4,12 +4,15 @@ using Dominio;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Data.Entity;
 using System.Linq;
 
 namespace Core.DAO
 {
     class DepartamentoDAO : AbstractDAO
     {
+        private static ApplicationDbContext db = new ApplicationDbContext();
+
         public DepartamentoDAO() : base("tb_departamento", "id") { }
         public DepartamentoDAO(string table, string idTable) : base(table, idTable) { }
         public DepartamentoDAO(DbConnection dbConnection, string table, string idTable) : base(dbConnection, table, idTable) { }
@@ -21,38 +24,7 @@ namespace Core.DAO
 
         public override List<EntidadeDominio> Consultar(EntidadeDominio entidade)
         {
-            List<Departamento> departamentos = new List<Departamento>();
-
-            try
-            {
-                OpenConnection();
-                DbCommand cmd = ConexaoDB.GetDbCommand(dbConnection);
-
-                cmd.CommandText = string.Format("SELECT id,Nome_Departamento from tb_departamento ORDER BY Nome_Departamento");
-
-                DbDataReader dr = cmd.ExecuteReader();
-                if (!dr.HasRows) throw new Exception();
-
-                while (dr.Read())
-                {
-                    Departamento d = new Departamento()
-                    {
-                        Id = Convert.ToInt32(dr["id"].ToString()),
-                        Nome_Departamento = dr["Nome_Departamento"].ToString(),
-
-                    };
-
-                    departamentos.Add(d);
-                }
-                dr.Close();
-
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
-            return departamentos.ToList<EntidadeDominio>();
+            return db.Departamentoes.ToList().Cast<EntidadeDominio>().ToList();
         }
 
         public override Resultado Excluir(EntidadeDominio entidade)
@@ -62,7 +34,9 @@ namespace Core.DAO
 
         public override Resultado Inserir(EntidadeDominio entidade)
         {
-            return base.Inserir(entidade);
+            db.Departamentoes.Add((Departamento)entidade);
+            db.SaveChanges();
+            return new Resultado();
         }
     }
 }

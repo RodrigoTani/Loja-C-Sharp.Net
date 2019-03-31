@@ -16,13 +16,12 @@ namespace Loja.Controllers
         public ActionResult Index()
         {
             var cart = CarrinhoDeCompras.GetCart(this.HttpContext);
-
             // Set up our ViewModel
             var viewModel = new CarrinhodeComprasViewModel
             {
                 CartItems = cart.GetCartItems(),
-                CartTotal = cart.GetTotal()
-
+                CartTotal = cart.GetTotal(),
+               
             };
             // Return the view
             return View(viewModel);

@@ -13,6 +13,13 @@ namespace Loja.Controllers
             return View();
         }
 
+        public static int b = 0;
+        public ActionResult AddDepartamento()
+        {
+            new Core.Controle.Fachada().Inserir(new Dominio.Departamento() {Id=b++,Nome_Departamento ="slipknot",DataCadastro = DateTime.Now });
+            return View();
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

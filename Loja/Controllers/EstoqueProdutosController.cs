@@ -53,6 +53,8 @@ namespace Loja.Controllers
         {
             if (ModelState.IsValid)
             {
+                estoqueProdutos.Ativo = true;
+                estoqueProdutos.DataCadastro = DateTime.Now;
                 db.EstoqueProdutos.Add(estoqueProdutos);
                 db.SaveChanges();
                 return RedirectToAction("Index");

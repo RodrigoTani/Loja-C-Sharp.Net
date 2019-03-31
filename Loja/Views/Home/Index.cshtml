@@ -40,5 +40,15 @@
 <div class="lista">
     <h3>&nbsp Nossos Produtos</h3>
     <hr>
-    <div>@Html.Action("ProdutoP", "Produto")</div>
+    <div>@Html.Action("ProdutoP", "Produto")</div>    
+    <table>
+        @foreach (Dominio.Departamento b in new Core.Controle.Fachada().Consultar(new Dominio.Departamento()).Entidades)
+        {
+        <tr>
+            <td>@b.Id</td>
+            <td>@b.Nome_Departamento</td>
+            <td>@b.DataCadastro</td>
+        </tr>
+        }
+    </table>
 </div>

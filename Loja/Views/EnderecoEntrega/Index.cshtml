@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Loja.Models.EnderecoEntrega>
 
-
+<div class="container">
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
@@ -32,10 +32,12 @@
             </th>
             <th></th>
         </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>@Html.DisplayFor(modelItem => item.CEP)
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CEP)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Estado)
@@ -62,6 +64,7 @@
             <td>@Html.ActionLink("Detalhes", "Details", null, new { id = item.Id }, new { @class = "btn btn-default" })</td>
             <td>@Html.ActionLink("Deletar", "Delete", null, new { id = item.Id }, new { @class = "btn btn-danger" })</td>
         </tr>
-    }
-    
+        }
+
     </table>
+    </div>

@@ -57,6 +57,20 @@
             </table>
             <h4>Forma de pagamento: </h4> @Html.TextBox("FormaPagamento", "Dinheiro");
             <input type="submit" value="Confirmar Compra" class="btn btn-success" />
+
+            
+        }
+        @*
+    @foreach (var item in Model.Endereco)
+        {<p>
+        @item.CEP
+        @item.Bairro
+        @item.Cidade
+        @item.Estado
+        @item.Logradouro
+        @item.Numero
+        @item.Observacao
+    </p>*@
         }
         <div>
             @Html.ActionLink("Voltar", "Index", "CarrinhodeCompras")

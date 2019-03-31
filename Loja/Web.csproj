@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -189,24 +190,17 @@
     <Compile Include="Controllers\MotivoController.cs" />
     <Compile Include="Controllers\PedidoController.cs" />
     <Compile Include="Controllers\ProdutoController.cs" />
+    <Compile Include="Controllers\ViewModels\FornecedorViewModelController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201903190354198_new2.cs" />
-    <Compile Include="Migrations\201903190354198_new2.Designer.cs">
-      <DependentUpon>201903190354198_new2.cs</DependentUpon>
+    <Compile Include="Migrations\201903311410588_novo.cs" />
+    <Compile Include="Migrations\201903311410588_novo.Designer.cs">
+      <DependentUpon>201903311410588_novo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201903190355410_new3.cs" />
-    <Compile Include="Migrations\201903190355410_new3.Designer.cs">
-      <DependentUpon>201903190355410_new3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903192245359_novo.cs" />
-    <Compile Include="Migrations\201903192245359_novo.Designer.cs">
-      <DependentUpon>201903192245359_novo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903251325151_novo3.cs" />
-    <Compile Include="Migrations\201903251325151_novo3.Designer.cs">
-      <DependentUpon>201903251325151_novo3.cs</DependentUpon>
+    <Compile Include="Migrations\201903311425115_novo2.cs" />
+    <Compile Include="Migrations\201903311425115_novo2.Designer.cs">
+      <DependentUpon>201903311425115_novo2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -225,6 +219,7 @@
     <Compile Include="Models\Fornecedor.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ViewModels\FornecedorViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -239,9 +234,22 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\cldr.js" />
+    <Content Include="Scripts\cldr\event.js" />
+    <Content Include="Scripts\cldr\supplemental.js" />
+    <Content Include="Scripts\cldr\unresolved.js" />
+    <Content Include="Scripts\globalize.js" />
+    <Content Include="Scripts\globalize\currency.js" />
+    <Content Include="Scripts\globalize\date.js" />
+    <Content Include="Scripts\globalize\message.js" />
+    <Content Include="Scripts\globalize\number.js" />
+    <Content Include="Scripts\globalize\plural.js" />
+    <Content Include="Scripts\globalize\relative-time.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.globalize.js" />
+    <Content Include="Scripts\jquery.validate.globalize.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -328,6 +336,7 @@
     <Content Include="Views\Checkout\EnderecoEntrega.cshtml" />
     <Content Include="Views\Produto\Inativar.cshtml" />
     <Content Include="Views\Produto\Ativar.cshtml" />
+    <Content Include="Views\FornecedorViewModel\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -343,23 +352,21 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{1eac8f50-0342-4018-8541-7e30a8f3121c}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Dominio\Dominio.csproj">
       <Project>{7A927D94-66F0-4F6B-ABAB-4B05677521BF}</Project>
       <Name>Dominio</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903190354198_new2.resx">
-      <DependentUpon>201903190354198_new2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903311410588_novo.resx">
+      <DependentUpon>201903311410588_novo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903190355410_new3.resx">
-      <DependentUpon>201903190355410_new3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903192245359_novo.resx">
-      <DependentUpon>201903192245359_novo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903251325151_novo3.resx">
-      <DependentUpon>201903251325151_novo3.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903311425115_novo2.resx">
+      <DependentUpon>201903311425115_novo2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
@@ -371,6 +378,13 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
     <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <Target Name="CopyRoslynFiles" AfterTargets="AfterBuild" Condition="!$(Disable_CopyWebApplication) And '$(OutDir)' != '$(OutputPath)'">
+    <ItemGroup>
+      <RoslynFiles Include="$(CscToolPath)\*" />
+    </ItemGroup>
+    <MakeDir Directories="$(WebProjectOutputDir)\bin\roslyn" />
+    <Copy SourceFiles="@(RoslynFiles)" DestinationFolder="$(WebProjectOutputDir)\bin\roslyn" SkipUnchangedFiles="true" Retries="$(CopyRetryCount)" RetryDelayMilliseconds="$(CopyRetryDelayMilliseconds)" />
   </Target>
   <ProjectExtensions>
     <VisualStudio>

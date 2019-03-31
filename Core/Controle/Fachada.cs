@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Text;
 using Dominio;
 using Core.DAO;
+using Core;
+using System.Data.Entity;
 
 namespace Core.Controle
 {
@@ -21,13 +23,13 @@ namespace Core.Controle
          O valor é um mapa que de regras de negócio indexado pela operação
         */
         private Dictionary<string, Dictionary<string, List<IStrategy>>> rns;
-
+        
         public Fachada()
         {
             daos = new Dictionary<string, IDAO>();
             /* Intânciando o Map de Regras de Negócio */
             rns = new Dictionary<string, Dictionary<string, List<IStrategy>>>();
-
+            Database.SetInitializer<ApplicationDbContext>(null);
             //Departamento
             daos.Add("Departamento", new DepartamentoDAO());
             List<IStrategy> strategiesDepartamentos = new List<IStrategy>();

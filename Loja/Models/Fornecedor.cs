@@ -6,7 +6,6 @@ namespace Loja.Models
 {
     public class Fornecedor : EntidadeDominio
     {
-        
         [Required]
         public String RazaoSocial { get; set; }
         public TipoPessoa tipoPessoa { get; set; }

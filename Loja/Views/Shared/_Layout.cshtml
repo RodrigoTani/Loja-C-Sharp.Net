@@ -9,6 +9,37 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/Scripts/jquery.validate.min.js")
     @Scripts.Render("~/Scripts/jquery.validate.unobtrusive.min.js")
+    <script src="~/Scripts/globalize/globalize.js"></script>
+    <script src="~/Scripts/globalize/cultures/globalize.culture.pt-BR.js"></script>
+    <script>
+
+    $.validator.methods.number = function (value, element) {
+        var val = Globalize.parseFloat(value);
+        return this.optional(element) ||
+            (val);
+    }
+
+    $.validator.methods.date = function (value, element) {
+        var val = Globalize.parseDate(value);
+        return this.optional(element) ||
+            (val);
+    }
+
+    $(function () {
+
+        Globalize.culture('pt-BR');
+
+        jQuery.extend(jQuery.validator.methods, {
+            range: function (value, element, param) {
+                //Use the Globalization plugin to parse the value
+                var val = Globalize.parseFloat(value);
+                return this.optional(element) || (
+                    val >= param[0] && val <= param[1]);
+            }
+        });
+
+    });
+    </script>
 
 </head>
 <body>
@@ -31,7 +62,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administrador<span class="caret"></span></a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("Fornecedores", "Index", "Fornecedor")</li>
+                            <li>@Html.ActionLink("Fornecedores", "Index", "FornecedorViewModel")</li>
                             <li>@Html.ActionLink("Produto", "Index", "Produto")</li>
                             <li>@Html.ActionLink("Estoque de Produtos", "Index", "EstoqueProdutos")</li>
                             <li>@Html.ActionLink("Endereco", "Index", "EnderecoEntrega")</li>
@@ -40,7 +71,7 @@
                             <li>@Html.ActionLink("Pedido", "Index", "Pedido")</li>
                         </ul>
                     </li>
-                    <li class="cart1">@{Html.RenderAction("CartSummary", "CarrinhodeCompras");}</li>
+                    @*<li class="cart1">@Html.RenderAction("CartSummary","CarrinhodeCompras")</li>*@
                     @Html.Partial("_LoginPartial")
                 </ul>
             </div>
