@@ -71,68 +71,70 @@
         }
     }
 </script>
-<div class="create">
-    <br />
-    @*@Html.ValidationSummary(true)*@
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-        <h3><em>&nbsp Revisão</em> do Carrinho:</h3>
-        <p class="button">
-            &nbsp @Html.ActionLink("Checkout", "ClienteFormadePagamento", "Checkout", null, htmlAttributes: new { @class = "btn btn-success" })
-        </p>
-        <div>
-            @for (int i = 0; i < Model.CartItems.Count; i++)
-            {
-                <p>@Html.ValidationMessageFor(model => model.CartItems[i].Quantidade)</p>
-            }
-        </div>
-        <div id="update-message">
-        </div>
-        <table>
-            <tr>
-                <th>&nbsp  Nome do Produto</th>
-                <th>&nbsp Preço (cada)</th>
-                <th>&nbsp Quantidade</th>
-                <th></th>
-                <th></th>
-                <th>&nbsp Em estoque</th>
-            </tr>
-            @{int ix = 0;}
-
-            @foreach (var item in Model.CartItems)
-            {
-
-                <tr id="row-@item.RecordId">
-
-                    <td>&nbsp @Html.ActionLink(item.Produto.Titulo, "Details", "Produto", new { id = item.ProdutoId }, null)</td>
-                    <td>&nbsp  @item.Produto.ValorFinal</td>
-                    <td align="right">
-                        @*id="item-count-@item.RecordId">
-                            @item.Count*@
-                        <div class="col-md-2">
-                            @Html.TextBoxFor(model => model.CartItems[ix].Quantidade, new { style = "width:30px; text-align:right;", onkeyup = "clearUpdateMessage();", onchange = "clearUpdateMessage();" })
-                        </div>
-                    </td>
-                    <td>
-                        <a href="#" class="RefreshQuantity" data-id="@item.RecordId" data-txt-id="CartItems_@(ix)__Quantidade"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span></a>&nbsp;|&nbsp;
-                        <a href="#" class="RemoveLink" data-id="@item.RecordId"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>&nbsp;
-                    </td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                ix++;
-            }
-            <tr>
-                <td>&nbsp Total (R$)</td>
-                <td></td>
-
-                <td id="cart-total">
-                    &nbsp  @Model.CartTotal
-                </td>
-            </tr>
-
-        </table>
+<div class="container">
+    <div class="create">
+        <br />
+        @*@Html.ValidationSummary(true)*@
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <h3><em>&nbsp Revisão</em> do Carrinho:</h3>
+            <p class="button">
+                &nbsp @Html.ActionLink("Checkout", "ClienteFormadePagamento", "Checkout", null, htmlAttributes: new { @class = "btn btn-success" })
+            </p>
+            <div>
+                @for (int i = 0; i < Model.CartItems.Count; i++)
+                {
+                    <p>@Html.ValidationMessageFor(model => model.CartItems[i].Quantidade)</p>
                 }
+            </div>
+            <div id="update-message">
+            </div>
+            <table>
+                <tr>
+                    <th>&nbsp  Nome do Produto</th>
+                    <th>&nbsp Preço (cada)</th>
+                    <th>&nbsp Quantidade</th>
+                    <th></th>
+                    <th></th>
+                    <th>&nbsp Em estoque</th>
+                </tr>
+                @{int ix = 0;}
 
+                @foreach (var item in Model.CartItems)
+                {
+
+                    <tr id="row-@item.RecordId">
+
+                        <td>&nbsp @Html.ActionLink(item.Produto.Titulo, "Details", "Produto", new { id = item.ProdutoId }, null)</td>
+                        <td>&nbsp  @item.Produto.ValorFinal</td>
+                        <td align="right">
+                            @*id="item-count-@item.RecordId">
+                                @item.Count*@
+                            <div class="col-md-2">
+                                @Html.TextBoxFor(model => model.CartItems[ix].Quantidade, new { style = "width:30px; text-align:right;", onkeyup = "clearUpdateMessage();", onchange = "clearUpdateMessage();" })
+                            </div>
+                        </td>
+                        <td>
+                            <a href="#" class="RefreshQuantity" data-id="@item.RecordId" data-txt-id="CartItems_@(ix)__Quantidade"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span></a>&nbsp;|&nbsp;
+                            <a href="#" class="RemoveLink" data-id="@item.RecordId"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>&nbsp;
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    ix++;
+                }
+                <tr>
+                    <td>&nbsp Total (R$)</td>
+                    <td></td>
+
+                    <td id="cart-total">
+                        &nbsp  @Model.CartTotal
+                    </td>
+                </tr>
+
+            </table>
+                    }
+
+    </div>
 </div>

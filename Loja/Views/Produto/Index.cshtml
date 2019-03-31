@@ -1,4 +1,5 @@
-﻿@model IEnumerable <Loja.Models.Produto>
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList <Loja.Models.Produto>
 
 <div class="container">
     <br />
@@ -15,12 +16,12 @@
     }
     <table class="table">
         <tr>
-            <th>@Html.DisplayNameFor(model => model.forn.RazaoSocial)</th>
+            <th>Razão Social</th>
             <th>@Html.ActionLink("Titulo", "Index", new { sortOrder = ViewBag.NomeParam })</th>
             <th>Plataforma</th>
             <th>Gênero</th>
-            <th>@Html.DisplayNameFor(model => model.ValorFinal)</th>
-            <th>@Html.DisplayNameFor(model => model.Ativo)</th>
+            <th>Valor Final</th>
+            <th>Ativo</th>
             <th>@Html.ActionLink("Data Cadastro", "Index", new { sortOrder = ViewBag.DateParam })</th>
             <th></th>
         </tr>
@@ -46,7 +47,7 @@
         }
 
     </table>
+    Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, ordem = ViewBag.Ordenacao }))
 </div>
-       @* Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount)
-        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
-       *@
+      
