@@ -1,0 +1,58 @@
+﻿@model Loja.Models.MotivoForn
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MotivoForn</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.forn.RazaoSocial)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.forn.RazaoSocial)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataMotivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataMotivo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Usuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MotivoAtivacao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MotivoAtivacao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MotivoInativacao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MotivoInativacao)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -177,5 +177,63 @@ namespace Loja.Controllers
                 }
                 base.Dispose(disposing);
             }
+
+        // GET: MotivoForn/Create
+        public ActionResult Inativar()
+        {
+            ViewBag.fornecedo = new SelectList(db.Fornecedors, "Id", "RazaoSocial");
+            return View();
         }
+
+        // POST: MotivoForn/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Inativar([Bind(Include = "id,DataMotivo,fornecedo,Usuario,MotivoAtivacao,MotivoInativacao")] MotivoForn motivoForn)
+        {
+            if (ModelState.IsValid)
+            {
+                db.MotivoForns.Add(motivoForn);
+                Fornecedor fornecedor = db.Fornecedors.Find(motivoForn.id);
+                motivoForn.Usuario = User.Identity.Name;
+                motivoForn.DataMotivo = DateTime.Now;
+                fornecedor.Ativo = false;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.fornecedo = new SelectList(db.Fornecedors, "Id", "RazaoSocial", motivoForn.fornecedo);
+            return View(motivoForn);
+        }
+
+        // GET: MotivoForn/Create
+        public ActionResult Ativar()
+        {
+            ViewBag.fornecedo = new SelectList(db.Fornecedors, "Id", "RazaoSocial");
+            return View();
+        }
+
+        // POST: MotivoForn/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Ativar([Bind(Include = "id,DataMotivo,fornecedo,Usuario,MotivoAtivacao,MotivoInativacao")] MotivoForn motivoForn)
+        {
+            if (ModelState.IsValid)
+            {
+                db.MotivoForns.Add(motivoForn);
+                Fornecedor fornecedor = db.Fornecedors.Find(motivoForn.id);
+                motivoForn.Usuario = User.Identity.Name;
+                motivoForn.DataMotivo = DateTime.Now;
+                fornecedor.Ativo = true;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.fornecedo = new SelectList(db.Fornecedors, "Id", "RazaoSocial", motivoForn.fornecedo);
+            return View(motivoForn);
+        }
+    }
     }

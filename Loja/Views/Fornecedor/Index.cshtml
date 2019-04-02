@@ -37,6 +37,8 @@
                 <td>@Html.ActionLink("Editar", "Edit", null, new { id = item.Id }, new { @class = "btn btn-primary" })
                     @Html.ActionLink("Detalhes", "Details", null, new { id = item.Id }, new { @class = "btn btn-default" })
                     @Html.ActionLink("Deletar", "Delete", null, new { id = item.Id }, new { @class = "btn btn-danger" })
+                    @Html.ActionLink("Inativar", "Inativar", null, new { id = item.Id }, new { @class = "btn btn-warning" })
+                    @Html.ActionLink("Ativar", "Ativar", null, new { id = item.Id }, new { @class = "btn btn-success" })
                 </td>
 
             </tr>

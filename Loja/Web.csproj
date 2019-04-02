@@ -188,6 +188,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MotivoController.cs" />
+    <Compile Include="Controllers\MotivoFornController.cs" />
     <Compile Include="Controllers\PedidoController.cs" />
     <Compile Include="Controllers\ProdutoController.cs" />
     <Compile Include="Global.asax.cs">
@@ -201,6 +202,10 @@
     <Compile Include="Migrations\201903311425115_novo2.Designer.cs">
       <DependentUpon>201903311425115_novo2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904022006312_novo4.cs" />
+    <Compile Include="Migrations\201904022006312_novo4.Designer.cs">
+      <DependentUpon>201904022006312_novo4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Carrinho\CarrinhoDeCompras.cs" />
@@ -210,6 +215,7 @@
     <Compile Include="Models\Carrinho\ClasseModeladora.cs" />
     <Compile Include="Models\Carrinho\DetalhesPedido.cs" />
     <Compile Include="Models\Carrinho\Pedido.cs" />
+    <Compile Include="Models\MotivoForn.cs" />
     <Compile Include="Models\Motivo.cs" />
     <Compile Include="Models\Produto.cs" />
     <Compile Include="Models\Carrinho\Carrinho.cs" />
@@ -331,6 +337,15 @@
     <Content Include="Views\Produto\Inativar.cshtml" />
     <Content Include="Views\Produto\Ativar.cshtml" />
     <Content Include="Views\FornecedorViewModel\Index.cshtml" />
+    <Content Include="Views\MotivoForn\Create.cshtml" />
+    <Content Include="Views\MotivoForn\Delete.cshtml" />
+    <Content Include="Views\MotivoForn\Details.cshtml" />
+    <Content Include="Views\MotivoForn\Edit.cshtml" />
+    <Content Include="Views\MotivoForn\Index.cshtml" />
+    <Content Include="Views\MotivoForn\Ativar.cshtml" />
+    <Content Include="Views\MotivoForn\Inativar.cshtml" />
+    <Content Include="Views\Fornecedor\Ativar.cshtml" />
+    <Content Include="Views\Fornecedor\Inativar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -364,6 +379,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903311425115_novo2.resx">
       <DependentUpon>201903311425115_novo2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904022006312_novo4.resx">
+      <DependentUpon>201904022006312_novo4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
