@@ -4,43 +4,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Tani's Store</title>
+    
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/Scripts/jquery.validate.min.js")
     @Scripts.Render("~/Scripts/jquery.validate.unobtrusive.min.js")
-    <script src="~/Scripts/globalize/globalize.js"></script>
-    <script src="~/Scripts/globalize/cultures/globalize.culture.pt-BR.js"></script>
-    <script>
-
-    $.validator.methods.number = function (value, element) {
-        var val = Globalize.parseFloat(value);
-        return this.optional(element) ||
-            (val);
-    }
-
-    $.validator.methods.date = function (value, element) {
-        var val = Globalize.parseDate(value);
-        return this.optional(element) ||
-            (val);
-    }
-
-    $(function () {
-
-        Globalize.culture('pt-BR');
-
-        jQuery.extend(jQuery.validator.methods, {
-            range: function (value, element, param) {
-                //Use the Globalization plugin to parse the value
-                var val = Globalize.parseFloat(value);
-                return this.optional(element) || (
-                    val >= param[0] && val <= param[1]);
-            }
-        });
-
-    });
-    </script>
-
+    
+   
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -71,7 +42,7 @@
                             <li>@Html.ActionLink("Pedido", "Index", "Pedido")</li>
                         </ul>
                     </li>
-                    @*<li class="cart1">@Html.RenderAction("CartSummary","CarrinhodeCompras")</li>*@
+                    <li class="cart1">@{Html.RenderAction("CartSummary", "CarrinhodeCompras");}</li>
                     @Html.Partial("_LoginPartial")
                 </ul>
             </div>
