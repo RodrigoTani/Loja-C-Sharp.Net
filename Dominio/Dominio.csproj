@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cupom.cs" />
     <Compile Include="Departamento.cs" />
     <Compile Include="EntidadeDominio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

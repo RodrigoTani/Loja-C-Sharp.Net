@@ -86,8 +86,7 @@ namespace Loja.Controllers
                 var cart = CarrinhoDeCompras.GetCart(this.HttpContext);
                 cart.CreateOrder(order);
 
-                return RedirectToAction("Complete",
-                        new { id = order.PedidoId });
+                return RedirectToAction("Complete",new { id = order.PedidoId });
             }
             catch
             {

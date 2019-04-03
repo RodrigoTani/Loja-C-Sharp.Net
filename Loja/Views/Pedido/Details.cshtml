@@ -25,11 +25,12 @@
 
             </div>
             <div class="row">
-                @{if(!String.IsNullOrEmpty(Model.EnderecoEntrega.Estado)){
+                @{if(!String.IsNullOrEmpty(Model.EnderecoEntrega.Estado))
+                  {
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="h4">Estado: @Html.DisplayFor(model => model.EnderecoEntrega.Estado)</div>
                         </div>
-                    }
+                  }
                 }
             </div>
             <div class="row">
@@ -37,33 +38,33 @@
                         <div class="col-md-6 col-sm-6 col-xs-6">
                             <div class="h4">Cidade: @Html.DisplayFor(model => model.EnderecoEntrega.Cidade)</div>
                         </div>
-                    }
+                   }
                 }
                 @{ if (!String.IsNullOrEmpty(Model.EnderecoEntrega.Logradouro))
-            {
+                   {
                         <div class="col-md-6 col-sm-6 col-xs-6">
                             <div class="h4">Endereço: @Html.DisplayFor(model => model.EnderecoEntrega.Logradouro)</div>
                         </div>
-                    }
+                   }
                 }
             </div>
             <div class="row">
                 @{ if (!String.IsNullOrEmpty(Model.EnderecoEntrega.Bairro))
-            {
+                   {
                         <div class="col-md-6 col-sm-6 col-xs-6">
                             <div class="h4">Bairro: @Html.DisplayFor(model => model.EnderecoEntrega.Bairro)</div>
                         </div>
-                    }
+                   }
                 }
 
             </div>
             <div class="row">
                 @{ if (!String.IsNullOrEmpty(Model.EnderecoEntrega.Numero))
-            {
+                   {
                         <div class="col-md-6 col-sm-6 col-xs-6">
                             <div class="h4">Número: @Html.DisplayFor(model => model.EnderecoEntrega.Numero)</div>
                         </div>
-                    }
+                   }
                 }
 
             </div>
@@ -85,11 +86,10 @@
                 <tbody>
 
                     @foreach (var item in Model.Produto)
-            {
+                    {
                         <tr>
-
                             <td>@Html.DisplayFor(model => item.Id)</td>
-
+                            <td>@Html.DisplayFor(model => item.Id)</td>
                             <td>@Html.DisplayFor(model => item.Titulo)</td>
                             <td>@Html.DisplayFor(model => model.DetalhesPedidos.Where(x => x.ProdutoId == item.Id).FirstOrDefault().PrecoUnitario)</td>
                             <td>@Html.DisplayFor(model => model.DetalhesPedidos.Where(x => x.ProdutoId == item.Id).FirstOrDefault().Quantidade)</td>

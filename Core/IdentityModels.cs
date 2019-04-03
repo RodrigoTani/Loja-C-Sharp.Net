@@ -30,6 +30,7 @@ namespace Core
         }
 
         public System.Data.Entity.DbSet<Dominio.Departamento> Departamentoes { get; set; }
-        
+        public System.Data.Entity.DbSet<Dominio.Cupom> Cupom { get; set; }
+
     }
 }

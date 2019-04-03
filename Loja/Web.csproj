@@ -346,6 +346,7 @@
     <Content Include="Views\MotivoForn\Inativar.cshtml" />
     <Content Include="Views\Fornecedor\Ativar.cshtml" />
     <Content Include="Views\Fornecedor\Inativar.cshtml" />
+    <Content Include="Views\Home\Cupom.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

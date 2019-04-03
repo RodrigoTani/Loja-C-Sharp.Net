@@ -23,7 +23,7 @@ namespace Loja.Models.Carrinho
         }
         public void BuscarProduto()
         {
-            //Produto = DB.Produtoes.ToList();
+            Produto = DB.Produtoes.ToList();
             List<Produto> lsProd = new List<Produto>();
             foreach (var i in DetalhesPedidos)
             {
@@ -34,7 +34,7 @@ namespace Loja.Models.Carrinho
         }
         public void BuscarEndereco()
         {
-            //EnderecoEntrega = DB.EnderecoEntregas.Where(x => x. == Pedido.Usuario).FirstOrDefault();
+            EnderecoEntrega = DB.EnderecoEntregas.Where(x => x.Usuario == Pedido.Usuario).FirstOrDefault(); 
         }
         public void BuscarDetalhesPedidos()
         {

@@ -59,6 +59,7 @@
     <Compile Include="Core\IFachada.cs" />
     <Compile Include="Core\IStrategy.cs" />
     <Compile Include="DAO\AbstractDAO.cs" />
+    <Compile Include="DAO\CupomDAO.cs" />
     <Compile Include="DAO\DepartamentoDAO.cs" />
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Migrations\201903310545356_dev.cs" />
@@ -68,6 +69,10 @@
     <Compile Include="Migrations\201903310610352_dev2.cs" />
     <Compile Include="Migrations\201903310610352_dev2.Designer.cs">
       <DependentUpon>201903310610352_dev2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904030312595_novo.cs" />
+    <Compile Include="Migrations\201904030312595_novo.Designer.cs">
+      <DependentUpon>201904030312595_novo.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Negocio\stDataCadastro.cs" />
@@ -91,6 +96,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903310610352_dev2.resx">
       <DependentUpon>201903310610352_dev2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904030312595_novo.resx">
+      <DependentUpon>201904030312595_novo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
