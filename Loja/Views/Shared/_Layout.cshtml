@@ -28,9 +28,10 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Início", "Index", "Home")</li>
                     <li>@Html.ActionLink("Sobre", "About", "Home")</li>
-                    <li>@Html.ActionLink("Trocas e Devolução", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Trocas/Devolução", "Contact", "Home")</li>
+                    @if (User.Identity.IsAuthenticated) { 
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administrador<span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Adm<span class="caret"></span></a>
 
                         <ul class="dropdown-menu" role="menu">
                             <li>@Html.ActionLink("Fornecedores", "Index", "Fornecedor")</li>
@@ -40,8 +41,10 @@
                             <li>@Html.ActionLink("Carrinho", "Index", "CarrinhodeCompras")</li>
                             <li>@Html.ActionLink("Estoque de Produtos", "Index", "EstoqueProdutos")</li>
                             <li>@Html.ActionLink("Pedido", "Index", "Pedido")</li>
+                            <li>@Html.ActionLink("Cupom", "ListagemCupom", "Home")</li>
                         </ul>
                     </li>
+                    }
                     <li class="cart1">@{Html.RenderAction("CartSummary", "CarrinhodeCompras");}</li>
                     @Html.Partial("_LoginPartial")
                 </ul>

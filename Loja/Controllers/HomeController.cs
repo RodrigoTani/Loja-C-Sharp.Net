@@ -14,13 +14,6 @@ namespace Loja.Controllers
             return View();
         }
 
-        public static int b = 0;
-        public ActionResult AddDepartamento()
-        {
-            new Core.Controle.Fachada().Inserir(new Dominio.Departamento() {Id=b++,Nome_Departamento ="slipknot",DataCadastro = DateTime.Now });
-            return View();
-        }
-
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -39,7 +32,7 @@ namespace Loja.Controllers
         {
             return View();
         }
-        /*
+        
         // GET: Cupom/Create
         public ActionResult Cupom()
         {
@@ -49,23 +42,16 @@ namespace Loja.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Cupom([Bind(Include = "Id,Codigo,Valor,Ativo,DataCadastro")] Cupom cupom)
         {
-            if (ModelState.IsValid)
-            {
-                cupom.Ativo = true;
-                cupom.DataCadastro = DateTime.Now;
-                db.Fornecedors.Add(cupom);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            new Core.Controle.Fachada().Inserir(new Dominio.Cupom() {
-                Id ,
-                Codigo,
-                Valor,
-                DataCadastro = DateTime.Now,
-                Ativo = true
+            cupom.DataCadastro = DateTime.Now;
+            cupom.Ativo = true;
 
-            });
+            new Core.Controle.Fachada().Inserir(cupom);
             return View(cupom);
-        }*/
+        }
+
+        public ActionResult ListagemCupom()
+        {
+            return View();
+        }
     }
 }

@@ -3,6 +3,37 @@
 @{
     ViewBag.Title = "Cupom";
 }
+<script src="~/Scripts/globalize/globalize.js"></script>
+<script src="~/Scripts/globalize/cultures/globalize.culture.pt-BR.js"></script>
+<script>
+
+    $.validator.methods.number = function (value, element) {
+        var val = Globalize.parseFloat(value);
+        return this.optional(element) ||
+            (val);
+    }
+
+    $.validator.methods.date = function (value, element) {
+        var val = Globalize.parseDate(value);
+        return this.optional(element) ||
+            (val);
+    }
+
+    $(function () {
+
+        Globalize.culture('pt-BR');
+
+        jQuery.extend(jQuery.validator.methods, {
+            range: function (value, element, param) {
+                //Use the Globalization plugin to parse the value
+                var val = Globalize.parseFloat(value);
+                return this.optional(element) || (
+                    val >= param[0] && val <= param[1]);
+            }
+        });
+
+    });
+</script>
 
 <h2>Cupom</h2>
 
@@ -31,24 +62,7 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Ativo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Ativo)
-                    @Html.ValidationMessageFor(model => model.Ativo, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.DataCadastro, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DataCadastro, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DataCadastro, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
+      
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />

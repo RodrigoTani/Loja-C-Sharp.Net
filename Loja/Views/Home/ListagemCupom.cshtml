@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Dominio.Cupom>
+
+@{
+    ViewBag.Title = "ListagemCupom";
+}
+
+<h2>ListagemCupom</h2>
+
+<p>
+    @Html.ActionLink("Adicionar Novo", "Cupom")
+</p>
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Codigo)</th>
+        <th>@Html.DisplayNameFor(model => model.Valor)</th>
+        <th>@Html.DisplayNameFor(model => model.Ativo)</th>
+        <th>@Html.DisplayNameFor(model => model.DataCadastro)</th>
+        <th></th>
+    </tr>
+
+    @foreach (Dominio.Cupom item in new Core.Controle.Fachada().Consultar(new Dominio.Cupom()).Entidades)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Codigo</td>
+            <td>@item.DataCadastro</td>
+            <td>@item.Valor</td>
+        </tr>
+    }
+
+</table>

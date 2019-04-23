@@ -83,7 +83,7 @@ namespace Loja.Controllers
             }
 
 
-            int pageSize = 3;
+            int pageSize = 6;
             int pageNumber = (page ?? 1);
             return View(produtos.ToPagedList(pageNumber, pageSize));
         }
