@@ -66,9 +66,6 @@ namespace Loja.Models
         [Required]
         public bool Ativo { get; set; } = true;
 
-        //public String MotivoAtivacao { get; set; }
-        //public String MotivoInativacao { get; set; }
-
         // Auxiliares
 
         public virtual Fornecedor forn { get; set; }

@@ -44,8 +44,6 @@ namespace Loja.Controllers
         }
 
         // POST: MotivoForn/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,DataMotivo,fornecedo,Usuario,MotivoAtivacao,MotivoInativacao")] MotivoForn motivoForn)
@@ -78,8 +76,6 @@ namespace Loja.Controllers
         }
 
         // POST: MotivoForn/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,DataMotivo,fornecedo,Usuario,MotivoAtivacao,MotivoInativacao")] MotivoForn motivoForn)
@@ -137,8 +133,6 @@ namespace Loja.Controllers
         }
 
         // POST: MotivoForn/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Inativar([Bind(Include = "id,DataMotivo,fornecedo,Usuario,MotivoAtivacao,MotivoInativacao")] MotivoForn motivoForn)
@@ -166,8 +160,6 @@ namespace Loja.Controllers
         }
 
         // POST: MotivoForn/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Anativar([Bind(Include = "id,DataMotivo,fornecedo,Usuario,MotivoAtivacao,MotivoInativacao")] MotivoForn motivoForn)

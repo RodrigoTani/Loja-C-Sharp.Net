@@ -3,27 +3,23 @@
     ViewBag.Title = "Manage";
 }
 
-<h2>@ViewBag.Title.</h2>
+<div class="container">
+    <p class="text-success">@ViewBag.StatusMessage</p>
+    <div>
+        <h2>Altere as configurações da sua conta</h2>
+        <hr />
+                     
+                @if (Model.HasPassword)
+                {
+                    @Html.ActionLink("Alterar Senha", "ChangePassword", null, new { @class = "btn btn-primary" })
+                }
+                else
+                {
+                    @Html.ActionLink("Criar", "SetPassword")
+                }
+                
+           @Html.ActionLink("Alterar seu Endereço ", "Index", "EnderecoEntrega",null, new { @class = "btn btn-primary" })
+       
 
-<p class="text-success">@ViewBag.StatusMessage</p>
-<div>
-    <h4>Altere as configurações da sua conta</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>Senha:</dt>
-        <dd>
-            [
-            @if (Model.HasPassword)
-            {
-                @Html.ActionLink("Alterar Senha", "ChangePassword")
-            }
-            else
-            {
-                @Html.ActionLink("Criar", "SetPassword")
-            }
-            ]
-        </dd>
-    </dl>
-    <h3>Altere seu endereço @Html.ActionLink("Aqui","Index", "EnderecoEntrega")</h3>
-   
+    </div>
 </div>

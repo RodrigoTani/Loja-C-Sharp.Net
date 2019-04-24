@@ -33,16 +33,16 @@ namespace Loja.Controllers
 
         public ActionResult AddToCart(int id)
         {
-            // Retrieve the album from the database
+            // Recupera o álbum do banco de dados
             var addProduto = storeDB.Produtoes
                 .Single(produto => produto.Id == id);
 
-            // Add it to the shopping cart
+            // Adiciona ao carrinho de compras
             var cart = CarrinhoDeCompras.GetCart(this.HttpContext);
 
             cart.AddToCart(addProduto);
 
-            // Go back to the main store page for more shopping
+            // Volta para a página da loja principal para mais compras
             return RedirectToAction("Index", "Home", null);
         }
         [HttpPost]
@@ -51,22 +51,22 @@ namespace Loja.Controllers
             CarrinhodeComprasRemoverViewModel results = null;
             try
             {
-                // Get the cart 
+                // Obtein o Carrinho
                 var cart = CarrinhoDeCompras.GetCart(this.HttpContext);
 
-                // Get the name of the album to display confirmation 
+                // Pega o nome do álbum para exibir a confirmação
                 string albumName = storeDB.Carrinhoes.Single(item => item.RecordId == id).Produto.Titulo;
 
-                // Update the cart count 
+                // Update a contagem do carrinho
                 int itemCount = cart.UpdateCartCount(id, cartCount);
 
-                //Prepare messages
+                //Prepara menssages
                 string msg = "A quantidade de " + Server.HtmlEncode(albumName) +
                         " foi atualizada no carrinho";
                 if (itemCount == 0) msg = Server.HtmlEncode(albumName) +
                         " foi removida do carrinho.";
                 //
-                // Display the confirmation message 
+                // Mostra mensagem de confirmação 
                 results = new CarrinhodeComprasRemoverViewModel
                 {
                     Message = msg,
@@ -94,17 +94,17 @@ namespace Loja.Controllers
         [HttpPost]
         public ActionResult RemoveFromCart(int id)
         {
-            // Remove the item from the cart
+            // Remove o item do carrinho
             var cart = CarrinhoDeCompras.GetCart(this.HttpContext);
 
-            // Get the name of the album to display confirmation
+            // Pega o nome do álbum para exibir a confirmação
             string nomeProduto = storeDB.Carrinhoes
                 .Single(item => item.RecordId == id).Produto.Titulo;
 
-            // Remove from cart
+            // Remove do carrinho
             int itemCount = cart.RemoveFromCart(id);
 
-            // Display the confirmation message
+            // Mostra a confirmação da mensagem
             var results = new CarrinhodeComprasRemoverViewModel
             {
                 Message = Server.HtmlEncode(nomeProduto) +
@@ -134,12 +134,6 @@ namespace Loja.Controllers
 
             return PartialView(cart);
         }
-
-        // POST: Cliente/Edit/5
-        // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
-        // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
-
-
 
         // POST: Pedidoes/Edit/5
         [HttpPost]

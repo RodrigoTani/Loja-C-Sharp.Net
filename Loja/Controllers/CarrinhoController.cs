@@ -45,8 +45,6 @@ namespace Loja.Controllers
         }
 
         // POST: Carrinho/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "RecordId,CarrinhoId,Quantidade,DataCriacao,ProdutoId,FormaPagamento")] Carrinho carrinho)
@@ -79,8 +77,6 @@ namespace Loja.Controllers
         }
 
         // POST: Carrinho/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "RecordId,CarrinhoId,Quantidade,DataCriacao,ProdutoId,FormaPagamento")] Carrinho carrinho)

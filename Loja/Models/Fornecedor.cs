@@ -6,11 +6,11 @@ namespace Loja.Models
 {
     public class Fornecedor : EntidadeDominio
     {
-        [Required]
+        [Required(ErrorMessage = "Campo Obrigatório")]
         public String RazaoSocial { get; set; }
+        [Required(ErrorMessage = "Campo Obrigatório")]
         public TipoPessoa tipoPessoa { get; set; }
         public String CNPJ { get; set; }
-        //[Required]
         public String NomeVendedor  { get; set; }
         public String CPF { get; set; }
         public String Observacao { get; set; }

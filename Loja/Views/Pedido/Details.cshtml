@@ -89,7 +89,6 @@
                     {
                         <tr>
                             <td>@Html.DisplayFor(model => item.Id)</td>
-                            <td>@Html.DisplayFor(model => item.Id)</td>
                             <td>@Html.DisplayFor(model => item.Titulo)</td>
                             <td>@Html.DisplayFor(model => model.DetalhesPedidos.Where(x => x.ProdutoId == item.Id).FirstOrDefault().PrecoUnitario)</td>
                             <td>@Html.DisplayFor(model => model.DetalhesPedidos.Where(x => x.ProdutoId == item.Id).FirstOrDefault().Quantidade)</td>

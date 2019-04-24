@@ -1,11 +1,13 @@
 ﻿@{
     ViewBag.Title = "Checkout Complete";
 }
-<div class="create">
-    <br />
-    <h2>Pedido Completo</h2>
-    <p>O pedido de codigo @Model foi adicionado</p>
-    <p>
-        @Html.ActionLink("inicio", "Index", "Home")
-    </p>
+<div class="container">
+    <div class="create">
+        <br />
+        <h2>Pedido Completo</h2>
+        <p>O pedido de codigo @Model foi adicionado  com sucesso</p>
+        <p>
+            @Html.ActionLink("Voltar ao Inicio", "Index", "Home",null, new { @class = "btn btn-success" })
+        </p>
+    </div>
 </div>

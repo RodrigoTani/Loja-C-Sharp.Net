@@ -34,14 +34,6 @@ namespace Loja.Controllers
             return PartialView();
         }
 
-        /*
-        // GET: Produto
-        public ActionResult Index()
-        {
-            var produtoes = db.Produtoes.Include(p => p.forn);
-            return View(produtoes.ToList());
-        }*/
-
         public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
@@ -111,8 +103,6 @@ namespace Loja.Controllers
         }
 
         // POST: Produto/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Titulo,ImagemUrl,plataforma,idioma,legenda,DimensaodoProduto,genero,classificacaoIndicativa,Desenvolvedor,EspacoHd,ConteudoEmbalagem,Fornecedor,GarantiaFornecedor,Descricao1,Descricao2,ValorFinal,Ativo,DataCadastro")] Produto produto)
@@ -147,8 +137,6 @@ namespace Loja.Controllers
         }
 
         // POST: Produto/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Titulo,ImagemUrl,plataforma,idioma,legenda,DimensaodoProduto,genero,classificacaoIndicativa,Desenvolvedor,EspacoHd,ConteudoEmbalagem,Fornecedor,GarantiaFornecedor,Descricao1,Descricao2,ValorFinal,Ativo,DataCadastro")] Produto produto)
@@ -188,62 +176,6 @@ namespace Loja.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-        /*
-        public ActionResult Inativar(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Produto produto = db.Produtoes.Find(id);
-            if (produto == null)
-            {
-                return HttpNotFound();
-            }
-            return View(produto);
-        }
-        
-        // POST: Produto/Inativar/5
-        [HttpPost, ActionName("Inativar")]
-        [ValidateAntiForgeryToken]
-        public ActionResult InativeConfirmed(int id)
-        {
-            Produto produto = db.Produtoes.Find(id);
-            RedirectToAction("Motivo");
-            produto.Ativo = false;
-            db.Entry(produto).State = EntityState.Modified;
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        
-        //---------------------------------------
-        // GET: Motivo/Create
-        public ActionResult Motivo()
-        {
-            ViewBag.ProdutoId = new SelectList(db.Produtoes, "Id", "Titulo");
-            return View();
-        }
-
-        // POST: Motivo/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Motivo([Bind(Include = "id,DataMotivo,ProdutoId,Usuario,MotivoAtivacao,MotivoInativacao")] Motivo motivo)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Motivoes.Add(motivo);
-                Produto produto = db.Produtoes.Find(motivo.ProdutoId);
-                produto.Ativo = false;
-                db.SaveChanges();
-                return RedirectToAction("Index", "Produto");
-            }
-
-            ViewBag.ProdutoId = new SelectList(db.Produtoes, "Id", "Titulo", motivo.ProdutoId);
-            return View(motivo);
-        }*/
 
         //----------------------------------
         // GET: Motivo/Create

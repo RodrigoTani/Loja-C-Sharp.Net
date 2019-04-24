@@ -20,7 +20,7 @@ namespace Loja.Models
             cart.ShoppingCartId = cart.GetCartId(context);
             return cart;
         }
-        // Helper method to simplify shopping cart calls
+        // Helper method q simplifica a chamada do carrinho
 
         public static CarrinhoDeCompras GetCart(Controller controller)
         {
@@ -29,7 +29,7 @@ namespace Loja.Models
 
         public void AddToCart(Produto produto)
         {
-            // Get the matching cart and album instances
+            //Pega o carrinho correspondente as instâncias do álbum
             var cartItem = storeDB.Carrinhoes.SingleOrDefault(
                 c => c.CarrinhoId == ShoppingCartId
                 && c.ProdutoId == produto.Id);
@@ -57,7 +57,7 @@ namespace Loja.Models
         } 
         public int RemoveFromCart(int id)
         {
-            // Get the cart
+            // Pega o carrinho
             var cartItem = storeDB.Carrinhoes.Single(
                 cart => cart.CarrinhoId == ShoppingCartId
                  && cart.RecordId == id);
@@ -81,7 +81,7 @@ namespace Loja.Models
             {
                 storeDB.Carrinhoes.Remove(cartItem);
             }
-            // Save changes
+            // Salvar mudanças
             storeDB.SaveChanges();
         } 
         public List<Carrinho.Carrinho> GetCartItems()
@@ -100,9 +100,8 @@ namespace Loja.Models
         }
         public decimal GetTotal()
         {
-            // Multiply album price by count of that album to get 
-            // the current price for each of those albums in the cart
-            // sum all album price totals to get the cart total
+            // Multiplica o preço  
+            // soma todos os preços para ter o cart total
             decimal? total = (from cartItems in storeDB.Carrinhoes
                               where cartItems.CarrinhoId == ShoppingCartId
                               select (int?)cartItems.Quantidade *
@@ -114,8 +113,8 @@ namespace Loja.Models
         {
             decimal orderTotal = 0;
             var cartItems = GetCartItems();
-            // Iterate over the items in the cart, 
-            // adding the order details for each
+            // Iterage com os items do carriho, 
+            // adicionando o detalhes do pedido para cada
             foreach (var item in cartItems)
             {
                 var orderDetail = new DetalhesPedido
@@ -125,7 +124,8 @@ namespace Loja.Models
                     PrecoUnitario = item.Produto.ValorFinal,
                     Quantidade = item.Quantidade
                 };
-                storeDB.EstoqueProdutos.Add(new EstoqueProdutos() { Quantidade = -item.Quantidade, Id = item.ProdutoId });
+                var b = storeDB.Produtoes.First(d => d.Id == item.ProdutoId);
+                storeDB.EstoqueProdutos.Add(new EstoqueProdutos() { Quantidade = item.Quantidade, DataCadastro = DateTime.Now, Produto = item.ProdutoId, Fornecedores = b.Fornecedor });
                 // Set the order total of the shopping cart
                 orderTotal += (item.Quantidade * item.Produto.ValorFinal);
 
@@ -135,14 +135,14 @@ namespace Loja.Models
             // Set the order's total to the orderTotal count
             pedido.Total = orderTotal;
 
-            // Save the order
+            // Salva o pedido
             storeDB.SaveChanges();
-            // Empty the shopping cart
+            // esvazia o carrinho
             EmptyCart();
-            // Return the OrderId as the confirmation number
+            // Returna o id do pedido para a confirmação
             return pedido.PedidoId;
         }
-        // We're using HttpContextBase to allow access to cookies.
+        //HttpContextBase para o acesso dos cookies.
         public string GetCartId(HttpContextBase context)
         {
             if (context.Session[CartSessionKey] == null)
@@ -154,9 +154,9 @@ namespace Loja.Models
                 }
                 else
                 {
-                    // Generate a new random GUID using System.Guid class
+                    // cria um novo random GUID usando System.Guid class
                     Guid tempCartId = Guid.NewGuid();
-                    // Send tempCartId back to client as a cookie
+                    //Envia o tempCartId de volta para o cliente como um cookie
                     context.Session[CartSessionKey] = tempCartId.ToString();
                 }
             }
@@ -165,7 +165,7 @@ namespace Loja.Models
          
         public int UpdateCartCount(int id, int cartCount)
         {
-            // Get the cart 
+            // Pega o carrinho
             var cartItem = storeDB.Carrinhoes.Single(
                 cart => cart.CarrinhoId == ShoppingCartId
                 && cart.RecordId == id);
@@ -183,14 +183,14 @@ namespace Loja.Models
                 {
                     storeDB.Carrinhoes.Remove(cartItem);
                 }
-                // Save changes 
+                // Salvar mudanças 
                 storeDB.SaveChanges();
             }
             return itemCount;
         }
 
-        // When a user has logged in, migrate their shopping cart to
-        // be associated with their username
+        // quando um usuario esta logado,migra seu carrinho
+        // associado com seu nome de usuario
         public void MigrateCart(string userName)
         {
             var shoppingCart = storeDB.Carrinhoes.Where(

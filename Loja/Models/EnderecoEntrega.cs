@@ -9,17 +9,17 @@ namespace Loja.Models
     public class EnderecoEntrega : EntidadeDominio
     {
         public string Usuario { get; set; }
-        //[Required]
+        [Required(ErrorMessage = "Campo Obrigatório")]
         public string CEP { get; set; }
-        //[Required(ErrorMessage = "Campo Obrigatório")]
+        [Required(ErrorMessage = "Campo Obrigatório")]
         public string Estado { get; set; }
-        //[Required]
+        [Required(ErrorMessage = "Campo Obrigatório")]
         public string Cidade { get; set; }
-        //[Required]
+        [Required(ErrorMessage = "Campo Obrigatório")]
         public string Bairro { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Campo Obrigatório")]
         public string Logradouro { get; set; }
-        //[Required]
+        [Required(ErrorMessage = "Campo Obrigatório")]
         public string Numero { get; set; }
 
         public string Observacao { get; set; }

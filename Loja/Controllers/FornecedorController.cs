@@ -14,12 +14,6 @@ namespace Loja.Controllers
     public class FornecedorController : Controller
     {
             private ApplicationDbContext db = new ApplicationDbContext();
-            /*
-            // GET: Fornecedor
-            public ActionResult Index()
-            {
-                return View(db.Fornecedors.ToList());
-            }*/
 
             public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
             {
@@ -94,8 +88,6 @@ namespace Loja.Controllers
             }
 
             // POST: Fornecedor/Create
-            // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-            // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
             [HttpPost]
             [ValidateAntiForgeryToken]
             public ActionResult Create([Bind(Include = "Id,Nome,tipoPessoa,CNPJ,RazaoSocial,Ativo,DataCadastro")] Fornecedor fornecedor)
@@ -128,8 +120,6 @@ namespace Loja.Controllers
             }
 
             // POST: Fornecedor/Edit/5
-            // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-            // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
             [HttpPost]
             [ValidateAntiForgeryToken]
             public ActionResult Edit([Bind(Include = "Id,Nome,tipoPessoa,CNPJ,RazaoSocial,Ativo,DataCadastro")] Fornecedor fornecedor)
@@ -186,8 +176,6 @@ namespace Loja.Controllers
         }
 
         // POST: MotivoForn/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Inativar([Bind(Include = "id,DataMotivo,fornecedo,Usuario,MotivoAtivacao,MotivoInativacao")] MotivoForn motivoForn)
@@ -215,8 +203,6 @@ namespace Loja.Controllers
         }
 
         // POST: MotivoForn/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Ativar([Bind(Include = "id,DataMotivo,fornecedo,Usuario,MotivoAtivacao,MotivoInativacao")] MotivoForn motivoForn)
