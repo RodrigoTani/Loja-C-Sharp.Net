@@ -6,109 +6,116 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Core;
 using Loja.Models;
 
 namespace Loja.Controllers
 {
-    public class EnderecoEntregaController : Controller
+    public class CartaoController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: EnderecoEntrega
+        // GET: Cartao
         public ActionResult Index()
         {
-            return View(db.EnderecoEntregas.ToList());
+            return View(db.Cartaos.ToList());
         }
 
-        // GET: EnderecoEntrega/Details/5
+        // GET: Cartao/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            EnderecoEntrega enderecoEntrega = db.EnderecoEntregas.Find(id);
-            if (enderecoEntrega == null)
+            Cartao cartao = db.Cartaos.Find(id);
+            if (cartao == null)
             {
                 return HttpNotFound();
             }
-            return View(enderecoEntrega);
+            return View(cartao);
         }
 
-        // GET: EnderecoEntrega/Create
+        // GET: Cartao/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: EnderecoEntrega/Create
+        // POST: Cartao/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CEP,Estado,Cidade,Bairro,Logradouro,Numero,Observacao,DataCadastro,Ativo")] EnderecoEntrega enderecoEntrega)
+        public ActionResult Create([Bind(Include = "Id,Usuario,NomeCartao,NumeroCartao,DataExpira,CVV,DataCadastro")] Cartao cartao)
         {
             if (ModelState.IsValid)
             {
-                db.EnderecoEntregas.Add(enderecoEntrega);
+                cartao.Usuario = User.Identity.Name;
+                cartao.DataCadastro = DateTime.Now;
+                db.Cartaos.Add(cartao);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(enderecoEntrega);
+            return View(cartao);
         }
 
-        // GET: EnderecoEntrega/Edit/5
+        // GET: Cartao/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            EnderecoEntrega enderecoEntrega = db.EnderecoEntregas.Find(id);
-            if (enderecoEntrega == null)
+            Cartao cartao = db.Cartaos.Find(id);
+            if (cartao == null)
             {
                 return HttpNotFound();
             }
-            return View(enderecoEntrega);
+            return View(cartao);
         }
 
-        // POST: EnderecoEntrega/Edit/5
+        // POST: Cartao/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CEP,Estado,Cidade,Bairro,Logradouro,Numero,Observacao,DataCadastro,Ativo")] EnderecoEntrega enderecoEntrega)
+        public ActionResult Edit([Bind(Include = "Id,Usuario,NomeCartao,NumeroCartao,DataExpira,CVV,DataCadastro")] Cartao cartao)
         {
             if (ModelState.IsValid)
             {
-                enderecoEntrega.Usuario = User.Identity.Name;
-                enderecoEntrega.DataCadastro = DateTime.Now;
-                db.Entry(enderecoEntrega).State = EntityState.Modified;
+                cartao.Usuario = User.Identity.Name;
+                cartao.DataCadastro = DateTime.Now;
+                db.Entry(cartao).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(enderecoEntrega);
+            return View(cartao);
         }
 
-        // GET: EnderecoEntrega/Delete/5
+        // GET: Cartao/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            EnderecoEntrega enderecoEntrega = db.EnderecoEntregas.Find(id);
-            if (enderecoEntrega == null)
+            Cartao cartao = db.Cartaos.Find(id);
+            if (cartao == null)
             {
                 return HttpNotFound();
             }
-            return View(enderecoEntrega);
+            return View(cartao);
         }
 
-        // POST: EnderecoEntrega/Delete/5
+        // POST: Cartao/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            EnderecoEntrega enderecoEntrega = db.EnderecoEntregas.Find(id);
-            db.EnderecoEntregas.Remove(enderecoEntrega);
+            Cartao cartao = db.Cartaos.Find(id);
+            db.Cartaos.Remove(cartao);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

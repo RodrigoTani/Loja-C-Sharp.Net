@@ -179,6 +179,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CarrinhoController.cs" />
     <Compile Include="Controllers\CarrinhodeComprasController.cs" />
+    <Compile Include="Controllers\CartaoController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\checkoutViewModelController.cs" />
     <Compile Include="Controllers\DetalhesPedidoController.cs" />
@@ -214,6 +215,18 @@
     <Compile Include="Migrations\201904240453064_novo51.Designer.cs">
       <DependentUpon>201904240453064_novo51.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905011956553_new.cs" />
+    <Compile Include="Migrations\201905011956553_new.Designer.cs">
+      <DependentUpon>201905011956553_new.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905012139378_new2.cs" />
+    <Compile Include="Migrations\201905012139378_new2.Designer.cs">
+      <DependentUpon>201905012139378_new2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905012227147_new3.cs" />
+    <Compile Include="Migrations\201905012227147_new3.Designer.cs">
+      <DependentUpon>201905012227147_new3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Carrinho\CarrinhoDeCompras.cs" />
@@ -223,6 +236,7 @@
     <Compile Include="Models\Carrinho\ClasseModeladora.cs" />
     <Compile Include="Models\Carrinho\DetalhesPedido.cs" />
     <Compile Include="Models\Carrinho\Pedido.cs" />
+    <Compile Include="Models\Cartao.cs" />
     <Compile Include="Models\MotivoForn.cs" />
     <Compile Include="Models\Motivo.cs" />
     <Compile Include="Models\Produto.cs" />
@@ -300,7 +314,6 @@
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Home\Endereco.cshtml" />
     <Content Include="Views\EnderecoEntrega\Create.cshtml" />
     <Content Include="Views\EnderecoEntrega\Delete.cshtml" />
     <Content Include="Views\EnderecoEntrega\Details.cshtml" />
@@ -317,9 +330,7 @@
     <Content Include="Views\Produto\Edit.cshtml" />
     <Content Include="Views\Produto\Index.cshtml" />
     <Content Include="Views\Pedido\Create.cshtml" />
-    <Content Include="Views\Pedido\Delete.cshtml" />
     <Content Include="Views\Pedido\Details.cshtml" />
-    <Content Include="Views\Pedido\Edit.cshtml" />
     <Content Include="Views\Pedido\Index.cshtml" />
     <Content Include="Views\DetalhesPedido\Create.cshtml" />
     <Content Include="Views\DetalhesPedido\Delete.cshtml" />
@@ -356,6 +367,13 @@
     <Content Include="Views\Fornecedor\Inativar.cshtml" />
     <Content Include="Views\Home\Cupom.cshtml" />
     <Content Include="Views\Home\ListagemCupom.cshtml" />
+    <Content Include="Views\Checkout\EscolhaEndereco.cshtml" />
+    <Content Include="Views\Cartao\Create.cshtml" />
+    <Content Include="Views\Cartao\Delete.cshtml" />
+    <Content Include="Views\Cartao\Details.cshtml" />
+    <Content Include="Views\Cartao\Edit.cshtml" />
+    <Content Include="Views\Cartao\Index.cshtml" />
+    <Content Include="Views\Checkout\ListagemCartao.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -398,6 +416,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904240453064_novo51.resx">
       <DependentUpon>201904240453064_novo51.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905011956553_new.resx">
+      <DependentUpon>201905011956553_new.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905012139378_new2.resx">
+      <DependentUpon>201905012139378_new2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905012227147_new3.resx">
+      <DependentUpon>201905012227147_new3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

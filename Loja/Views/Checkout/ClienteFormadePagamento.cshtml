@@ -12,7 +12,7 @@
             <h3><em>Confirmação do pedido</em></h3>
             <div>
                 @for (int i = 0; i < Model.CartItems.Count; i++)
-                { 
+                {
                 <p>@Html.ValidationMessageFor(model => model.CartItems[i].Quantidade)</p>
                 }
             </div>
@@ -58,19 +58,6 @@
             <h4>Forma de pagamento: </h4> @Html.TextBox("FormaPagamento", "Dinheiro");
             <input type="submit" value="Complete" class="btn btn-success" />
 
-            
-        
-        @*
-    @foreach (var item in Model.Endereco)
-        {<p>
-        @item.CEP
-        @item.Bairro
-        @item.Cidade
-        @item.Estado
-        @item.Logradouro
-        @item.Numero
-        @item.Observacao
-    </p>*@
         }
         <div>
             @Html.ActionLink("Voltar", "Index", "CarrinhodeCompras")
@@ -81,8 +68,3 @@
         }
     </div>
 </div>
-@*
-    
-    <label>Endereço: <input type="" name="" id=""> <label>
-
-*@

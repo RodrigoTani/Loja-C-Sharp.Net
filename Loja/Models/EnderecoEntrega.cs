@@ -24,6 +24,5 @@ namespace Loja.Models
 
         public string Observacao { get; set; }
 
-
     }
 }

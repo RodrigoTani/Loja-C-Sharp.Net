@@ -2,6 +2,7 @@
 using Loja.Models.Carrinho;
 using System;
 using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 
 namespace Loja.Controllers
@@ -14,57 +15,57 @@ namespace Loja.Controllers
         public ActionResult Index()
         {
             var cart = CarrinhoDeCompras.GetCart(this.HttpContext);
-
             // Set up our ViewModel
             var viewModel = new CarrinhodeComprasViewModel
             {
                 CartItems = cart.GetCartItems(),
-                CartTotal = cart.GetTotal()
+                CartTotal = cart.GetTotal(),
+    
             };
             // Retorna a view
 
             return View(viewModel);
         }
-        public ActionResult ClienteFormadePagamento(string pagamento)
+        public ActionResult ClienteFormadePagamento(string pagamento,int? id)
         {
-            var cart = CarrinhoDeCompras.GetCart(this.HttpContext);
-            if (storeDB.EnderecoEntregas.Where(x => x.Usuario == User.Identity.Name).FirstOrDefault() == null)
+            if (id == null)
             {
-                return RedirectToAction("EnderecoEntrega");
+                return RedirectToAction("EscolhaEndereco");
             }
+            EnderecoEntrega end = storeDB.EnderecoEntregas.Find(id);
+            if (end == null)
+            {
+                return HttpNotFound();
+            }
+            var cart = CarrinhoDeCompras.GetCart(this.HttpContext);
+            
             // Set up our ViewModel
             var viewModel = new CarrinhodeComprasViewModel
             {
                 CartItems = cart.GetCartItems(),
-                CartTotal = cart.GetTotal()
+                CartTotal = cart.GetTotal(),
+               
             };
             // Retorna a view
             viewModel.FormaPagamento = pagamento;
+            viewModel.EndId = end.Id;
             return View(viewModel);
         }
-        public ActionResult EnderecoEntrega()
-        {
-            return View();
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult EnderecoEntrega([Bind(Include = "CEP,Estado,Cidade,Bairro,Logradouro,Numero,Observacao,DataCadastro")] EnderecoEntrega localEntrega)
-        {
-            if (ModelState.IsValid)
-            {
-                localEntrega.DataCadastro = DateTime.Now;
-                localEntrega.Usuario = User.Identity.Name;
-                storeDB.EnderecoEntregas.Add(localEntrega);
-                storeDB.SaveChanges();
-                return RedirectToAction("ClienteFormadePagamento");
-            }
 
-            return View(localEntrega); 
+        public ActionResult EscolhaEndereco()
+        {
+            return View(storeDB.EnderecoEntregas.ToList());
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ClienteFormadePagamento(FormCollection values)
+        public ActionResult ClienteFormadePagamento(FormCollection values,int? id)
         {
+            EnderecoEntrega end = storeDB.EnderecoEntregas.Find(id);
+            if (end == null)
+            {
+                return HttpNotFound();
+            }
             ViewBag.Clientes = storeDB.Users; 
             var order = new Pedido();
             TryUpdateModel(order);
@@ -74,6 +75,7 @@ namespace Loja.Controllers
                 order.FormaPagamento = forma;
                 order.Usuario = User.Identity.Name;
                 order.DataPedido = DateTime.Now;
+                order.Endereco = end.Id;
                 order.Total = CarrinhoDeCompras.GetCart(this.HttpContext).GetTotal();
                 //Salva o Pedido
                 storeDB.Pedidoes.Add(order);
@@ -104,6 +106,27 @@ namespace Loja.Controllers
             {
                 return View("Error");
             }
+        }
+
+
+        public ActionResult EnderecoEntrega()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EnderecoEntrega([Bind(Include = "CEP,Estado,Cidade,Bairro,Logradouro,Numero,Observacao,DataCadastro")] EnderecoEntrega localEntrega)
+        {
+            if (ModelState.IsValid)
+            {
+                localEntrega.DataCadastro = DateTime.Now;
+                localEntrega.Usuario = User.Identity.Name;
+                storeDB.EnderecoEntregas.Add(localEntrega);
+                storeDB.SaveChanges();
+                return RedirectToAction("ClienteFormadePagamento");
+            }
+
+            return View(localEntrega);
         }
 
     }

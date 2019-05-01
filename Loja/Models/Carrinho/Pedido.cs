@@ -21,5 +21,6 @@ namespace Loja.Models.Carrinho
         public List<DetalhesPedido> DetalhesPedidos { get; set; }
 
         public string FormaPagamento { get; set; }
+        public int Endereco  { get; set; }
     }
 }

@@ -12,5 +12,7 @@ namespace Loja.Models.Carrinho
         public string FormaPagamento { get; set; }
 
         public IEnumerable<EnderecoEntrega> Endereco { get; set; }
+        public int EndId { get; set; }
+
     }
 }

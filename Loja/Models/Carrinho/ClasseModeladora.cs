@@ -34,7 +34,7 @@ namespace Loja.Models.Carrinho
         }
         public void BuscarEndereco()
         {
-            EnderecoEntrega = DB.EnderecoEntregas.Where(x => x.Usuario == Pedido.Usuario).FirstOrDefault(); 
+            EnderecoEntrega = DB.EnderecoEntregas.Where(x => x.Usuario == Pedido.Usuario && Pedido.Endereco == x.Id).FirstOrDefault(); 
         }
         public void BuscarDetalhesPedidos()
         {
@@ -44,5 +44,5 @@ namespace Loja.Models.Carrinho
         {
             Pedido = DB.Pedidoes.Where(x => x.PedidoId == PedidoId).FirstOrDefault();
         }
-    }
+    }   
 }

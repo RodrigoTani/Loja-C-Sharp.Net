@@ -1,7 +1,9 @@
-﻿using Dominio;
+﻿using Core;
+using Dominio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -9,6 +11,9 @@ namespace Loja.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
+
         public ActionResult Index()
         {
             return View();
@@ -48,6 +53,18 @@ namespace Loja.Controllers
         public ActionResult ListagemCupom()
         {
             return View();
+        }
+
+        public bool ValidaCupom (string cupom)
+        {
+            
+            Cupom cup = db.Cupom.Where(x => x.Codigo == cupom).FirstOrDefault();
+            if(cup.Ativo == true)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
