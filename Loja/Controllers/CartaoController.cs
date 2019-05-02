@@ -6,14 +6,13 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Core;
 using Loja.Models;
 
 namespace Loja.Controllers
 {
     public class CartaoController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationDbContext db = new ApplicationDbContext(); 
 
         // GET: Cartao
         public ActionResult Index()

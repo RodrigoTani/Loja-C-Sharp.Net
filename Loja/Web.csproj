@@ -227,6 +227,10 @@
     <Compile Include="Migrations\201905012227147_new3.Designer.cs">
       <DependentUpon>201905012227147_new3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905021802199_new4.cs" />
+    <Compile Include="Migrations\201905021802199_new4.Designer.cs">
+      <DependentUpon>201905021802199_new4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Carrinho\CarrinhoDeCompras.cs" />
@@ -368,12 +372,13 @@
     <Content Include="Views\Home\Cupom.cshtml" />
     <Content Include="Views\Home\ListagemCupom.cshtml" />
     <Content Include="Views\Checkout\EscolhaEndereco.cshtml" />
+    <Content Include="Views\Checkout\ListagemCartao.cshtml" />
+    <Content Include="Views\Pedido\TrocaPedido.cshtml" />
     <Content Include="Views\Cartao\Create.cshtml" />
     <Content Include="Views\Cartao\Delete.cshtml" />
     <Content Include="Views\Cartao\Details.cshtml" />
     <Content Include="Views\Cartao\Edit.cshtml" />
     <Content Include="Views\Cartao\Index.cshtml" />
-    <Content Include="Views\Checkout\ListagemCartao.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -425,6 +430,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905012227147_new3.resx">
       <DependentUpon>201905012227147_new3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905021802199_new4.resx">
+      <DependentUpon>201905021802199_new4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

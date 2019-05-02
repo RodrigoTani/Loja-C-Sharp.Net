@@ -11,6 +11,7 @@ namespace Loja.Controllers
     {
         // GET: Checkout
         ApplicationDbContext storeDB = new ApplicationDbContext();
+        static int endere;
         // GET: Checkout
         public ActionResult Index()
         {
@@ -26,19 +27,37 @@ namespace Loja.Controllers
 
             return View(viewModel);
         }
-        public ActionResult ClienteFormadePagamento(string pagamento,int? id)
+        public ActionResult ClienteFormadePagamento(string pagamento,int? id,int? cartao)
         {
-            if (id == null)
+            if (endere == 0)
             {
-                return RedirectToAction("EscolhaEndereco");
+                if (id == null)
+                {
+                    endere = 0;
+                    return RedirectToAction("EscolhaEndereco");
+                }
+                else
+                {
+                    EnderecoEntrega end = storeDB.EnderecoEntregas.Find(id);
+                    endere = id.Value;
+                    if (end == null)
+                    {
+                        return HttpNotFound();
+                    }
+                }
             }
-            EnderecoEntrega end = storeDB.EnderecoEntregas.Find(id);
-            if (end == null)
+            
+            var cart = CarrinhoDeCompras.GetCart(this.HttpContext);
+            
+            if (cartao == null)
+            {
+                return RedirectToAction("ListagemCartao");
+            }
+            Cartao card = storeDB.Cartaos.Find(cartao);
+            if (card == null)
             {
                 return HttpNotFound();
             }
-            var cart = CarrinhoDeCompras.GetCart(this.HttpContext);
-            
             // Set up our ViewModel
             var viewModel = new CarrinhodeComprasViewModel
             {
@@ -47,29 +66,41 @@ namespace Loja.Controllers
                
             };
             // Retorna a view
-            viewModel.FormaPagamento = pagamento;
-            viewModel.EndId = end.Id;
+            //viewModel.FormaPagamento = pagamento;
+            viewModel.FormaPagamento = cartao.ToString();
+            viewModel.EndId = endere;
             return View(viewModel);
         }
-
+      
         public ActionResult EscolhaEndereco()
         {
             return View(storeDB.EnderecoEntregas.ToList());
         }
 
+        public ActionResult ListagemCartao()
+        {
+            return View(storeDB.Cartaos.ToList());
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ClienteFormadePagamento(FormCollection values,int? id)
+        public ActionResult ClienteFormadePagamento(FormCollection values,int? id, int? cartao)
         {
-            EnderecoEntrega end = storeDB.EnderecoEntregas.Find(id);
+            
+            EnderecoEntrega end = storeDB.EnderecoEntregas.Find(endere);
             if (end == null)
+            {
+                return HttpNotFound();
+            }
+            Cartao card = storeDB.Cartaos.Find(cartao);
+            if (card == null)
             {
                 return HttpNotFound();
             }
             ViewBag.Clientes = storeDB.Users; 
             var order = new Pedido();
             TryUpdateModel(order);
-            string forma = Request.Form["FormaPagamento"];
+            string forma = card.Id.ToString();
             try
             {
                 order.FormaPagamento = forma;

@@ -99,10 +99,36 @@
                 <tfoot class="bottom-right">
                     <tr>
                         <td class="" colspan="5">
+                           
+                            <div class="text-left h5">
+                                @*Html.DisplayFor(model => model.Pedido.FormaPagamento)*@ 
+
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>id</th>
+                                            <th>Nome no Cartao</th>
+                                            <th>Numero Cartao</th>
+                                            <th>Data Expira</th>
+                                            <th>CVV</th>
+                                        </tr>
+                                    </thead>
+                                    @foreach (var item in Model.cartao)
+                                    {
+                                        <tr>
+                                            <td>@Html.DisplayFor(model => item.Id)</td>
+                                            <td>@Html.DisplayFor(model => item.NomeCartao)</td>
+                                            <td>@Html.DisplayFor(model => item.NumeroCartao)</td>
+                                            <td>@Html.DisplayFor(model => item.DataExpira)</td>
+                                            <td>@Html.DisplayFor(model => item.CVV)</td>
+                                            <td></td>
+                                        </tr>
+                                    }
+                                </table>
+                            </div>
                             <div class="text-right h5">
                                 <strong>Total: @Html.DisplayFor(model => model.Pedido.Total) R$ </strong>
                             </div>
-                            <div class="text-left h5">@Html.DisplayFor(model => model.Pedido.FormaPagamento) </div>
                         </td>
                     </tr>
                 </tfoot>

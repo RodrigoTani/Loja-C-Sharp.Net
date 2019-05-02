@@ -47,5 +47,7 @@ namespace Loja.Models
         public System.Data.Entity.DbSet<Loja.Models.Motivo> Motivoes { get; set; }
 
         public System.Data.Entity.DbSet<Loja.Models.MotivoForn> MotivoForns { get; set; }
+
+        public System.Data.Entity.DbSet<Loja.Models.Cartao> Cartaos { get; set; }
     }
 }
