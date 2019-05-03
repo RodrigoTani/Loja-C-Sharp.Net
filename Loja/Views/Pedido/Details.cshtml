@@ -115,14 +115,16 @@
                                     </thead>
                                     @foreach (var item in Model.cartao)
                                     {
+                                        if (Model.Pedido.Usuario == item.Usuario) {
                                         <tr>
                                             <td>@Html.DisplayFor(model => item.Id)</td>
                                             <td>@Html.DisplayFor(model => item.NomeCartao)</td>
                                             <td>@Html.DisplayFor(model => item.NumeroCartao)</td>
                                             <td>@Html.DisplayFor(model => item.DataExpira)</td>
                                             <td>@Html.DisplayFor(model => item.CVV)</td>
-                                            <td></td>
+                                            
                                         </tr>
+                                        }
                                     }
                                 </table>
                             </div>
@@ -136,26 +138,30 @@
             </table>
         </div>
     </div>
+</div>
+<div class="container">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                @*<th>PedidoId</th>*@
+                <th>Status</th>
+            </tr>
+        </thead>
+        @foreach (var item in Model.status)
+        {
+            if (Model.Pedido.PedidoId == item.pedi.PedidoId)
+            {
+                <tr>
+                    @*<td>@Html.DisplayFor(model => item.pedi.PedidoId)</td>*@
+                    <td>
+                        @Html.DisplayFor(model => item.statu.NomeStatus)
+                    <br />
+                    @Html.DisplayFor(model => item.DataStatus)
+                </td>
+            </tr>
+            }
+        }
+    </table>
     @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-primary" })
 </div>
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>PedidoId</th>
-            <th>Status</th>
-        </tr>
-    </thead>
-    @foreach (var item in Model.status)
-    {
-        if (Model.Pedido.PedidoId == item.pedi.PedidoId) {
-        <tr>
-            <td>@Html.DisplayFor(model => item.pedi.PedidoId)</td>
-            <td>@Html.DisplayFor(model => item.statu.NomeStatus)
-                <br/>
-                @Html.DisplayFor(model => item.DataStatus)            
-            </td>
-        </tr>
-        }
-    }
-</table>

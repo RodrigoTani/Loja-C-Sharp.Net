@@ -48,6 +48,8 @@ namespace Loja.Controllers
         {
             if (ModelState.IsValid)
             {
+                enderecoEntrega.Usuario = User.Identity.Name;
+                enderecoEntrega.DataCadastro = DateTime.Now;
                 db.EnderecoEntregas.Add(enderecoEntrega);
                 db.SaveChanges();
                 return RedirectToAction("Index");
