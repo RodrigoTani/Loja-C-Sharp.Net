@@ -191,7 +191,9 @@
     <Compile Include="Controllers\MotivoController.cs" />
     <Compile Include="Controllers\MotivoFornController.cs" />
     <Compile Include="Controllers\PedidoController.cs" />
+    <Compile Include="Controllers\PedidoStatusController.cs" />
     <Compile Include="Controllers\ProdutoController.cs" />
+    <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -231,6 +233,18 @@
     <Compile Include="Migrations\201905021802199_new4.Designer.cs">
       <DependentUpon>201905021802199_new4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905031332363_new5.cs" />
+    <Compile Include="Migrations\201905031332363_new5.Designer.cs">
+      <DependentUpon>201905031332363_new5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905031337064_new6.cs" />
+    <Compile Include="Migrations\201905031337064_new6.Designer.cs">
+      <DependentUpon>201905031337064_new6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905031412173_new7.cs" />
+    <Compile Include="Migrations\201905031412173_new7.Designer.cs">
+      <DependentUpon>201905031412173_new7.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Carrinho\CarrinhoDeCompras.cs" />
@@ -240,6 +254,7 @@
     <Compile Include="Models\Carrinho\ClasseModeladora.cs" />
     <Compile Include="Models\Carrinho\DetalhesPedido.cs" />
     <Compile Include="Models\Carrinho\Pedido.cs" />
+    <Compile Include="Models\Carrinho\PedidoStatus.cs" />
     <Compile Include="Models\Cartao.cs" />
     <Compile Include="Models\MotivoForn.cs" />
     <Compile Include="Models\Motivo.cs" />
@@ -250,6 +265,7 @@
     <Compile Include="Models\Fornecedor.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Carrinho\Status.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -379,6 +395,16 @@
     <Content Include="Views\Cartao\Details.cshtml" />
     <Content Include="Views\Cartao\Edit.cshtml" />
     <Content Include="Views\Cartao\Index.cshtml" />
+    <Content Include="Views\Status\Create.cshtml" />
+    <Content Include="Views\Status\Delete.cshtml" />
+    <Content Include="Views\Status\Details.cshtml" />
+    <Content Include="Views\Status\Edit.cshtml" />
+    <Content Include="Views\Status\Index.cshtml" />
+    <Content Include="Views\PedidoStatus\Create.cshtml" />
+    <Content Include="Views\PedidoStatus\Delete.cshtml" />
+    <Content Include="Views\PedidoStatus\Details.cshtml" />
+    <Content Include="Views\PedidoStatus\Edit.cshtml" />
+    <Content Include="Views\PedidoStatus\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -433,6 +459,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905021802199_new4.resx">
       <DependentUpon>201905021802199_new4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905031332363_new5.resx">
+      <DependentUpon>201905031332363_new5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905031337064_new6.resx">
+      <DependentUpon>201905031337064_new6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905031412173_new7.resx">
+      <DependentUpon>201905031412173_new7.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

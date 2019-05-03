@@ -14,6 +14,7 @@ namespace Loja.Models.Carrinho
         public ApplicationDbContext DB { get; set; }
         public EnderecoEntrega EnderecoEntrega { get; set; }
         public List<Cartao> cartao { get; set; }
+        public List<PedidoStatus> status { get; set; }
         public void Preencher(int? idPedido)
         {
             PedidoId = idPedido;
@@ -22,6 +23,7 @@ namespace Loja.Models.Carrinho
             BuscarEndereco();
             BuscarProduto();
             BuscarPagamento();
+            BuscarStatus();
         }
         public void BuscarProduto()
         {
@@ -56,6 +58,17 @@ namespace Loja.Models.Carrinho
                 lsProd.Add(c);
             }
             cartao = lsProd;
+        }
+        public void BuscarStatus()
+        {
+            status = DB.PedidoStatus.ToList();
+            List<PedidoStatus> lsProd = new List<PedidoStatus>();
+            foreach (var i in status)
+            {
+                PedidoStatus c = status.Where(x => x.PedidoId == i.pedi.PedidoId && x.id == i.id).FirstOrDefault();
+                lsProd.Add(c);
+            }
+            status = lsProd;
         }
 
     }   

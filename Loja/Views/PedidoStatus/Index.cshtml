@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Loja.Models.Carrinho.PedidoStatus>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="container">
+    <h2>Listagem Pedido Status</h2>
+
+    <p>
+        @Html.ActionLink("Adicionar Novo", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.pedi.PedidoId)</th>
+            <th>@Html.DisplayNameFor(model => model.statu.NomeStatus)</th>
+            <th>@Html.DisplayNameFor(model => model.Usuario)</th>
+            <th>@Html.DisplayNameFor(model => model.DataStatus)</th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            //if (User.Identity.Name == item.Usuario)
+            //{
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.pedi.PedidoId)</td>
+                <td>@Html.DisplayFor(modelItem => item.statu.NomeStatus)</td>
+                <td>@Html.DisplayFor(modelItem => item.Usuario)</td>
+                <td>@Html.DisplayFor(modelItem => item.DataStatus)</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.PedidoId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.PedidoId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.PedidoId })
+                </td>
+            </tr>
+            //}
+        }
+    </table>
+</div>

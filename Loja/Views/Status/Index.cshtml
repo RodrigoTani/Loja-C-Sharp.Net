@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Loja.Models.Status>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="container">
+    <h2>Listagem Status</h2>
+
+    <p>
+        @Html.ActionLink("Adicionar Novo", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.NomeStatus)</th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.NomeStatus)</td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit",null, new { id = item.id }, new { @class = "btn btn-primary" }) 
+                    @Html.ActionLink("Detalhes", "Details",null, new { id = item.id }, new { @class = "btn btn-default" }) 
+                    @Html.ActionLink("Deletar", "Delete",null, new { id = item.id }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

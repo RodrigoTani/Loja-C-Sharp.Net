@@ -49,5 +49,9 @@ namespace Loja.Models
         public System.Data.Entity.DbSet<Loja.Models.MotivoForn> MotivoForns { get; set; }
 
         public System.Data.Entity.DbSet<Loja.Models.Cartao> Cartaos { get; set; }
+
+        public System.Data.Entity.DbSet<Loja.Models.Status> Status { get; set; }
+
+        public System.Data.Entity.DbSet<Loja.Models.Carrinho.PedidoStatus> PedidoStatus { get; set; }
     }
 }
