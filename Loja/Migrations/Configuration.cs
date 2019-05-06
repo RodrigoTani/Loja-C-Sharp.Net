@@ -5,14 +5,14 @@ namespace Loja.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Loja.Models.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<Core.ApplicationDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(Loja.Models.ApplicationDbContext context)
+        protected override void Seed(Core.ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

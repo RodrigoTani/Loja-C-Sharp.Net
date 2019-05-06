@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Core;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Loja.Models.Carrinho

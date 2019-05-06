@@ -1,24 +1,29 @@
-﻿@model IEnumerable<Loja.Models.Cartao>
+﻿@model  Tuple<Loja.Models.Carrinho.Pagamento, List<Loja.Models.Cartao>>
 
 @{
     ViewBag.Title = "Listagem Cartões";
 }
+
 <div class="container">
     <h2>Listagem Cartões</h2>
-
+    @using (Html.BeginForm("ClienteFormadePagamento2", "Checkout", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
     <p>
-        @Html.ActionLink("Adicionar Novo", "Create")
+        @Html.ActionLink("Adicionar Novo", "Create");
+    </p>
+    <p>  valor pagar:  @Html.TextBox("dev")
     </p>
     <table class="table">
         <tr>
-            <th>@Html.DisplayNameFor(model => model.NomeCartao)</th>
-            <th>@Html.DisplayNameFor(model => model.NumeroCartao)</th>
-            <th>@Html.DisplayNameFor(model => model.DataExpira)</th>
-            <th>@Html.DisplayNameFor(model => model.CVV)</th>
+            <th>NomeCartao</th>
+            <th>NumeroCartao)</th>
+            <th>DataExpira</th>
+            <th>CVV</th>
             <th></th>
         </tr>
-
-        @foreach (var item in Model)
+        
+        @foreach (var item in Model.Item2)
         {
             if (User.Identity.Name == item.Usuario)
             {
@@ -30,12 +35,38 @@
                     <td>
                         @Html.ActionLink("Editar", "Edit", null, new { id = item.Id }, new { @class = "btn btn-primary" })
                         @Html.ActionLink("Deletar", "Delete", null, new { id = item.Id }, new { @class = "btn btn-danger" })
-                        @Html.ActionLink("Escolher", "ClienteFormadePagamento", null, new { cartao = item.Id }, new { @class = "btn btn-success" })
+                        <input type="hidden" name="@item.Id" value="@item.Id"  />
+                        <input type="submit" name="go" value="Escolher" class="btn btn-success" />
+                        
                     </td>
-
+                    
                 </tr>
             }
         }
-
+    
     </table>
+    }
+    <script>
+        function go(atri) 
+        {
+            /*
+            $.ajax({
+                url: "Url.Action("ClienteFormadePagamento", "Checkout")",
+                data: { 'cartao': atri, 'valor': document.getElementById('Item1_Valor').value },
+                type: 'GET',
+                context: document.body,
+                timeout:300000,
+                success: function (result) {
+                    //do the necessary updations
+                },
+                error: function (result) {
+                   alert('as')
+                }
+            });
+            */
+            document.href = "/Checkout/ClienteFormadePagamento?cartao=atri&valor="+document.getElementById('Item1_Valor').value;
+        }
+
+
+    </script>
 </div>

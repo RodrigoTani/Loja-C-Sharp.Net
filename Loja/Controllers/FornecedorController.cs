@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Loja.Models;
 using PagedList;
+using Core;
 
 namespace Loja.Controllers
 {

@@ -1,4 +1,5 @@
-﻿using Loja.Models;
+﻿using Core;
+using Loja.Models;
 using Loja.Models.Carrinho;
 using System.Data.Entity;
 using System.Linq;
@@ -37,7 +38,7 @@ namespace Loja.Controllers
             var addProduto = storeDB.Produtoes
                 .Single(produto => produto.Id == id);
 
-            // Adiciona ao carrinho de compras
+            // Adiciona ao ItemVenda de compras
             var cart = CarrinhoDeCompras.GetCart(this.HttpContext);
 
             cart.AddToCart(addProduto);
@@ -51,20 +52,20 @@ namespace Loja.Controllers
             CarrinhodeComprasRemoverViewModel results = null;
             try
             {
-                // Obtein o Carrinho
+                // Obtein o ItemVenda
                 var cart = CarrinhoDeCompras.GetCart(this.HttpContext);
 
                 // Pega o nome do álbum para exibir a confirmação
-                string albumName = storeDB.Carrinhoes.Single(item => item.RecordId == id).Produto.Titulo;
+                string albumName = storeDB.ItemVendaes.Single(item => item.RecordId == id).Produto.Titulo;
 
-                // Update a contagem do carrinho
+                // Update a contagem do ItemVenda
                 int itemCount = cart.UpdateCartCount(id, cartCount);
 
                 //Prepara menssages
                 string msg = "A quantidade de " + Server.HtmlEncode(albumName) +
-                        " foi atualizada no carrinho";
+                        " foi atualizada no ItemVenda";
                 if (itemCount == 0) msg = Server.HtmlEncode(albumName) +
-                        " foi removida do carrinho.";
+                        " foi removida do ItemVenda.";
                 //
                 // Mostra mensagem de confirmação 
                 results = new CarrinhodeComprasRemoverViewModel
@@ -94,21 +95,21 @@ namespace Loja.Controllers
         [HttpPost]
         public ActionResult RemoveFromCart(int id)
         {
-            // Remove o item do carrinho
+            // Remove o item do ItemVenda
             var cart = CarrinhoDeCompras.GetCart(this.HttpContext);
 
             // Pega o nome do álbum para exibir a confirmação
-            string nomeProduto = storeDB.Carrinhoes
+            string nomeProduto = storeDB.ItemVendaes
                 .Single(item => item.RecordId == id).Produto.Titulo;
 
-            // Remove do carrinho
+            // Remove do ItemVenda
             int itemCount = cart.RemoveFromCart(id);
 
             // Mostra a confirmação da mensagem
             var results = new CarrinhodeComprasRemoverViewModel
             {
                 Message = Server.HtmlEncode(nomeProduto) +
-                    " Foi removido do carrinho.",
+                    " Foi removido do ItemVenda.",
                 CartTotal = cart.GetTotal(),
                 CartCount = cart.GetCount(),
                 ItemCount = itemCount,
@@ -138,7 +139,7 @@ namespace Loja.Controllers
         // POST: Pedidoes/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public PartialViewResult Pagamento(Carrinho cart)
+        public PartialViewResult Pagamento(ItemVenda cart)
         {
             if (ModelState.IsValid)
             {

@@ -7,13 +7,13 @@ namespace Core
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class novo : IMigrationMetadata
+    public sealed partial class dev : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(novo));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(dev));
         
         string IMigrationMetadata.Id
         {
-            get { return "201904030312595_novo"; }
+            get { return "201905050316321_dev"; }
         }
         
         string IMigrationMetadata.Source

@@ -1,4 +1,5 @@
-﻿using Loja.Models;
+﻿using Core;
+using Loja.Models;
 using Loja.Models.Carrinho;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace Loja.Models
             cart.ShoppingCartId = cart.GetCartId(context);
             return cart;
         }
-        // Helper method q simplifica a chamada do carrinho
+        // Helper method q simplifica a chamada do ItemVenda
 
         public static CarrinhoDeCompras GetCart(Controller controller)
         {
@@ -29,26 +30,26 @@ namespace Loja.Models
 
         public void AddToCart(Produto produto)
         {
-            //Pega o carrinho correspondente as instâncias do álbum
-            var cartItem = storeDB.Carrinhoes.SingleOrDefault(
-                c => c.CarrinhoId == ShoppingCartId
+            //Pega o ItemVenda correspondente as instâncias do álbum
+            var cartItem = storeDB.ItemVendaes.SingleOrDefault(
+                c => c.ItemVendaId == ShoppingCartId
                 && c.ProdutoId == produto.Id);
 
             if (cartItem == null)
             {
-                // Cria um novo carrinho caso não exista um
-                cartItem = new Carrinho.Carrinho
+                // Cria um novo ItemVenda caso não exista um
+                cartItem = new Carrinho.ItemVenda
                 {
                     ProdutoId = produto.Id,
-                    CarrinhoId = ShoppingCartId,
+                    ItemVendaId = ShoppingCartId,
                     Quantidade = 1,
                     DataCriacao = DateTime.Now
                 };
-                storeDB.Carrinhoes.Add(cartItem);
+                storeDB.ItemVendaes.Add(cartItem);
             }
             else
             {
-                // Se o item já existe no carrinho, 
+                // Se o item já existe no ItemVenda, 
                 // então adiciona mais um na quantidade
                 cartItem.Quantidade++;
             }
@@ -57,16 +58,16 @@ namespace Loja.Models
         } 
         public int RemoveFromCart(int id)
         {
-            // Pega o carrinho
-            var cartItem = storeDB.Carrinhoes.Single(
-                cart => cart.CarrinhoId == ShoppingCartId
+            // Pega o ItemVenda
+            var cartItem = storeDB.ItemVendaes.Single(
+                cart => cart.ItemVendaId == ShoppingCartId
                  && cart.RecordId == id);
 
             int itemCount = 0;
 
             if (cartItem != null)
             {
-                storeDB.Carrinhoes.Remove(cartItem);
+                storeDB.ItemVendaes.Remove(cartItem);
                 // Salvar mudanças
                 storeDB.SaveChanges();
             }
@@ -74,26 +75,26 @@ namespace Loja.Models
         }
         public void EmptyCart()
         {
-            var cartItems = storeDB.Carrinhoes.Where(
-                cart => cart.CarrinhoId == ShoppingCartId);
+            var cartItems = storeDB.ItemVendaes.Where(
+                cart => cart.ItemVendaId == ShoppingCartId);
 
             foreach (var cartItem in cartItems)
             {
-                storeDB.Carrinhoes.Remove(cartItem);
+                storeDB.ItemVendaes.Remove(cartItem);
             }
             // Salvar mudanças
             storeDB.SaveChanges();
         } 
-        public List<Carrinho.Carrinho> GetCartItems()
+        public List<Carrinho.ItemVenda> GetCartItems()
         {
-            return storeDB.Carrinhoes.Where(
-                cart => cart.CarrinhoId == ShoppingCartId).ToList();
+            return storeDB.ItemVendaes.Where(
+                cart => cart.ItemVendaId == ShoppingCartId).ToList();
         }
         public int GetCount()
         {
-            // Conta os items do carrinho e soma todos
-            int? count = (from cartItems in storeDB.Carrinhoes
-                          where cartItems.CarrinhoId == ShoppingCartId
+            // Conta os items do ItemVenda e soma todos
+            int? count = (from cartItems in storeDB.ItemVendaes
+                          where cartItems.ItemVendaId == ShoppingCartId
                           select (int?)cartItems.Quantidade).Sum();
             // Retorna 0 se tds entradas forem null
             return count ?? 0;
@@ -102,15 +103,16 @@ namespace Loja.Models
         {
             // Multiplica o preço  
             // soma todos os preços para ter o cart total
-            decimal? total = (from cartItems in storeDB.Carrinhoes
-                              where cartItems.CarrinhoId == ShoppingCartId
+            decimal? total = (from cartItems in storeDB.ItemVendaes
+                              where cartItems.ItemVendaId == ShoppingCartId
                               select (int?)cartItems.Quantidade *
                               cartItems.Produto.ValorFinal).Sum();
 
             return total ?? decimal.Zero;
         }
-        public int CreateOrder(Pedido pedido)
+        public int CreateOrder(Pedido pedido,List<Pagamento> formas)
         {
+            var compra = new Venda();
             decimal orderTotal = 0;
             var cartItems = GetCartItems();
             // Iterage com os items do carriho, 
@@ -132,12 +134,14 @@ namespace Loja.Models
                 storeDB.DetalhesPedidoes.Add(orderDetail);
 
             }
+            compra.ItemVendas = cartItems;
             // Set the order's total to the orderTotal count
-            pedido.Total = orderTotal;
-
+            compra.Total = pedido.Total = orderTotal;
+            compra.Formas = formas;
+            storeDB.Venda.Add(compra);
             // Salva o pedido
             storeDB.SaveChanges();
-            // esvazia o carrinho
+            // esvazia o ItemVenda
             EmptyCart();
             // Returna o id do pedido para a confirmação
             return pedido.PedidoId;
@@ -165,9 +169,9 @@ namespace Loja.Models
          
         public int UpdateCartCount(int id, int cartCount)
         {
-            // Pega o carrinho
-            var cartItem = storeDB.Carrinhoes.Single(
-                cart => cart.CarrinhoId == ShoppingCartId
+            // Pega o ItemVenda
+            var cartItem = storeDB.ItemVendaes.Single(
+                cart => cart.ItemVendaId == ShoppingCartId
                 && cart.RecordId == id);
 
             int itemCount = 0;
@@ -181,7 +185,7 @@ namespace Loja.Models
                 }
                 else
                 {
-                    storeDB.Carrinhoes.Remove(cartItem);
+                    storeDB.ItemVendaes.Remove(cartItem);
                 }
                 // Salvar mudanças 
                 storeDB.SaveChanges();
@@ -189,16 +193,16 @@ namespace Loja.Models
             return itemCount;
         }
 
-        // quando um usuario esta logado,migra seu carrinho
+        // quando um usuario esta logado,migra seu ItemVenda
         // associado com seu nome de usuario
         public void MigrateCart(string userName)
         {
-            var shoppingCart = storeDB.Carrinhoes.Where(
-                c => c.CarrinhoId == ShoppingCartId);
+            var shoppingCart = storeDB.ItemVendaes.Where(
+                c => c.ItemVendaId == ShoppingCartId);
 
-            foreach (Carrinho.Carrinho item in shoppingCart)
+            foreach (Carrinho.ItemVenda item in shoppingCart)
             {
-                item.CarrinhoId = userName;
+                item.ItemVendaId = userName;
             }
             storeDB.SaveChanges();
         }

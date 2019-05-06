@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Loja.Models
 {
-    public class Cartao : EntidadeDominio
+    public class Cartao : FormaDePagamento
     {
         public string Usuario { get; set; }
         public string NomeCartao { get; set; }

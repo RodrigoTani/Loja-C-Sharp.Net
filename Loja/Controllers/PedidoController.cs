@@ -8,7 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using Loja.Models;
 using Loja.Models.Carrinho;
- 
+using Core;
+
 namespace Loja.Controllers
 {
     public class PedidoController : Controller

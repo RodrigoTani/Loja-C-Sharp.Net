@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Loja.Models;
+using Core;
 
 namespace Loja.Controllers
 {

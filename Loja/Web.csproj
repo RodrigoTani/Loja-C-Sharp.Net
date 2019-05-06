@@ -197,75 +197,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201903311410588_novo.cs" />
-    <Compile Include="Migrations\201903311410588_novo.Designer.cs">
-      <DependentUpon>201903311410588_novo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903311425115_novo2.cs" />
-    <Compile Include="Migrations\201903311425115_novo2.Designer.cs">
-      <DependentUpon>201903311425115_novo2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904022006312_novo4.cs" />
-    <Compile Include="Migrations\201904022006312_novo4.Designer.cs">
-      <DependentUpon>201904022006312_novo4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904240449083_novo5.cs" />
-    <Compile Include="Migrations\201904240449083_novo5.Designer.cs">
-      <DependentUpon>201904240449083_novo5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904240453064_novo51.cs" />
-    <Compile Include="Migrations\201904240453064_novo51.Designer.cs">
-      <DependentUpon>201904240453064_novo51.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905011956553_new.cs" />
-    <Compile Include="Migrations\201905011956553_new.Designer.cs">
-      <DependentUpon>201905011956553_new.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905012139378_new2.cs" />
-    <Compile Include="Migrations\201905012139378_new2.Designer.cs">
-      <DependentUpon>201905012139378_new2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905012227147_new3.cs" />
-    <Compile Include="Migrations\201905012227147_new3.Designer.cs">
-      <DependentUpon>201905012227147_new3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905021802199_new4.cs" />
-    <Compile Include="Migrations\201905021802199_new4.Designer.cs">
-      <DependentUpon>201905021802199_new4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905031332363_new5.cs" />
-    <Compile Include="Migrations\201905031332363_new5.Designer.cs">
-      <DependentUpon>201905031332363_new5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905031337064_new6.cs" />
-    <Compile Include="Migrations\201905031337064_new6.Designer.cs">
-      <DependentUpon>201905031337064_new6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905031412173_new7.cs" />
-    <Compile Include="Migrations\201905031412173_new7.Designer.cs">
-      <DependentUpon>201905031412173_new7.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Carrinho\CarrinhoDeCompras.cs" />
-    <Compile Include="Models\Carrinho\CarrinhodeComprasRemoverViewModel.cs" />
-    <Compile Include="Models\Carrinho\CarrinhodeComprasViewModel.cs" />
-    <Compile Include="Models\Carrinho\CheckoutViewModel.cs" />
-    <Compile Include="Models\Carrinho\ClasseModeladora.cs" />
-    <Compile Include="Models\Carrinho\DetalhesPedido.cs" />
-    <Compile Include="Models\Carrinho\Pedido.cs" />
-    <Compile Include="Models\Carrinho\PedidoStatus.cs" />
-    <Compile Include="Models\Cartao.cs" />
-    <Compile Include="Models\MotivoForn.cs" />
-    <Compile Include="Models\Motivo.cs" />
-    <Compile Include="Models\Produto.cs" />
-    <Compile Include="Models\Carrinho\Carrinho.cs" />
-    <Compile Include="Models\EnderecoEntrega.cs" />
-    <Compile Include="Models\EstoqueProdutos.cs" />
-    <Compile Include="Models\Fornecedor.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Carrinho\Status.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -404,6 +335,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Migrations\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -422,44 +355,6 @@
       <Project>{7A927D94-66F0-4F6B-ABAB-4B05677521BF}</Project>
       <Name>Dominio</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903311410588_novo.resx">
-      <DependentUpon>201903311410588_novo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903311425115_novo2.resx">
-      <DependentUpon>201903311425115_novo2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904022006312_novo4.resx">
-      <DependentUpon>201904022006312_novo4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904240449083_novo5.resx">
-      <DependentUpon>201904240449083_novo5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904240453064_novo51.resx">
-      <DependentUpon>201904240453064_novo51.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905011956553_new.resx">
-      <DependentUpon>201905011956553_new.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905012139378_new2.resx">
-      <DependentUpon>201905012139378_new2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905012227147_new3.resx">
-      <DependentUpon>201905012227147_new3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905021802199_new4.resx">
-      <DependentUpon>201905021802199_new4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905031332363_new5.resx">
-      <DependentUpon>201905031332363_new5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905031337064_new6.resx">
-      <DependentUpon>201905031337064_new6.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905031412173_new7.resx">
-      <DependentUpon>201905031412173_new7.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

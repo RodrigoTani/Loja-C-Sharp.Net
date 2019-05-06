@@ -42,9 +42,66 @@
     <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.2\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.2\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -62,19 +119,33 @@
     <Compile Include="DAO\CupomDAO.cs" />
     <Compile Include="DAO\DepartamentoDAO.cs" />
     <Compile Include="IdentityModels.cs" />
-    <Compile Include="Migrations\201903310545356_dev.cs" />
-    <Compile Include="Migrations\201903310545356_dev.Designer.cs">
-      <DependentUpon>201903310545356_dev.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903310610352_dev2.cs" />
-    <Compile Include="Migrations\201903310610352_dev2.Designer.cs">
-      <DependentUpon>201903310610352_dev2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904030312595_novo.cs" />
-    <Compile Include="Migrations\201904030312595_novo.Designer.cs">
-      <DependentUpon>201904030312595_novo.cs</DependentUpon>
+    <Compile Include="Migrations\201905050316321_dev.cs" />
+    <Compile Include="Migrations\201905050316321_dev.Designer.cs">
+      <DependentUpon>201905050316321_dev.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Carrinho\ItemVenda.cs" />
+    <Compile Include="Models\Carrinho\CarrinhoDeCompras.cs" />
+    <Compile Include="Models\Carrinho\CarrinhodeComprasRemoverViewModel.cs" />
+    <Compile Include="Models\Carrinho\CarrinhodeComprasViewModel.cs" />
+    <Compile Include="Models\Carrinho\CheckoutViewModel.cs" />
+    <Compile Include="Models\Carrinho\ClasseModeladora.cs" />
+    <Compile Include="Models\Carrinho\DetalhesPedido.cs" />
+    <Compile Include="Models\Carrinho\Pagamento.cs" />
+    <Compile Include="Models\Carrinho\Pedido.cs" />
+    <Compile Include="Models\Carrinho\PedidoStatus.cs" />
+    <Compile Include="Models\Carrinho\Status.cs" />
+    <Compile Include="Models\Carrinho\Venda.cs" />
+    <Compile Include="Models\Cartao.cs" />
+    <Compile Include="Models\EnderecoEntrega.cs" />
+    <Compile Include="Models\EstoqueProdutos.cs" />
+    <Compile Include="Models\FomaDePagamento.cs" />
+    <Compile Include="Models\Fornecedor.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Motivo.cs" />
+    <Compile Include="Models\MotivoForn.cs" />
+    <Compile Include="Models\Produto.cs" />
     <Compile Include="Negocio\stDataCadastro.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\BDInfo.cs" />
@@ -91,17 +162,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903310545356_dev.resx">
-      <DependentUpon>201903310545356_dev.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903310610352_dev2.resx">
-      <DependentUpon>201903310610352_dev2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904030312595_novo.resx">
-      <DependentUpon>201904030312595_novo.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201905050316321_dev.resx">
+      <DependentUpon>201905050316321_dev.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

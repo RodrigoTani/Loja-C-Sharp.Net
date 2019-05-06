@@ -7,7 +7,7 @@ namespace Loja.Models.Carrinho
     {
         [Key]
         public int RecordID { get; set; }
-        public List<Carrinho> CartItems { get; set; }
+        public List<ItemVenda> CartItems { get; set; }
         public decimal CartTotal { get; set; }
         public string FormaPagamento { get; set; }
 

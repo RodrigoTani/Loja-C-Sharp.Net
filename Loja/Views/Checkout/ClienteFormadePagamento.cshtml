@@ -6,7 +6,7 @@
         <h2>Confirmação</h2>
 
 
-        @using (Html.BeginForm())
+        @using (Html.BeginForm("ClienteFormadePagamento", "Checkout", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
             <h3><em>Confirmação do pedido</em></h3>

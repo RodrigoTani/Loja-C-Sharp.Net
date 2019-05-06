@@ -1,4 +1,5 @@
-﻿using Loja.Models;
+﻿using Core;
+using Loja.Models;
 using Loja.Models.Carrinho;
 using System;
 using System.Collections.Generic;
@@ -84,8 +85,8 @@ namespace Loja.Controllers
                 storeDB.SaveChanges();
                 //Processa o pedido
                 var cart = CarrinhoDeCompras.GetCart(this.HttpContext);
-                cart.CreateOrder(order);
-
+                cart.CreateOrder(order,(List<Pagamento>)Session["cards"]);
+                Session["cards"] = null;
                 return RedirectToAction("Complete",new { id = order.PedidoId });
             }
             catch

@@ -1,6 +1,8 @@
-﻿using Loja.Models;
+﻿using Core;
+using Loja.Models;
 using Loja.Models.Carrinho;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -27,10 +29,26 @@ namespace Loja.Controllers
 
             return View(viewModel);
         }
-        public ActionResult ClienteFormadePagamento(string pagamento,int? id,int? cartao)
+        [HttpPost]
+        public ActionResult ClienteFormadePagamento2(string pagamento, int? id, int? cartao, decimal? valor)
+        {
+            decimal dec = 0;
+            decimal.TryParse(Request.Form["dev"],out dec);
+            valor = dec;
+            return orc(pagamento, id, cartao, valor);
+        }
+        public static decimal valor;
+        public ActionResult ClienteFormadePagamento(string pagamento, int? id, int? cartao, decimal? valor,bool? dife)
+        {
+            return orc(pagamento, id, cartao, valor);
+        }
+        public ActionResult orc(string pagamento, int? id, int? cartao, decimal? valor)
         {
             if (endere == 0)
             {
+                //se o id recebido for nulo
+                //manda cadastrar endereço
+                //senão acha o endereço e salve-o
                 if (id == null)
                 {
                     endere = 0;
@@ -46,14 +64,30 @@ namespace Loja.Controllers
                     }
                 }
             }
-            
+            valor = (valor == null) ? 0 : valor;
             var cart = CarrinhoDeCompras.GetCart(this.HttpContext);
-            
+            foreach (var r in storeDB.Cartaos.ToList())
+            {
+                if (Request.Form[r.Id.ToString()] != null)
+                {
+                    cartao = int.Parse(Request.Form[r.Id.ToString()]);
+                    break;
+                }
+                
+            }
             if (cartao == null)
             {
                 return RedirectToAction("ListagemCartao");
             }
+            decimal valord = (decimal)valor;
             Cartao card = storeDB.Cartaos.Find(cartao);
+            var cards = new List<Pagamento>();//lista de cartoes
+            //adiciona cartao na sessão
+            //cria uma lista de obj cartoes na sessao
+            if (Session["cards"]!=null)
+            cards = (List<Pagamento>)Session["cards"];
+            cards.Add(new Pagamento() { Cartaoid= card.Id,Valor=valord });
+            Session["cards"] = cards;
             if (card == null)
             {
                 return HttpNotFound();
@@ -65,11 +99,19 @@ namespace Loja.Controllers
                 CartTotal = cart.GetTotal(),
                
             };
+            decimal mountcard = 0;
+            foreach(Pagamento pag in cards)
+            {
+                mountcard+= pag.Valor;
+            }
             // Retorna a view
             //viewModel.FormaPagamento = pagamento;
             viewModel.FormaPagamento = cartao.ToString();
             viewModel.EndId = endere;
-            return View(viewModel);
+            if(cart.GetTotal()==mountcard)
+                return View("ClienteFormadePagamento", viewModel);
+            else
+                return RedirectToAction("ListagemCartao");
         }
       
         public ActionResult EscolhaEndereco()
@@ -79,14 +121,16 @@ namespace Loja.Controllers
 
         public ActionResult ListagemCartao()
         {
-            return View(storeDB.Cartaos.ToList());
+            return View(new Tuple<Pagamento,List<Cartao>>(new Pagamento(), storeDB.Cartaos.ToList()));
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult ClienteFormadePagamento(FormCollection values,int? id, int? cartao)
         {
-            
+            int dec = 0;
+            int.TryParse(Request.Form["FormaPagamento"], out dec);
+            cartao = dec;
             EnderecoEntrega end = storeDB.EnderecoEntregas.Find(endere);
             if (end == null)
             {
@@ -112,7 +156,8 @@ namespace Loja.Controllers
                 storeDB.Pedidoes.Add(order);
                 storeDB.SaveChanges();
                 var cart = CarrinhoDeCompras.GetCart(this.HttpContext);
-                cart.CreateOrder(order);
+                cart.CreateOrder(order,(List<Pagamento>)Session["cards"]);
+                Session["cards"] = null;
 
                 return RedirectToAction("Complete",new { id = order.PedidoId });
             }

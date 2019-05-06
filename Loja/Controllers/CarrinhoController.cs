@@ -8,111 +8,112 @@ using System.Web;
 using System.Web.Mvc;
 using Loja.Models;
 using Loja.Models.Carrinho;
+using Core;
 
 namespace Loja.Controllers
 {
-    public class CarrinhoController : Controller
+    public class ItemVendaController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Carrinho
+        // GET: ItemVenda
         public ActionResult Index()
         {
-            var carrinhoes = db.Carrinhoes.Include(c => c.Produto);
-            return View(carrinhoes.ToList());
+            var ItemVendaes = db.ItemVendaes.Include(c => c.Produto);
+            return View(ItemVendaes.ToList());
         }
 
-        // GET: Carrinho/Details/5
+        // GET: ItemVenda/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Carrinho carrinho = db.Carrinhoes.Find(id);
-            if (carrinho == null)
+            ItemVenda ItemVenda = db.ItemVendaes.Find(id);
+            if (ItemVenda == null)
             {
                 return HttpNotFound();
             }
-            return View(carrinho);
+            return View(ItemVenda);
         }
 
-        // GET: Carrinho/Create
+        // GET: ItemVenda/Create
         public ActionResult Create()
         {
             ViewBag.ProdutoId = new SelectList(db.Produtoes, "Id", "Titulo");
             return View();
         }
 
-        // POST: Carrinho/Create
+        // POST: ItemVenda/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RecordId,CarrinhoId,Quantidade,DataCriacao,ProdutoId,FormaPagamento")] Carrinho carrinho)
+        public ActionResult Create([Bind(Include = "RecordId,ItemVendaId,Quantidade,DataCriacao,ProdutoId,FormaPagamento")] ItemVenda ItemVenda)
         {
             if (ModelState.IsValid)
             {
-                db.Carrinhoes.Add(carrinho);
+                db.ItemVendaes.Add(ItemVenda);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ProdutoId = new SelectList(db.Produtoes, "Id", "Titulo", carrinho.ProdutoId);
-            return View(carrinho);
+            ViewBag.ProdutoId = new SelectList(db.Produtoes, "Id", "Titulo", ItemVenda.ProdutoId);
+            return View(ItemVenda);
         }
 
-        // GET: Carrinho/Edit/5
+        // GET: ItemVenda/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Carrinho carrinho = db.Carrinhoes.Find(id);
-            if (carrinho == null)
+            ItemVenda ItemVenda = db.ItemVendaes.Find(id);
+            if (ItemVenda == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ProdutoId = new SelectList(db.Produtoes, "Id", "Titulo", carrinho.ProdutoId);
-            return View(carrinho);
+            ViewBag.ProdutoId = new SelectList(db.Produtoes, "Id", "Titulo", ItemVenda.ProdutoId);
+            return View(ItemVenda);
         }
 
-        // POST: Carrinho/Edit/5
+        // POST: ItemVenda/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "RecordId,CarrinhoId,Quantidade,DataCriacao,ProdutoId,FormaPagamento")] Carrinho carrinho)
+        public ActionResult Edit([Bind(Include = "RecordId,ItemVendaId,Quantidade,DataCriacao,ProdutoId,FormaPagamento")] ItemVenda ItemVenda)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(carrinho).State = EntityState.Modified;
+                db.Entry(ItemVenda).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ProdutoId = new SelectList(db.Produtoes, "Id", "Titulo", carrinho.ProdutoId);
-            return View(carrinho);
+            ViewBag.ProdutoId = new SelectList(db.Produtoes, "Id", "Titulo", ItemVenda.ProdutoId);
+            return View(ItemVenda);
         }
 
-        // GET: Carrinho/Delete/5
+        // GET: ItemVenda/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Carrinho carrinho = db.Carrinhoes.Find(id);
-            if (carrinho == null)
+            ItemVenda ItemVenda = db.ItemVendaes.Find(id);
+            if (ItemVenda == null)
             {
                 return HttpNotFound();
             }
-            return View(carrinho);
+            return View(ItemVenda);
         }
 
-        // POST: Carrinho/Delete/5
+        // POST: ItemVenda/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Carrinho carrinho = db.Carrinhoes.Find(id);
-            db.Carrinhoes.Remove(carrinho);
+            ItemVenda ItemVenda = db.ItemVendaes.Find(id);
+            db.ItemVendaes.Remove(ItemVenda);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
