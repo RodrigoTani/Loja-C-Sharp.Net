@@ -18,6 +18,8 @@ namespace Loja.Models.Carrinho
         public int StatusId { get; set; }
         public string Usuario { get; set; }
         public DateTime DataStatus { get; set; }
+        public String Motivo { get; set; }
+
 
         //Auxiliares
         public virtual Pedido pedi { get; set; }

@@ -20,6 +20,7 @@
 
             @foreach (var item in Model)
             {
+               
                 <tr>
                     <th>@Html.DisplayFor(model => item.PedidoId)</th>
                     <td>@Html.DisplayFor(modelItem => item.FormaPagamento)</td>
@@ -32,6 +33,7 @@
                         @Html.ActionLink("Deletar", "Delete", null, new { id = item.PedidoId }, new { @class = "btn btn-danger" })|
                     </td>
                 </tr>
+                
             }
 
         </table>

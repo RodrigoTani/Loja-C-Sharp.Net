@@ -123,6 +123,10 @@
     <Compile Include="Migrations\201905050316321_dev.Designer.cs">
       <DependentUpon>201905050316321_dev.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905072350392_novo4.cs" />
+    <Compile Include="Migrations\201905072350392_novo4.Designer.cs">
+      <DependentUpon>201905072350392_novo4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Carrinho\ItemVenda.cs" />
@@ -164,6 +168,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201905050316321_dev.resx">
       <DependentUpon>201905050316321_dev.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905072350392_novo4.resx">
+      <DependentUpon>201905072350392_novo4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

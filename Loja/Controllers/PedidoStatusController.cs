@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Loja.Models;
 using Loja.Models.Carrinho;
 using Core;
+using PagedList;
 
 namespace Loja.Controllers
 {
@@ -17,11 +14,61 @@ namespace Loja.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: PedidoStatus
-        public ActionResult Index()
+
+        //-----------------------------
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            var pedidoStatus = db.PedidoStatus.Include(p => p.pedi).Include(p => p.statu);
-            return View(pedidoStatus.ToList());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NomeParam = String.IsNullOrEmpty(sortOrder) ? "PedidoId" : "";
+            ViewBag.NomeStatus = String.IsNullOrEmpty(sortOrder) ? "Status" : "";
+            ViewBag.DateParm = sortOrder == "Date" ? "Date_desc" : "Date";
+            
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var pedidoStatus = from s in db.PedidoStatus
+                               select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                pedidoStatus = pedidoStatus.Where(s => s.PedidoId.ToString().ToUpper().Contains(searchString.ToUpper())
+                                       || s.PedidoId.ToString().ToUpper().Contains(searchString.ToUpper())
+                                       || s.StatusId.ToString().ToUpper().Contains(searchString.ToUpper()));
+            }
+            switch (sortOrder)
+            {
+                case "PedidoId":
+                    pedidoStatus = pedidoStatus.OrderByDescending(s => s.PedidoId);
+                    break;
+                case "Status":
+                    pedidoStatus = pedidoStatus.OrderByDescending(s => s.StatusId);
+                    break;
+                case "Data":
+                    pedidoStatus = pedidoStatus.OrderBy(s => s.DataStatus);
+                    break;
+                case "Data_desc":
+                    pedidoStatus = pedidoStatus.OrderByDescending(s => s.DataStatus);
+                    break;
+                default:
+                    pedidoStatus = pedidoStatus.OrderBy(s => s.PedidoId);
+                    break;
+            }
+
+
+            int pageSize = 12;
+            int pageNumber = (page ?? 1);
+            return View(pedidoStatus.ToPagedList(pageNumber, pageSize));
         }
+        //-----------------------------
+
 
         // GET: PedidoStatus/Details/5
         public ActionResult Details(int? id)
@@ -47,8 +94,6 @@ namespace Loja.Controllers
         }
 
         // POST: PedidoStatus/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,PedidoId,StatusId,Usuario,DataStatus")] PedidoStatus pedidoStatus)
@@ -85,8 +130,6 @@ namespace Loja.Controllers
         }
 
         // POST: PedidoStatus/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,PedidoId,StatusId,Usuario,DataStatus")] PedidoStatus pedidoStatus)
@@ -135,6 +178,47 @@ namespace Loja.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult TrocaPedido(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Pedido pedido = db.Pedidoes.Find(id);
+            if (pedido == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.PedidoId = pedido.PedidoId;
+            return View();
+        }
+
+        // POST: PedidoStatus/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult TrocaPedido(PedidoStatus pedidoStatus,int? id)
+        {
+            Pedido pedido = db.Pedidoes.Find(id);
+            if (pedido == null)
+            {
+                return HttpNotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                pedidoStatus.PedidoId = pedido.PedidoId;
+                pedidoStatus.Usuario = User.Identity.Name;
+                pedidoStatus.DataStatus = DateTime.Now;
+                pedidoStatus.StatusId = 7;
+                db.PedidoStatus.Add(pedidoStatus);
+                db.SaveChanges();
+                return RedirectToAction("Index","Pedido");
+            }
+
+            ViewBag.PedidoId = new SelectList(db.Pedidoes, "PedidoId", "Usuario", pedidoStatus.PedidoId);
+            ViewBag.StatusId = new SelectList(db.Status, "id", "NomeStatus", pedidoStatus.StatusId);
+            return View(pedidoStatus);
         }
     }
 }

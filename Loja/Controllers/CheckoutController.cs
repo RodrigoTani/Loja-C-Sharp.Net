@@ -158,6 +158,12 @@ namespace Loja.Controllers
                 var cart = CarrinhoDeCompras.GetCart(this.HttpContext);
                 cart.CreateOrder(order,(List<Pagamento>)Session["cards"]);
                 Session["cards"] = null;
+                PedidoStatus stats = new PedidoStatus();
+                stats.DataStatus = DateTime.Now;
+                stats.PedidoId = order.PedidoId;
+                stats.StatusId = 1;
+                storeDB.PedidoStatus.Add(stats);
+                storeDB.SaveChanges();
 
                 return RedirectToAction("Complete",new { id = order.PedidoId });
             }
@@ -204,6 +210,30 @@ namespace Loja.Controllers
 
             return View(localEntrega);
         }
+        /*
+        // GET: Fornecedor/Edit/5
+        public ActionResult Troca(int? id)
+        {
+           if(id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Pedido ped = storeDB.Pedidoes.Find(id);
+            if (ped == null)
+            {
+                return HttpNotFound();
+            }
+            return View(ped);
+        }
+
+        // POST: Fornecedor/Edit/5
+        
+        public ActionResult Troca(string motivo, int? id)
+        {
+            motivo = Request.Form["troca"];
+            
+            return View();
+        }*/
 
     }
 }

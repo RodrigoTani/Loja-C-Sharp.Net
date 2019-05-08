@@ -163,5 +163,6 @@
         }
     </table>
     @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Trocar Pedido", "TrocaPedido","PedidoStatus", new  { id  = Model.Pedido.PedidoId  }, new { @class = "btn btn-primary" })
 </div>
 

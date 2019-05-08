@@ -59,6 +59,7 @@ namespace Core
        //public System.Data.Entity.DbSet<Loja.Models.Carrinho.Pagamento> Pagamentoes { get; set; }
         public System.Data.Entity.DbSet<Dominio.Cupom> Cupom { get; set; }
         public System.Data.Entity.DbSet<Loja.Models.Carrinho.Venda> Venda { get; set; }
+
         // public System.Data.Entity.DbSet<Loja.Models.Cartao> Cartaos { get; set; }
     }
 }
