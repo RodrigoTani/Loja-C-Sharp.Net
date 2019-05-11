@@ -6,14 +6,25 @@
 
 <div class="container">
     <h2>Listagem Cartões</h2>
+
+    
     @using (Html.BeginForm("ClienteFormadePagamento2", "Checkout", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
+
     <p>
         @Html.ActionLink("Adicionar Novo", "Create");
     </p>
-    <p>  valor pagar:  @Html.TextBox("dev")
-    </p>
+
+    <h5>Ao escolher somente um cartão digite no campo abaixo o valor total e ecolha o cartão</h5>
+            <h5>
+                Ao escolher dois cartões digite no campo abaixo o valor que você quer pagar
+                e escolha o cartão e aperte escolher, após isso digite novamente o valor e escolha o outro cartão.
+            </h5>
+
+     <p>Valor Total da Compra: @ViewBag.Total</p>
+    <p>Valor a pagar no cartão:  @Html.TextBox("dev")</p>
+    <p>Valor que valta a pagar @ViewBag.Falta</p>
     <table class="table">
         <tr>
             <th>NomeCartao</th>
@@ -43,7 +54,7 @@
                 </tr>
             }
         }
-    
+       
     </table>
     }
     <script>
@@ -69,4 +80,9 @@
 
 
     </script>
+@using (Html.BeginForm("ClienteFormadePagamento3", "Checkout", FormMethod.Post))
+{
+    <p>Insira Cupom:  @Html.TextBox("cup")</p>
+    <input type="submit" name="go" value="Escolher" class="btn btn-success" />
+}
 </div>

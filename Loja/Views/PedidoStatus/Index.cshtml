@@ -40,6 +40,12 @@
                     @Html.ActionLink("Detalhes", "Details", new { id = item.PedidoId }) |
                     @Html.ActionLink("Deletar", "Delete", new { id = item.PedidoId })
                 </td>
+                @if (item.StatusId == 7) {
+                <td>
+                    @Html.ActionLink("Autorizar", "Autorizar", null, new { id = item.PedidoId }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Negar", "Negar", null, new { id = item.PedidoId }, new { @class = "btn btn-danger" })
+                </td>
+                }
             </tr>
             //}
         }

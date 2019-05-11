@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Loja.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Dominio;
 
 namespace Loja.Models.Carrinho
 {
@@ -24,9 +25,9 @@ namespace Loja.Models.Carrinho
         public int Cartaoid { get; set; }
         [ForeignKey("Cartaoid")]
         public virtual Cartao Cartao { get; set; }
+        
 
         public virtual Venda Venda { get; set; }
-
-
+        
     }
 }

@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using Loja.Models.Carrinho;
 using Core;
 using PagedList;
+using Dominio;
+using Loja.Models;
 
 namespace Loja.Controllers
 {
@@ -218,6 +220,101 @@ namespace Loja.Controllers
 
             ViewBag.PedidoId = new SelectList(db.Pedidoes, "PedidoId", "Usuario", pedidoStatus.PedidoId);
             ViewBag.StatusId = new SelectList(db.Status, "id", "NomeStatus", pedidoStatus.StatusId);
+            return View(pedidoStatus);
+        }
+
+        public ActionResult Negar(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PedidoStatus pedido = db.PedidoStatus.Find(id);
+            if (pedido == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.PedidoId = pedido.PedidoId;
+            return View();
+        }
+
+        // POST: PedidoStatus/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Negar(PedidoStatus pedidoStatus, int? id)
+        {
+            PedidoStatus pedido = db.PedidoStatus.Find(id);
+            if (pedido == null)
+            {
+                return HttpNotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                //cria pedidoStatus
+                pedidoStatus.id = pedido.id;
+                pedidoStatus.Usuario = User.Identity.Name;
+                pedidoStatus.DataStatus = DateTime.Now;
+                pedidoStatus.StatusId = 8;
+                db.PedidoStatus.Add(pedidoStatus);
+                db.SaveChanges();
+                return RedirectToAction("Index", "Pedido");
+            }
+            return View(pedidoStatus);
+        }
+
+        public ActionResult Autorizar(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PedidoStatus pedido = db.PedidoStatus.Find(id);
+            if (pedido == null)
+            {
+                return HttpNotFound();
+            }
+            DetalhesPedido dpedido = db.DetalhesPedidoes.Find(id);
+            if (pedido == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.produto = dpedido.ProdutoId;
+            ViewBag.PedidoId = pedido.PedidoId;
+            return Autorizar(pedido,pedido.PedidoId);
+        }
+
+        // POST: PedidoStatus/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Autorizar(PedidoStatus pedidoStatus, int? id)
+        {
+            PedidoStatus pedido = db.PedidoStatus.Find(id);
+            if (pedido == null)
+            {
+                return HttpNotFound();
+            }
+            
+            if (ModelState.IsValid)
+            {
+                //cria pedidoStatus
+                //pedidoStatus.id = pedido.id;
+                pedidoStatus.Usuario = User.Identity.Name;
+                pedidoStatus.DataStatus = DateTime.Now;
+                pedidoStatus.StatusId = 9;
+                db.PedidoStatus.Add(pedidoStatus);
+                //cria cupom
+                Cupom cupom = new Cupom();
+                cupom.Ativo = true;
+                cupom.DataCadastro = DateTime.Now;
+                cupom.Valor = pedido.pedi.Total;
+                cupom.Codigo = User.Identity.Name + (cupom.Valor.ToString()).ToString();
+                new Core.Controle.Fachada().Inserir(cupom);
+                //Atualiza Estoque
+                //db.EstoqueProdutos.Add(new EstoqueProdutos() { Quantidade = +1, Produto = pedido.pedi.DetalhesPedidos.PedidoId});
+                
+                db.SaveChanges();
+                return RedirectToAction("Index", "Pedido");
+            }
             return View(pedidoStatus);
         }
     }

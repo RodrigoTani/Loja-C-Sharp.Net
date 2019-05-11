@@ -127,6 +127,18 @@
     <Compile Include="Migrations\201905072350392_novo4.Designer.cs">
       <DependentUpon>201905072350392_novo4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905090344054_new7.cs" />
+    <Compile Include="Migrations\201905090344054_new7.Designer.cs">
+      <DependentUpon>201905090344054_new7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905100400180_dev1.cs" />
+    <Compile Include="Migrations\201905100400180_dev1.Designer.cs">
+      <DependentUpon>201905100400180_dev1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905100451098_dev2.cs" />
+    <Compile Include="Migrations\201905100451098_dev2.Designer.cs">
+      <DependentUpon>201905100451098_dev2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Carrinho\ItemVenda.cs" />
@@ -171,6 +183,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905072350392_novo4.resx">
       <DependentUpon>201905072350392_novo4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905090344054_new7.resx">
+      <DependentUpon>201905090344054_new7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905100400180_dev1.resx">
+      <DependentUpon>201905100400180_dev1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905100451098_dev2.resx">
+      <DependentUpon>201905100451098_dev2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
