@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Dominio.Cupom>
+
+@{
+    ViewBag.Title = "ListagemCupom";
+}
+<div class="container">
+    <h2>Listagem Cupom</h2>
+
+    <table class="table">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Codigo)</th>
+            <th>@Html.DisplayNameFor(model => model.Valor)</th>
+            <th>@Html.DisplayNameFor(model => model.Ativo)</th>
+            <th></th>
+        </tr>
+
+        @foreach (Dominio.Cupom item in new Core.Controle.Fachada().Consultar(new Dominio.Cupom()).Entidades)
+        {
+            if (User.Identity.Name + item.Valor == (item.Codigo).ToString())
+            {
+            <tr>
+                <td>@item.Codigo</td>
+                <td>@item.Valor</td>
+                <td>@Html.DisplayFor(modelItem => item.Ativo)</td>
+                
+            </tr>
+            }
+        }
+
+    </table>
+</div>

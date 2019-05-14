@@ -1,4 +1,5 @@
 ﻿using Core;
+using Dominio;
 using Loja.Models;
 using Loja.Models.Carrinho;
 using System;
@@ -110,7 +111,7 @@ namespace Loja.Models
 
             return total ?? decimal.Zero;
         }
-        public int CreateOrder(Pedido pedido,List<Pagamento> formas)
+        public int CreateOrder(Pedido pedido,List<Pagamento> formas,Cupom cup)
         {
             var compra = new Venda();
             decimal orderTotal = 0;
@@ -127,7 +128,9 @@ namespace Loja.Models
                     Quantidade = item.Quantidade
                 };
                 var b = storeDB.Produtoes.First(d => d.Id == item.ProdutoId);
-                storeDB.EstoqueProdutos.Add(new EstoqueProdutos() { Quantidade = item.Quantidade, DataCadastro = DateTime.Now, Produto = item.ProdutoId, Fornecedores = b.Fornecedor });
+                var ddd=storeDB.EstoqueProdutos.First(bb => bb.Produto == item.ProdutoId);
+                if (ddd != null)
+                    ddd.Quantidade -= item.Quantidade;
                 // Set the order total of the shopping cart
                 orderTotal += (item.Quantidade * item.Produto.ValorFinal);
 
@@ -138,6 +141,8 @@ namespace Loja.Models
             // Set the order's total to the orderTotal count
             compra.Total = pedido.Total = orderTotal;
             compra.Formas = formas;
+            if(cup!=null)
+            compra.cupom_venda = cup.Id;
             storeDB.Venda.Add(compra);
             // Salva o pedido
             storeDB.SaveChanges();

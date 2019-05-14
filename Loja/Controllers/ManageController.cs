@@ -27,6 +27,11 @@ namespace Loja.Controllers
             SignInManager = signInManager;
         }
 
+        public ActionResult ListagemCupom()
+        {
+            return View();
+        }
+
         public ApplicationSignInManager SignInManager
         {
             get

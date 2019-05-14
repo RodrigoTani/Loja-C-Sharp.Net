@@ -1,4 +1,5 @@
 ﻿using Core;
+using Dominio;
 using Loja.Models;
 using Loja.Models.Carrinho;
 using System;
@@ -14,6 +15,9 @@ namespace Loja.Controllers
         // GET: Checkout
         ApplicationDbContext storeDB = new ApplicationDbContext();
         static int endere;
+        static decimal valorView;
+        static bool cupons;
+        static int cupo;
         // GET: Checkout
         public ActionResult Index()
         {
@@ -23,26 +27,45 @@ namespace Loja.Controllers
             {
                 CartItems = cart.GetCartItems(),
                 CartTotal = cart.GetTotal(),
-    
+
             };
             // Retorna a view
 
             return View(viewModel);
         }
         [HttpPost]
-        public ActionResult ClienteFormadePagamento2(string pagamento, int? id, int? cartao, decimal? valor)
+        public ActionResult ClienteFormadePagamento3(string pagamento, int? id, int? cartao, decimal? valor)
+        {
+            ViewBag.Cupom = "Cupom Ínvalido";
+            string Codigo = (Request.Form["cup"]);
+            Cupom cupom = storeDB.Cupom.Where(x => x.Codigo == Codigo).FirstOrDefault();
+            if (cupom != null)
+            {
+                if (cupom.Ativo == false || cupom.Codigo == null)
+                {
+                    return RedirectToAction("ListagemCartao");
+                }
+            }
+            cupons = true;
+            cupo = cupom.Id;
+            valor = cupom.Valor;
+            return orc(pagamento, id, cartao, valor, cupom.Codigo);
+        }
+
+        [HttpPost]
+        public ActionResult ClienteFormadePagamento2(string pagamento, int? id, int? cartao, decimal? valor, string cupom)
         {
             decimal dec = 0;
-            decimal.TryParse(Request.Form["dev"],out dec);
+            decimal.TryParse(Request.Form["dev"], out dec);
             valor = dec;
-            return orc(pagamento, id, cartao, valor);
+            return orc(pagamento, id, cartao, valor, cupom);
         }
         public static decimal valor;
-        public ActionResult ClienteFormadePagamento(string pagamento, int? id, int? cartao, decimal? valor,bool? dife)
+        public ActionResult ClienteFormadePagamento(string pagamento, int? id, int? cartao, decimal? valor, bool? dife, string cupom)
         {
-            return orc(pagamento, id, cartao, valor);
+            return orc(pagamento, id, cartao, valor, cupom);
         }
-        public ActionResult orc(string pagamento, int? id, int? cartao, decimal? valor)
+        public ActionResult orc(string pagamento, int? id, int? cartao, decimal? valor, string cupom)
         {
             if (endere == 0)
             {
@@ -73,47 +96,71 @@ namespace Loja.Controllers
                     cartao = int.Parse(Request.Form[r.Id.ToString()]);
                     break;
                 }
-                
+
             }
-            if (cartao == null)
-            {
-                return RedirectToAction("ListagemCartao");
-            }
+            var cards = new List<Pagamento>();
             decimal valord = (decimal)valor;
-            Cartao card = storeDB.Cartaos.Find(cartao);
-            var cards = new List<Pagamento>();//lista de cartoes
-            //adiciona cartao na sessão
-            //cria uma lista de obj cartoes na sessao
-            if (Session["cards"]!=null)
-            cards = (List<Pagamento>)Session["cards"];
-            cards.Add(new Pagamento() { Cartaoid= card.Id,Valor=valord });
-            Session["cards"] = cards;
-            if (card == null)
+            //if (cupom == null)
             {
-                return HttpNotFound();
+
+                Cartao card = null;
+                if (cartao != null)
+                    card = storeDB.Cartaos.Find(cartao);
+                //var cards = new List<Pagamento>();//lista de cartoes
+                //adiciona cartao na sessão
+                //cria uma lista de obj cartoes na sessao
+                if (Session["cards"] != null)
+                    cards = (List<Pagamento>)Session["cards"];
+                if (card != null)
+                    cards.Add(new Pagamento() { Cartaoid = card.Id, Valor = valord });
+                Session["cards"] = cards;
+
+            }
+            if (cupom != null)
+            {
+                //Cupom cup = storeDB.Cupom.Find(cupom);
+                Cupom cup = storeDB.Cupom.Where(x => x.Codigo == cupom).FirstOrDefault();
+                Session["cup_pro"] = cup;
+                if (cup == null)
+                {
+                    return HttpNotFound();
+                }
             }
             // Set up our ViewModel
             var viewModel = new CarrinhodeComprasViewModel
             {
                 CartItems = cart.GetCartItems(),
                 CartTotal = cart.GetTotal(),
-               
+
             };
             decimal mountcard = 0;
-            foreach(Pagamento pag in cards)
+            foreach (Pagamento pag in cards)
             {
-                mountcard+= pag.Valor;
+                mountcard += pag.Valor;
+                if (mountcard > cart.GetTotal())
+                {
+                    mountcard = 0;
+                    mountcard += pag.Valor;
+                }
             }
+            if (Session["cup_pro"] != null)
+                mountcard += ((Cupom)Session["cup_pro"]).Valor;
             // Retorna a view
             //viewModel.FormaPagamento = pagamento;
+            valorView = viewModel.CartTotal - mountcard;
             viewModel.FormaPagamento = cartao.ToString();
             viewModel.EndId = endere;
-            if(cart.GetTotal()==mountcard)
+            if (cart.GetTotal() == mountcard)
+            {
+                valorView = 0;
                 return View("ClienteFormadePagamento", viewModel);
+            }
             else
+            {
                 return RedirectToAction("ListagemCartao");
+            }
         }
-      
+
         public ActionResult EscolhaEndereco()
         {
             return View(storeDB.EnderecoEntregas.ToList());
@@ -121,12 +168,22 @@ namespace Loja.Controllers
 
         public ActionResult ListagemCartao()
         {
-            return View(new Tuple<Pagamento,List<Cartao>>(new Pagamento(), storeDB.Cartaos.ToList()));
+            var cart = CarrinhoDeCompras.GetCart(this.HttpContext);
+            // Set up our ViewModel
+            var viewModel = new CarrinhodeComprasViewModel
+            {
+                CartItems = cart.GetCartItems(),
+                CartTotal = cart.GetTotal(),
+
+            };
+            ViewBag.Falta = valorView;
+            ViewBag.Total = viewModel.CartTotal;
+            return View(new Tuple<Pagamento, List<Cartao>>(new Pagamento(), storeDB.Cartaos.ToList()));
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ClienteFormadePagamento(FormCollection values,int? id, int? cartao)
+        public ActionResult ClienteFormadePagamento(FormCollection values, int? id, int? cartao)
         {
             int dec = 0;
             int.TryParse(Request.Form["FormaPagamento"], out dec);
@@ -136,18 +193,14 @@ namespace Loja.Controllers
             {
                 return HttpNotFound();
             }
-            Cartao card = storeDB.Cartaos.Find(cartao);
-            if (card == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.Clientes = storeDB.Users; 
+
+            ViewBag.Clientes = storeDB.Users;
             var order = new Pedido();
             TryUpdateModel(order);
-            string forma = card.Id.ToString();
+
             try
             {
-                order.FormaPagamento = forma;
+                order.FormaPagamento = " ";
                 order.Usuario = User.Identity.Name;
                 order.DataPedido = DateTime.Now;
                 order.Endereco = end.Id;
@@ -156,16 +209,23 @@ namespace Loja.Controllers
                 storeDB.Pedidoes.Add(order);
                 storeDB.SaveChanges();
                 var cart = CarrinhoDeCompras.GetCart(this.HttpContext);
-                cart.CreateOrder(order,(List<Pagamento>)Session["cards"]);
+                cart.CreateOrder(order, (List<Pagamento>)Session["cards"], (Cupom)Session["cup_pro"]);
                 Session["cards"] = null;
+                Session["cup_pro"] = null;
                 PedidoStatus stats = new PedidoStatus();
                 stats.DataStatus = DateTime.Now;
                 stats.PedidoId = order.PedidoId;
                 stats.StatusId = 1;
                 storeDB.PedidoStatus.Add(stats);
                 storeDB.SaveChanges();
+                if (cupons == true)
+                {
+                    Cupom cup = storeDB.Cupom.Find(cupo);
+                    cup.Ativo = false;
+                }
+                storeDB.SaveChanges();
 
-                return RedirectToAction("Complete",new { id = order.PedidoId });
+                return RedirectToAction("Complete", new { id = order.PedidoId });
             }
             catch
             {
@@ -210,30 +270,6 @@ namespace Loja.Controllers
 
             return View(localEntrega);
         }
-        /*
-        // GET: Fornecedor/Edit/5
-        public ActionResult Troca(int? id)
-        {
-           if(id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Pedido ped = storeDB.Pedidoes.Find(id);
-            if (ped == null)
-            {
-                return HttpNotFound();
-            }
-            return View(ped);
-        }
-
-        // POST: Fornecedor/Edit/5
-        
-        public ActionResult Troca(string motivo, int? id)
-        {
-            motivo = Request.Form["troca"];
-            
-            return View();
-        }*/
 
     }
 }

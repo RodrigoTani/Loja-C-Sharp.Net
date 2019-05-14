@@ -332,6 +332,7 @@
     <Content Include="Views\PedidoStatus\Edit.cshtml" />
     <Content Include="Views\PedidoStatus\Index.cshtml" />
     <Content Include="Views\Manage\MeusPedidos.cshtml" />
+    <Content Include="Views\Manage\ListagemCupom.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

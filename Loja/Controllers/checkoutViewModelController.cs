@@ -1,4 +1,5 @@
 ﻿using Core;
+using Dominio;
 using Loja.Models;
 using Loja.Models.Carrinho;
 using System;
@@ -85,8 +86,9 @@ namespace Loja.Controllers
                 storeDB.SaveChanges();
                 //Processa o pedido
                 var cart = CarrinhoDeCompras.GetCart(this.HttpContext);
-                cart.CreateOrder(order,(List<Pagamento>)Session["cards"]);
+                cart.CreateOrder(order,(List<Pagamento>)Session["cards"], (Cupom)Session["cup_pro"]);
                 Session["cards"] = null;
+                Session["cup_pro"] = null;
                 return RedirectToAction("Complete",new { id = order.PedidoId });
             }
             catch
