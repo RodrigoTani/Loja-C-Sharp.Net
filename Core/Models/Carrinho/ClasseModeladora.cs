@@ -1,4 +1,5 @@
 ﻿using Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,6 +17,7 @@ namespace Loja.Models.Carrinho
         public EnderecoEntrega EnderecoEntrega { get; set; }
         public List<Cartao> cartao { get; set; }
         public List<PedidoStatus> status { get; set; }
+        public List<ItemVenda> pag { get; set; }
         public void Preencher(int? idPedido)
         {
             PedidoId = idPedido;
@@ -25,6 +27,7 @@ namespace Loja.Models.Carrinho
             BuscarProduto();
             BuscarPagamento();
             BuscarStatus();
+            BuscarPag();
         }
         public void BuscarProduto()
         {
@@ -59,6 +62,17 @@ namespace Loja.Models.Carrinho
                 lsProd.Add(c);
             }
             cartao = lsProd;
+        }
+        public void BuscarPag()
+        {
+            pag = DB.ItemVendaes.ToList();
+            List<ItemVenda> lsProd = new List<ItemVenda>();
+            foreach (var i in pag)
+            {
+                ItemVenda c = pag.Where(x => x.FormaPagamento == i.FormaPagamento).FirstOrDefault();
+                lsProd.Add(c);
+            }
+            pag = lsProd;
         }
         public void BuscarStatus()
         {
