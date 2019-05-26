@@ -125,6 +125,7 @@ namespace Loja.Controllers
                 {
                     return HttpNotFound();
                 }
+                cupons = true;
             }
             // Set up our ViewModel
             var viewModel = new CarrinhodeComprasViewModel

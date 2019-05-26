@@ -333,6 +333,7 @@
     <Content Include="Views\PedidoStatus\Index.cshtml" />
     <Content Include="Views\Manage\MeusPedidos.cshtml" />
     <Content Include="Views\Manage\ListagemCupom.cshtml" />
+    <Content Include="Views\Home\Relatorio.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -116,6 +116,7 @@
     <Compile Include="Core\IFachada.cs" />
     <Compile Include="Core\IStrategy.cs" />
     <Compile Include="DAO\AbstractDAO.cs" />
+    <Compile Include="DAO\AnaliseDAO.cs" />
     <Compile Include="DAO\CupomDAO.cs" />
     <Compile Include="DAO\DepartamentoDAO.cs" />
     <Compile Include="IdentityModels.cs" />
@@ -141,6 +142,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Analise.cs" />
     <Compile Include="Models\Carrinho\ItemVenda.cs" />
     <Compile Include="Models\Carrinho\CarrinhoDeCompras.cs" />
     <Compile Include="Models\Carrinho\CarrinhodeComprasRemoverViewModel.cs" />
