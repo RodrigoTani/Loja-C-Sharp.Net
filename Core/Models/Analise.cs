@@ -1,12 +1,13 @@
-﻿using Dominio;
+﻿using Core;
+using Loja.Models.Carrinho;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Dominio
 {
+    
     public class datasets
     {
         public string label;
@@ -91,6 +92,8 @@ namespace Dominio
     }
     public class Analise : EntidadeDominio
     {
+        private ApplicationDbContext storeDB = new ApplicationDbContext();
+        public Pedido p;
         private DateTime data_max;
 
         public DateTime Data_max
@@ -108,14 +111,16 @@ namespace Dominio
         }
 
         public string[] generic_labels;
-        public Dictionary<string, List<EntidadeDominio>> resultado;
+        public Dictionary<string, List<Pedido>> resultado;
         public chartsjs chartsjs;
 
         public Analise() : base()
         {
             data_min = data_max = DateTime.Now;
             chartsjs = new chartsjs();
-            resultado = new Dictionary<string, List<EntidadeDominio>>();
+
+            p = storeDB.Pedidoes.ToList().FirstOrDefault();
+            resultado = new Dictionary<string, List<Pedido>>();
         }
     }
 }

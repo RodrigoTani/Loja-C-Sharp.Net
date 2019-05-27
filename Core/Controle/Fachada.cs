@@ -52,6 +52,18 @@ namespace Core.Controle
             dictionaryCupom.Add("Consultar", new List<IStrategy>());
             rns.Add("Cupom", dictionaryCupom);
 
+            //Análise
+            AnaliseDAO AnaDAO = new AnaliseDAO();
+            daos.Add(typeof(Analise).Name, AnaDAO);
+
+            Dictionary<string, List<IStrategy>> dictionaryAnalise = new Dictionary<string, List<IStrategy>>();
+            dictionaryAnalise.Add("Inserir", new List<IStrategy>());
+            dictionaryAnalise.Add("Alterar", new List<IStrategy>());
+            dictionaryAnalise.Add("Excluir", new List<IStrategy>());
+            dictionaryAnalise.Add("Consultar", new List<IStrategy>());
+            rns.Add("Analise", dictionaryAnalise);
+            
+
         }
         /* --------------------------------------------------------------  */
         public Resultado Atualizar(EntidadeDominio entidade)

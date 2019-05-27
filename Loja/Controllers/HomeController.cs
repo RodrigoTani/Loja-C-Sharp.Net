@@ -33,7 +33,11 @@ namespace Loja.Controllers
         {
             return View();
         }
-        
+
+        public ActionResult Relatorio()
+        {
+            return View();
+        }
         // GET: Cupom/Create
         public ActionResult Cupom()
         {

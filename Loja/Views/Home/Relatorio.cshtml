@@ -1,92 +1,91 @@
-﻿
-@model Loja.Controllers.
-@{
+﻿@{
     ViewData["Title"] = "Análise";
 }
-<h2>Análise</h2>
-<script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
-<link rel="stylesheet" type="text/css" href="~/lib/datatables.min.css">
-<script type="text/javascript" src="~/lib/datatables.min.js"></script><!---->
-<script src="~/js/jquery.mask.min.js"></script>
-<script type="text/javascript" src="~/lib/chart/Chart.bundle.min.js" 1></script>
-<script type="text/javascript" src="~/lib/chart/Chart.min.js"></script>
-grafico: <select id="queen" onchange="maggots();">
-    <option selected="selected" value="0">bagagem</option>
-    <option value="1">passageiros</option>
-</select>
-tipo: <select id="mmrdevill" onchange="maggots();">
-    <option selected="selected" value="0">linha</option>
-    <option value="1">barra</option>
-</select>
-voo: <select id="mmrdevil" onchange="maggots();">
-    <option selected="selected" value="0">todos</option>
-    <option value="1">GRU To DCM</option>
-    <option value="2">BSB To GRU</option>
-    <option value="3">GRU To BSB</option>
-</select>
-    Mês inicial:
-<select id="mrdevil" onchange="maggots();">
-    <option selected="selected">1</option>
-    <option>2</option>
-    <option>3</option>
-    <option>4</option>
-    <option>5</option>
-    <option>6</option>
-    <option>7</option>
-    <option>8</option>
-    <option>9</option>
-    <option>10</option>
-    <option>11</option>
-    <option>12</option>
-</select> ano inicial:
-<select id="mrdevill" onchange="maggots();">
-    <option selected="selected">2017</option>
-    <option>2018</option>
-</select> Mês final:
-<select id="devil" onchange="maggots();">
-    <option>1</option>
-    <option>2</option>
-    <option>3</option>
-    <option>4</option>
-    <option>5</option>
-    <option>6</option>
-    <option>7</option>
-    <option>8</option>
-    <option>9</option>
-    <option selected="selected">10</option>
-    <option>11</option>
-    <option>12</option>
-</select>
-    ano final:
-<select id="mrdevilll" onchange="maggots();">
-    <option>2017</option>
-    <option selected="selected">2018</option>
-</select>
-<br />
-<div class="chart-container" style="position: relative; height:400px; width:800px">
-    <canvas id="myChart"></canvas>
-</div>
+<center>
+    <h2>Análise</h2>
+    <script type="text/javascript" src="~/Scripts/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Scripts/datatables.min.css">
+    <script type="text/javascript" src="~/Scripts/datatables.min.js"></script><!---->
+    <script src="~/js/jquery.mask.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/chart/Chart.bundle.min.js" 1></script>
+    <script type="text/javascript" src="~/Scripts/chart/Chart.min.js"></script>
+    <div class="container">
+        Gráfico: <select id="queen" onchange="maggots();">
+            <option selected="selected" value="0">Vendas</option>
+        </select>
+        Tipo: <select id="tipo" onchange="maggots();">
+            <option selected="selected" value="0">Linha</option>
+        </select>
+        Plataforma: <select id="plataforma" onchange="maggots();">
+            <option selected="selected" value="0">Todos</option>
+            <option value="1">PS4</option>
+            <option value="2">Xbox One</option>
+        </select>
+        Mês Inicial:
+        <select id="mesI" onchange="maggots();">
+            <option selected="selected">1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+            <option>11</option>
+            <option>12</option>
+        </select> Ano Inicial:
+        <select id="anoI" onchange="maggots();">
+            <option selected="selected">2019</option>
+            <option>2018</option>
+        </select> Mês Final:
+        <select id="mesF" onchange="maggots();">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option selected="selected">6</option>            
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+            <option>11</option>
+            <option>12</option>
+        </select>
+        Ano Final:
+        <select id="anoF" onchange="maggots();">
+            <option>2018</option>
+            <option selected="selected">2019</option>
+        </select>
+        <br />
+        <div class="chart-container" style="position: relative; height:400px; width:800px">
+            <canvas id="myChart"></canvas>
+        </div>
+    </div>
+</center>
 <script>
     var asdf;
 
     function maggots() {
         asdf.destroy();
         var ctx = document.getElementById('myChart').getContext('2d');
-        var e = document.getElementById("devil");
+        var e = document.getElementById("mesF");
         var strUser = e.options[e.selectedIndex].value;
-        var ee = document.getElementById("mrdevil");
+        var ee = document.getElementById("mesI");
         var strUserr = ee.options[ee.selectedIndex].value;
-        var eer = document.getElementById("mrdevill");
+        var eer = document.getElementById("anoI");
         var strUserre = eer.options[eer.selectedIndex].value;
-        var eerr = document.getElementById("mrdevilll");
+        var eerr = document.getElementById("anoF");
         var strUserree = eerr.options[eerr.selectedIndex].value;
-        var eee = document.getElementById("mmrdevil");
+        var eee = document.getElementById("plataforma");
         var strUserrr = eee.options[eee.selectedIndex].value;
-        var eeee = document.getElementById("mmrdevill");
+        var eeee = document.getElementById("tipo");
         var sstrUserrr = eeee.options[eeee.selectedIndex].value;
         var eeeeu = document.getElementById("queen");
         var loml = eeeeu.options[eeeeu.selectedIndex].value;
-        asdf = new Chart(ctx, JSON.parse(httpGet('./api/devil/analise/' + sstrUserrr + '/' + strUserree + '/' + strUser + '/' + strUserre + '/' + strUserr + '/' + strUserrr + '/' + loml )));
+        asdf = new Chart(ctx, JSON.parse(httpGet('/api/devil/analise/' + sstrUserrr + '/' + strUserree + '/' + strUser + '/' + strUserre + '/' + strUserr + '/' + strUserrr + '/' + loml )));
     }
     function httpGet(theUrl) {
         var xmlHttp = new XMLHttpRequest();
@@ -97,6 +96,6 @@ voo: <select id="mmrdevil" onchange="maggots();">
 
     window.onload = function () {
         var ctx = document.getElementById('myChart').getContext('2d');
-        asdf = new Chart(ctx, JSON.parse(httpGet('./api/devil/analise/0/2018/10/2017/1/0/0')));
+        asdf = new Chart(ctx, JSON.parse(httpGet('/api/devil/analise/0/2019/05/2019/1/0/0')));
     };
 </script>
