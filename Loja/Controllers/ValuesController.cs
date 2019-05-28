@@ -16,7 +16,6 @@ namespace Loja.Controllers
 {
     public class ValuesController : ApiController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET api/<controller>
         [HttpGet]
@@ -45,13 +44,13 @@ namespace Loja.Controllers
             DateTime dt_min = new DateTime(codee, codde, 1);
             Dominio.Analise analise = new Dominio.Analise() { Data_max = dt_max, Data_min = dt_min };
             analise.Id = cod;
-            //commands["CONSULTAR"].execute(analise);
+            Random rnd = new Random();
             if (analise.Id == 0)
             {
                 Dominio.data asd = new Dominio.data()
                 {
                     //eixo x do grafico
-                    labels = new string[] { "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" },
+                    labels = new string[] { "Janeiro", "Fevereiro", "Março", "Abril", "Maio"},
 
                 };
                 var fdsa = new List<Dominio.datasets>() { };
@@ -60,36 +59,124 @@ namespace Loja.Controllers
                 {
                     if (co == 0)
                     {
-                        List<Pedido> b = analise.resultado.Values.ElementAt(i);
+                        //qts pedidos dentro da lista?
+                        List<Pedido> b = analise.p;
                         // cor randomica
-                        Random rnd = new Random();
-                        string color = "rgb(" + rnd.Next(0, 255) + "," + rnd.Next(0, 255) + " , " + rnd.Next(0, 255) + ")";
-                        //linha?
-                        var go = new datasets() { label ="Pedido", backgroundColor = color, borderColor = color, fill = false };
+                        var color = "rgb(" + rnd.Next(0, 255) + "," + rnd.Next(0, 255) + " , " + rnd.Next(0, 255) + ")";
+                        var go = new datasets() { label = analise.resultado.Keys.ElementAt(i), backgroundColor = (string)color.Clone(), borderColor = (string)color.Clone(), fill = false };
                         var grr = new List<double>() { };
-        
+
                         //eixo y
+                        var queen = new double[12];
+                        //foreach dentro de pedido
                         foreach (Pedido bbb in b)
                         {
-                            //presta aateção nesses dois quando fizer a consulta vou dormir abraço
-                            // so falta pegar os dados do banco
-                            grr.Add(bbb.PedidoId);
+                            if (bbb.Usuario == analise.resultado.Keys.ElementAt(i))
+                            {
+                                double devil = 0;
+                                //pedido por mes, contador de pedidos por mes
+                                switch (bbb.DataPedido.Month)
+                                {
+                                    case 1:
+                                        queen[0]++;
+                                        break;
+                                    case 2:
+                                        queen[1]++;
+                                        break;
+                                    case 3:
+                                        queen[2]++;
+                                        break;
+                                    case 4:
+                                        queen[3]++;
+                                        break;
+                                    case 5:
+                                        queen[4]++;
+                                        break;
+                                    case 6:
+                                        queen[5]++;
+                                        break;
+                                    case 7:
+                                        queen[6]++;
+                                        break;
+                                    case 8:
+                                        queen[7]++;
+                                        break;
+                                    case 9:
+                                        queen[8]++;
+                                        break;
+                                    case 10:
+                                        queen[9]++;
+                                        break;
+                                    case 11:
+                                        queen[10]++;
+                                        break;
+                                    case 12:
+                                        queen[11]++;
+                                        break;
+                                }
+                            }
+                            
                         }
+                        grr.AddRange(queen);
                         go.data = grr.ToArray();
                         fdsa.Add(go);
                     }
                     else if (co == i + 1)
                     {
-                        List<Pedido> b = analise.resultado.Values.ElementAt(i);
-                        Random rnd = new Random();
-                        string color = "rgb(" + rnd.Next(0, 255) + "," + rnd.Next(0, 255) + " , " + rnd.Next(0, 255) + ")";
-                        var go = new datasets() { label = analise.resultado.Keys.ElementAt(i), backgroundColor = color, borderColor = color, fill = false };
+                        List<Pedido> b = analise.p;
+                        var color = "rgb(" + rnd.Next(0, 255) + "," + rnd.Next(0, 255) + " , " + rnd.Next(0, 255) + ")";
+                        var go = new datasets() { label = analise.resultado.Keys.ElementAt(i), backgroundColor = (string)color.Clone(), borderColor = (string)color.Clone(), fill = false };
                         var grr = new List<double>() { };
                         //eixo y
+                        var queen = new double[12];
                         foreach (Pedido bbb in b)
-                        {
-                            grr.Add(bbb.PedidoId);
+                        {                           
+                            if (bbb.Usuario == analise.resultado.Keys.ElementAt(i))
+                            {
+                                double devil = 0;
+                                switch (bbb.DataPedido.Month)
+                                {
+                                    case 1:
+                                        queen[0]++;
+                                        break;
+                                    case 2:
+                                        queen[1]++;
+                                        break;
+                                    case 3:
+                                        queen[2]++;
+                                        break;
+                                    case 4:
+                                        queen[3]++;
+                                        break;
+                                    case 5:
+                                        queen[4]++;
+                                        break;
+                                    case 6:
+                                        queen[5]++;
+                                        break;
+                                    case 7:
+                                        queen[6]++;
+                                        break;
+                                    case 8:
+                                        queen[7]++;
+                                        break;
+                                    case 9:
+                                        queen[8]++;
+                                        break;
+                                    case 10:
+                                        queen[9]++;
+                                        break;
+                                    case 11:
+                                        queen[10]++;
+                                        break;
+                                    case 12:
+                                        queen[11]++;
+                                        break;
+                                }
+                            }
+
                         }
+                        grr.AddRange(queen);
                         go.data = grr.ToArray();
                         fdsa.Add(go);
 

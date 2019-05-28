@@ -1,5 +1,6 @@
 ﻿using Core;
 using Loja.Models.Carrinho;
+using MoreLinq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -93,7 +94,7 @@ namespace Dominio
     public class Analise : EntidadeDominio
     {
         private ApplicationDbContext storeDB = new ApplicationDbContext();
-        public Pedido p;
+        public List<Pedido> p;
         private DateTime data_max;
 
         public DateTime Data_max
@@ -118,9 +119,13 @@ namespace Dominio
         {
             data_min = data_max = DateTime.Now;
             chartsjs = new chartsjs();
+            //qtd de objetos de pedidos
+            p = storeDB.Pedidoes.ToList();            
 
-            p = storeDB.Pedidoes.ToList().FirstOrDefault();
             resultado = new Dictionary<string, List<Pedido>>();
+            foreach (string b in p.DistinctBy(mbox => mbox.Usuario).Select(mbox => mbox.Usuario).ToList())
+                resultado.Add(b, new List<Pedido>());
+
         }
     }
 }
