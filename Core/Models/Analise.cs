@@ -1,4 +1,5 @@
 ﻿using Core;
+using Loja.Models;
 using Loja.Models.Carrinho;
 using MoreLinq;
 using System;
@@ -94,7 +95,9 @@ namespace Dominio
     public class Analise : EntidadeDominio
     {
         private ApplicationDbContext storeDB = new ApplicationDbContext();
-        public List<Pedido> p;
+        //public List<Pedido> p;
+        public List<DetalhesPedido> prod;
+        public List<Produto> pa;
         private DateTime data_max;
 
         public DateTime Data_max
@@ -112,7 +115,8 @@ namespace Dominio
         }
 
         public string[] generic_labels;
-        public Dictionary<string, List<Pedido>> resultado;
+        public Dictionary<string, List<DetalhesPedido>> resultado;
+        public Dictionary<string, List<Produto>> resultado2;
         public chartsjs chartsjs;
 
         public Analise() : base()
@@ -120,12 +124,23 @@ namespace Dominio
             data_min = data_max = DateTime.Now;
             chartsjs = new chartsjs();
             //qtd de objetos de pedidos
-            p = storeDB.Pedidoes.ToList();            
+            //p = storeDB.Pedidoes.ToList();
+            prod = storeDB.DetalhesPedidoes.ToList();
+            resultado = new Dictionary<string, List<DetalhesPedido>>();
+            resultado2 = new Dictionary<string, List<Produto>>();
+            //foreach (string b in p.DistinctBy(mbox => mbox.Usuario).Select(mbox => mbox.Usuario).ToList())
+            //  resultado.Add(b, new List<Pedido>());
 
-            resultado = new Dictionary<string, List<Pedido>>();
-            foreach (string b in p.DistinctBy(mbox => mbox.Usuario).Select(mbox => mbox.Usuario).ToList())
-                resultado.Add(b, new List<Pedido>());
-
+            /*foreach (string item in pa.DistinctBy(mbox => mbox.Titulo).Select(mbox => mbox.Titulo).ToList())
+            {
+                resultado2.Add(pa.ToString(), new List<Produto>());
+            }
+            */
+            foreach (int a in prod.DistinctBy(mbox => mbox.ProdutoId).Select(mbox => mbox.ProdutoId).ToList())
+            {
+                
+                resultado.Add(a.ToString(), new List<DetalhesPedido>());
+            }
         }
     }
 }

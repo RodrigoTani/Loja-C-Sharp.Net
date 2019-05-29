@@ -11,11 +11,13 @@ using System.Web.Http;
 using Loja.Models.Carrinho;
 using Core;
 using Newtonsoft.Json.Linq;
+using Loja.Models;
 
 namespace Loja.Controllers
 {
     public class ValuesController : ApiController
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET api/<controller>
         [HttpGet]
@@ -50,6 +52,7 @@ namespace Loja.Controllers
                 Dominio.data asd = new Dominio.data()
                 {
                     //eixo x do grafico
+                    //essa 
                     labels = new string[] { "Janeiro", "Fevereiro", "Março", "Abril", "Maio"},
 
                 };
@@ -60,22 +63,29 @@ namespace Loja.Controllers
                     if (co == 0)
                     {
                         //qts pedidos dentro da lista?
-                        List<Pedido> b = analise.p;
+                        List<DetalhesPedido> b = analise.prod;
                         // cor randomica
                         var color = "rgb(" + rnd.Next(0, 255) + "," + rnd.Next(0, 255) + " , " + rnd.Next(0, 255) + ")";
-                        var go = new datasets() { label = analise.resultado.Keys.ElementAt(i), backgroundColor = (string)color.Clone(), borderColor = (string)color.Clone(), fill = false };
+                        //var go = new datasets() { label = analise.resultado2.Keys.ElementAt(i), backgroundColor = (string)color.Clone(), borderColor = (string)color.Clone(), fill = false };
+                       
+                        var go = new datasets() { label = db.Produtoes.ToList().Where(bbb => bbb.Id == int.Parse(analise.resultado.Keys.ElementAt(i))).ElementAt(0).Titulo, backgroundColor = (string)color.Clone(), borderColor = (string)color.Clone(), fill = false };
                         var grr = new List<double>() { };
-
-                        //eixo y
+                        
+                
+                //eixo y
+                //aqui
                         var queen = new double[12];
                         //foreach dentro de pedido
-                        foreach (Pedido bbb in b)
+                        foreach (DetalhesPedido bbb in b)
                         {
-                            if (bbb.Usuario == analise.resultado.Keys.ElementAt(i))
+                            Pedido p = db.Pedidoes.Find(bbb.PedidoId);
+                                
+                            //if (bbb.Usuario == analise.resultado.Keys.ElementAt(i))
+                            if (bbb.ProdutoId.ToString() == analise.resultado.Keys.ElementAt(i))
                             {
-                                double devil = 0;
                                 //pedido por mes, contador de pedidos por mes
-                                switch (bbb.DataPedido.Month)
+                                //aqui
+                                switch (p.DataPedido.Month)
                                 {
                                     case 1:
                                         queen[0]++;
@@ -123,18 +133,18 @@ namespace Loja.Controllers
                     }
                     else if (co == i + 1)
                     {
-                        List<Pedido> b = analise.p;
+                        List<DetalhesPedido> b = analise.prod;
                         var color = "rgb(" + rnd.Next(0, 255) + "," + rnd.Next(0, 255) + " , " + rnd.Next(0, 255) + ")";
                         var go = new datasets() { label = analise.resultado.Keys.ElementAt(i), backgroundColor = (string)color.Clone(), borderColor = (string)color.Clone(), fill = false };
                         var grr = new List<double>() { };
                         //eixo y
                         var queen = new double[12];
-                        foreach (Pedido bbb in b)
+                        foreach (DetalhesPedido bbb in b)
                         {                           
-                            if (bbb.Usuario == analise.resultado.Keys.ElementAt(i))
+                            if (bbb.ProdutoId.ToString() == analise.resultado.Keys.ElementAt(i))
                             {
-                                double devil = 0;
-                                switch (bbb.DataPedido.Month)
+                                Pedido p = db.Pedidoes.Find(bbb.PedidoId);
+                                switch (p.DataPedido.Month)
                                 {
                                     case 1:
                                         queen[0]++;
@@ -198,6 +208,7 @@ namespace Loja.Controllers
                         yAxes = new yAxes[] { new yAxes() { display = true, scaleLabel = new scaleLabel() { display = true, labelString = "Quantidade" } } }
                     }
                 };
+                //tipo do grafico linha ou barra
                 if (tip == 0)
                     analise.chartsjs.type = "line";
                 else
@@ -207,7 +218,7 @@ namespace Loja.Controllers
             }
             
              
-            return analise.chartsjs;//System.IO.File.ReadAllText("./analise.json");
+            return analise.chartsjs;
         }
         // GET api/<controller>/5
         //[HttpGet("{id}")]
