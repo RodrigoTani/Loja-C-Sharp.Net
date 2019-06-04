@@ -12,6 +12,7 @@ using Loja.Models.Carrinho;
 using Core;
 using Newtonsoft.Json.Linq;
 using Loja.Models;
+using MoreLinq;
 
 namespace Loja.Controllers
 {
@@ -49,11 +50,20 @@ namespace Loja.Controllers
             Random rnd = new Random();
             if (analise.Id == 0)
             {
+                List<string> lbls = new List<string>();
+                //var dev = db.Pedidoes.Where(ddd => ddd.DataPedido >= dt_min && ddd.DataPedido <= dt_max).ToList();
+                var dev = db.Pedidoes.Where(ddd => ddd.DataPedido >= dt_min && ddd.DataPedido <= dt_max)
+                  .DistinctBy(ddd => ddd.DataPedido.Year)
+                 .DistinctBy(ddd => ddd.DataPedido.Month);
+                foreach (var b in dev)
+                {
+                    lbls.Add(b.DataPedido.ToString("MMMM"));
+                }
                 Dominio.data asd = new Dominio.data()
                 {
                     //eixo x do grafico
-                    //essa 
-                    labels = new string[] { "Janeiro", "Fevereiro", "Março", "Abril", "Maio"},
+                    //labels = lbls.ToArray(),
+                    labels = new string[] { "Janeiro", "Fevereiro", "Março", "Abril", "Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro" },
 
                 };
                 var fdsa = new List<Dominio.datasets>() { };
@@ -62,29 +72,22 @@ namespace Loja.Controllers
                 {
                     if (co == 0)
                     {
-                        //qts pedidos dentro da lista?
-                        List<DetalhesPedido> b = analise.prod;
+                        //qts pedidos dentro da lista?                        
                         // cor randomica
                         var color = "rgb(" + rnd.Next(0, 255) + "," + rnd.Next(0, 255) + " , " + rnd.Next(0, 255) + ")";
-                        //var go = new datasets() { label = analise.resultado2.Keys.ElementAt(i), backgroundColor = (string)color.Clone(), borderColor = (string)color.Clone(), fill = false };
-                       
                         var go = new datasets() { label = db.Produtoes.ToList().Where(bbb => bbb.Id == int.Parse(analise.resultado.Keys.ElementAt(i))).ElementAt(0).Titulo, backgroundColor = (string)color.Clone(), borderColor = (string)color.Clone(), fill = false };
-                        var grr = new List<double>() { };
-                        
+                        var grr = new List<double>() { };                        
                 
-                //eixo y
-                //aqui
+                        //eixo y                
                         var queen = new double[12];
                         //foreach dentro de pedido
-                        foreach (DetalhesPedido bbb in b)
+                        foreach (DetalhesPedido bbb in analise.prod)
                         {
                             Pedido p = db.Pedidoes.Find(bbb.PedidoId);
-                                
-                            //if (bbb.Usuario == analise.resultado.Keys.ElementAt(i))
-                            if (bbb.ProdutoId.ToString() == analise.resultado.Keys.ElementAt(i))
+
+                            if (bbb.ProdutoId.ToString() == analise.resultado.Keys.ElementAt(i) && p.DataPedido>=dt_min && p.DataPedido<=dt_max)
                             {
                                 //pedido por mes, contador de pedidos por mes
-                                //aqui
                                 switch (p.DataPedido.Month)
                                 {
                                     case 1:
@@ -124,8 +127,7 @@ namespace Loja.Controllers
                                         queen[11]++;
                                         break;
                                 }
-                            }
-                            
+                            }                            
                         }
                         grr.AddRange(queen);
                         go.data = grr.ToArray();
@@ -198,7 +200,7 @@ namespace Loja.Controllers
                 {
                     //titulo do grafico
                     responsive = true,
-                    title = new title() { display = true, text = "Quantidade de Vendas (ano " + analise.Data_min.Year + ")" },
+                    title = new title() { display = true, text = "Quantidade de Vendas por Jogo (ano " + analise.Data_min.Year + ")" },
                     tooltips = new tooltips() { intersect = false, mode = "index" },
                     hover = new hover() { intersect = true, mode = "nearest" },
                     //Legenda das escalas qtd por mês
@@ -215,8 +217,7 @@ namespace Loja.Controllers
                     analise.chartsjs.type = "bar";
                 analise.chartsjs.data = asd;
                 analise.chartsjs.options = asdf;
-            }
-            
+            }           
              
             return analise.chartsjs;
         }

@@ -17,11 +17,15 @@
             <option selected="selected" value="0">Linha</option>
              <option  value="1">Barras</option>
         </select>
-        @*
-    Plataforma: <select id="plataforma" onchange="maggots();">
-        <option selected="selected" value="0">Todos</option>
-        <option value="1">PS4</option>
-        <option value="2">Xbox One</option>
+       
+    Jogo: <select id="plataforma" onchange="maggots();">
+              <option selected="selected" value="0">Todos</option>
+              @*<option value="1">dev</option>
+              <option value="2">gta5</option>
+              <option value="3">Cod Bo4 Xbox</option>
+              <option value="4">SuperMario Odissey</option>
+              <option value="5">God of War</option>
+              <option value="6">Cod Bo4 Ps4</option>*@
     </select>
     Mês Inicial:
     <select id="mesI" onchange="maggots();">
@@ -62,7 +66,7 @@
             <option>2018</option>
             <option selected="selected">2019</option>
         </select>
-        *@
+       
         <br />
         <div class="chart-container" style="position: relative; height:400px; width:800px">
             <canvas id="myChart"></canvas>
